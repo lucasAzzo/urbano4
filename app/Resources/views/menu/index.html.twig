@@ -12,9 +12,23 @@
                     </tr>    
                 {% endif %}
                 {% for submodulo in modulo.submodulos %}
-                    <tr>
-                        <td>{{submodulo.nombre}}</td>
-                    </tr>  
+                    {% if submodulo.operaciones.first() is empty %}
+                        <tr>
+                            <td>{{submodulo.nombre}}</td>
+                        </tr>
+                    {% else %}
+                        {% if item_submodulo is not defined or item_submodulo.idSubmodulo != submodulo.idSubmodulo %}
+                            <tr>
+                                <td class="bg-secondary">{{submodulo.nombre}}{% set item_submodulo = submodulo.idSubmodulo %}</td>
+                            </tr>    
+                        {% endif %}
+                        {% for operacion in submodulo.operaciones %}
+                            <tr>
+                                <td>{{operacion.nombre}}</td>
+                            </tr>
+                        {% endfor %}    
+                    {% endif %}    
+                     
                 {% endfor %}    
             {% endfor %}
         </tbody>
