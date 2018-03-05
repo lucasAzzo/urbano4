@@ -1,0 +1,48 @@
+<ul class="list-group" id="accordion" role="tablist" aria-multiselectable="true">
+    {% for modulo in item.children %}
+        <ul class="list-group">
+            <li class=" list-group-item list-group-item-dark" role="tab" id="heading{{modulo.label}}">
+                <h6 class="mb-0">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapse{{modulo.label}}" aria-expanded="true" aria-controls="collapse{{modulo.label}}">
+                        {{modulo.label}} <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                    </a>
+                </h6>
+            </li>
+            
+            <div id="collapse{{modulo.label}}" class="collapse" role="tabpanel" aria-labelledby="heading{{modulo.label}}">
+                <div class="bg-submodulo-menu">
+                    {% for submodulo in modulo.children %}
+                        <ul class="list-group">
+                        {% if submodulo.hasChildren %}
+                            <ul class="list-group" id="accordion1" role="tablist" aria-multiselectable="true">
+                                <li class="list-group-item list-group-item-secondary">
+                                    <div role="tab" id="heading{{submodulo.label}}">
+                                        <h7 class="mb-0">
+                                            <a data-toggle="collapse" data-parent="#accordion1" href="#collapse{{submodulo.label}}" aria-expanded="true" aria-controls="collapse{{submodulo.label}}">
+                                                {{submodulo.label}} <i class="fa fa-arrow-circle-o-down" aria-hidden="true"></i>
+                                            </a>
+                                        </h7>
+                                    </div>
+                                </li>
+                                
+                                <div id="collapse{{submodulo.label}}" class="collapse" role="tabpanel" aria-labelledby="heading{{submodulo.label}}">
+                                    <div class="card-block">
+                                        <ul class="list-group">
+                                            {% for operacion in submodulo.children %}
+                                                <li class="list-group-item list-group-item-secondary"><a href="{{operacion.uri}}">{{operacion.label}}</a></li>
+                                            {% endfor %} 
+                                        </ul>
+                                    </div>
+                                </div>
+                            </ul>    
+                        {% else %}    
+                            <li class="list-group-item list-group-item-secondary"><a href="{{submodulo.uri}}">{{submodulo.label}}</a></li>
+                        {% endif %}
+                        </ul>
+                    {% endfor %}    
+                </div>
+            </div>
+        </ul>
+    {% endfor %}
+</ul>
+

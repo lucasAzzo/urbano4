@@ -1,0 +1,31 @@
+{% extends 'bootstrap_4_layout.html.twig' %}
+
+{% block form_errors -%}
+    {%- if errors|length > 0 -%}
+    <div class="{% if form is not rootform %}invalid-feedback{% else %}alert alert-danger alert-dismissible fade show{% endif %}" role="alert">
+        <ul class="list-unstyled mb-0">
+            {%- for error in errors -%}
+            <li>
+                {{ error.message }} 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </li>
+            {%- endfor -%}
+        </ul>
+    </div>
+    {%- endif %}
+    {%- endblock form_errors %}
+
+
+    {% block form_label -%}
+        {%- if compound is defined and compound -%}
+        {%- set element = 'legend' -%}
+        {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' col-form-legend text-muted')|trim}) -%}
+        {%- else -%}
+        {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' form-control-label text-muted')|trim}) -%}
+        {%- endif -%}
+        {{- parent() -}}
+        {%- endblock form_label %}
+
+

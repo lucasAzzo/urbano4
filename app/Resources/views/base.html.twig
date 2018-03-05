@@ -5,9 +5,41 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/comun.css') }}" />
+        <link href="{{ asset('css/font-awesome-4.7.0/css/font-awesome.min.css') }}" rel="stylesheet" />
+        <link href="{{ asset('css/gijgo/css/gijgo.min.css') }}" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+            {% include 'barra_superior.html.twig' %}
+            <div class="row">
+                <div class="col-md-2">{{ knp_menu_render('main') }}</div>
+                <div class="col-md-10">
+                    <div class="col-md-12 text-muted"><hr><h4>{% block titulo_operacion %}{% endblock %}</h4><hr></div>
+                    {% for flash_message in app.session.flashbag.get('success') %}
+                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                            {{ flash_message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
+                    {% block body %}{% endblock %}
+                    {% block fos_user_content %}{% endblock %}
+                </div>
+            </div>
+        {% else %}
+            {% block content %} {% endblock %}
+        {% endif %} 
+        
+        <script src="{{ asset('js/jquery-3.2.1.slim.min.js') }}" ></script>
+        <script src="{{ asset('js/popper.min.js') }}" ></script>
+        <script src="{{ asset('js/bootstrap.min.js') }}" ></script>
+        <script src="{{ asset('js/collections.js') }}"></script>
+        <script src="{{ asset('js/comun.js') }}"></script>
+        <script src="{{ asset('js/gijgo.min.js') }}" type="text/javascript"></script>
+        {% block formulario_js %}<script src="{{ asset('js/formulario.js') }}"></script>{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
 </html>
