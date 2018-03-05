@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}KNP menú{% endblock %}
+{% block body %}
+    
+    <table class="table table-bordered table-hover">
+        <tbody>
+            {% for modulo in modulos %}
+                {% if item_modulo is not defined or item_modulo.idModulo != modulo.idModulo %}
+                    <tr>
+                        <td class="bg-secondary">{{modulo.nombre}}{% set item_modulo = modulo.idModulo %}</td>
+                    </tr>    
+                {% endif %}
+                {% for submodulo in modulo.submodulos %}
+                    <tr>
+                        <td>{{submodulo.nombre}}</td>
+                    </tr>  
+                {% endfor %}    
+            {% endfor %}
+        </tbody>
+    </table>    
+    
+{% endblock %}
