@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}Shippers{% endblock %}
+{% block body %}
+    <table class="table table-bordered">
+        <thead class="table_head">
+            <tr>
+                <th>Shipper</th>
+                <th><a type="button" class="btn btn-sm btn-success" href="{{path('shipper_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for shipper in shippers %}
+                <tr>
+                    <td>{{shipper.shiRepresentante}}</td>
+                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('shipper_edit',{'id_shipper':shipper.idShipper})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a type="button" class="btn btn-sm btn-danger" href="{{path('shipper_delete',{'id_shipper':shipper.idShipper})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+{% endblock %}
