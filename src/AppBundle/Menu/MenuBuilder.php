@@ -20,7 +20,7 @@ class MenuBuilder /*extends \Twig_Extension*/ {
 
         $menu = $this->factory->createItem('root');
         
-        $modulos = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Modulo')->findBy([],['orden' => 'ASC']);
+        $modulos = $this->container->get('doctrine.orm.entity_manager')->getRepository('AppBundle:Menu')->findBy(['idMenuPadre' => null],['orden' => 'ASC']);
         
 //        return $this->container->get('templating')->render(
 //                        'menu_izquierdo.html.twig', array('modulos' => $modulos)
@@ -30,10 +30,10 @@ class MenuBuilder /*extends \Twig_Extension*/ {
         foreach ($modulos as $modulo) {
             $menu->addChild($modulo->getNombre(), array('route' => ''));
             
-            foreach ($modulo->getSubmodulos() as $submodulo) {
+            foreach ($modulo->getHijos() as $submodulo) {
                 $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getPath(),'routeParameters' => eval("return " . $submodulo->getParametro() . ";")));
                 
-                foreach ($submodulo->getOperaciones() as $operacion) {
+                foreach ($submodulo->getHijos() as $operacion) {
                     $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getPath(), 'routeParameters' => eval("return " . $operacion->getParametro() . ";")));
                 }
             }

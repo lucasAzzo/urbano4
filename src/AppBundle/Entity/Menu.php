@@ -12,22 +12,22 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Description of Operacion
+ * Description of Menu
  *
  * @author Lucas
- * @ORM\Table(name="operacion")
+ * @ORM\Table(name="menu")
  * @ORM\Entity
  */
-class Operacion {
+class Menu {
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_operacion", type="integer")
+     * @ORM\Column(name="id_menu", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      */
-    private $idOperacion;
+    private $idMenu;
     
     /**
      * @var string
@@ -46,30 +46,41 @@ class Operacion {
     /**
      * @var string
      *
-     * @ORM\Column(name="path", type="string")
+     * @ORM\Column(name="path", type="string", nullable=true)
      */
     private $path;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="parametro", type="string")
+     * @ORM\Column(name="parametro", type="string", nullable=true)
      */
     private $parametro;
     
     /**
-     * @var \AppBundle\Entity\Submodulo
+     * @var \AppBundle\Entity\Menu
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Submodulo",inversedBy="operaciones")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Menu",inversedBy="hijos")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_submodulo", referencedColumnName="id_submodulo")
+     *   @ORM\JoinColumn(name="id_menu_padre", referencedColumnName="id_menu")
      * })
      */
-    private $idSubmodulo;
+    private $idMenuPadre;
     
     
-    public function getIdOperacion() {
-        return $this->idOperacion;
+    /**
+     * @ORM\OneToMany(targetEntity="Menu",mappedBy="idMenuPadre")
+     * @ORM\OrderBy({"orden" = "ASC"})
+     */
+    protected $hijos;
+    
+    
+    public function __construct() {
+        $this->hijos = new ArrayCollection();
+    }
+    
+    public function getIdMenu() {
+        return $this->idMenu;
     }
 
     public function getNombre() {
@@ -88,8 +99,12 @@ class Operacion {
         return $this->parametro;
     }
 
-    public function setIdOperacion($idOperacion) {
-        $this->idOperacion = $idOperacion;
+    public function getIdMenuPadre(){
+        return $this->idMenuPadre;
+    }
+
+    public function setIdMenu($idMenu) {
+        $this->idMenu = $idMenu;
     }
 
     public function setNombre($nombre) {
@@ -107,16 +122,17 @@ class Operacion {
     public function setParametro($parametro) {
         $this->parametro = $parametro;
     }
+
+    public function setIdMenuPadre(\AppBundle\Entity\Menu $idMenuPadre) {
+        $this->idMenuPadre = $idMenuPadre;
+    }
     
-    public function getIdSubmodulo() {
-        return $this->idSubmodulo;
+    /**
+     * @return ArrayCollection|Menu[]
+     */
+    public function getHijos() {
+        return $this->hijos;
     }
-
-    public function setIdSubmodulo(\AppBundle\Entity\Submodulo $idSubmodulo) {
-        $this->idSubmodulo = $idSubmodulo;
-    }
-
-
 
 
     
