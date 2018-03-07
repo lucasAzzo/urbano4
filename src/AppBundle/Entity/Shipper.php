@@ -10,6 +10,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Description of Shipper
@@ -125,6 +126,10 @@ class Shipper {
      * @var string
      *
      * @ORM\Column(name="ref_estado", type="string", length=2, nullable=false)
+     * @Assert\Length(
+     *      max = 2,
+     *      maxMessage = "El campo refEstado no puede tener mas de 2 caracteres."
+     * )
      */
     private $refEstado;
     

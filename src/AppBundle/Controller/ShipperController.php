@@ -77,7 +77,7 @@ class ShipperController extends Controller {
             $date = new \DateTime();
             $shipper->setIdUsuario($this->getUser());
             $shipper->setAudFechaCreacion($date);
-            $shipper->setAudFechaProc($date->format('Y-m-d'));
+            $shipper->setAudFechaProc($date);
             $shipper->setAudHoraProc($date->format('H:i'));
             
             $em->persist($shipper);
@@ -129,14 +129,14 @@ class ShipperController extends Controller {
             $date = new \DateTime();
             $shipper->setIdUsuario($this->getUser());
             $shipper->setAudFechaCreacion($date);
-            $shipper->setAudFechaProc($date->format('Y-m-d'));
+            $shipper->setAudFechaProc($date);
             $shipper->setAudHoraProc($date->format('H:i'));
 
             $em->persist($shipper);
             $em->flush();
             return $this->redirectToRoute('shipper_edit', array('id_shipper' => $id_shipper));
         }
-
+        
         return $this->render('shipper/new_edit.html.twig', [
                     'formulario' => $formulario->createView(),
         ]);
