@@ -2,36 +2,68 @@
 
 {% block titulo_operacion %}KNP menú{% endblock %}
 {% block body %}
-    
     <table class="table table-bordered table-hover">
         <tbody>
-            {% for modulo in modulos %}
-                {% if item_modulo is not defined or item_modulo.idModulo != modulo.idModulo %}
-                    <tr>
-                        <td class="bg-secondary">{{modulo.nombre}}{% set item_modulo = modulo.idModulo %}</td>
-                    </tr>    
-                {% endif %}
-                {% for submodulo in modulo.submodulos %}
-                    {% if submodulo.operaciones.first() is empty %}
-                        <tr>
-                            <td>{{submodulo.nombre}}</td>
-                        </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>
+                    <a type="button" class="btn btn-sm btn-success" href="{{path('menu_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
+                </td>
+            </tr>    
+        {% for modulo in modulos %}
+            {% if item_modulo is not defined or item_modulo != modulo.idMenu %}
+                <tr>
+                    <td>{{modulo.nombre}}{% set item_modulo = modulo.idMenu %}</td>
+                    <td>{{modulo.orden}}</td>
+                    <td>{{modulo.path}}</td>
+                    <td>{{modulo.parametro}}</td>
+                    <td>
+                        <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':modulo.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':modulo.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                    </td>
+                </tr>
+            {% endif %}
+            {% for submodulo in modulo.getHijos() %}
+                <tr>
+                    {% if submodulo.getHijos().first() is empty %}
+                        <td>-> {{submodulo.nombre}}</td>
+                        <td>{{submodulo.orden}}</td>
+                        <td>{{submodulo.path}}</td>
+                        <td>{{submodulo.parametro}}</td>
+                        <td>
+                            <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
                     {% else %}
-                        {% if item_submodulo is not defined or item_submodulo.idSubmodulo != submodulo.idSubmodulo %}
-                            <tr>
-                                <td class="bg-secondary">{{submodulo.nombre}}{% set item_submodulo = submodulo.idSubmodulo %}</td>
-                            </tr>    
-                        {% endif %}
-                        {% for operacion in submodulo.operaciones %}
-                            <tr>
-                                <td>{{operacion.nombre}}</td>
-                            </tr>
-                        {% endfor %}    
-                    {% endif %}    
-                     
-                {% endfor %}    
-            {% endfor %}
-        </tbody>
-    </table>    
-    
+                        {% if item_submodulo is not defined or item_submodulo != submodulo.idMenu %}
+                        <tr>
+                            <td>-> {{submodulo.nombre}}{% set item_submodulo = submodulo.idMenu %}</td>
+                            <td>{{submodulo.orden}}</td>
+                            <td>{{submodulo.path}}</td>
+                            <td>{{submodulo.parametro}}</td>
+                            <td>
+                                <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                                <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% for operacion in submodulo.getHijos() %}
+                        <td>--> {{operacion.nombre}}</td>
+                        <td>{{operacion.orden}}</td>
+                        <td>{{operacion.path}}</td>
+                        <td>{{operacion.parametro}}</td>
+                        <td>
+                            <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':operacion.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':operacion.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        </td>
+                    {% endfor %}    
+                {% endif %}    
+            </tr>
+        {% endfor %}    
+    {% endfor %}
+</tbody>
+</table>
 {% endblock %}
