@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}Sucursales{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formulario) }}
+
+    {{ form_errors(formulario) }}
+      
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form_label(formulario.sucursal) }}
+            {{ form_widget(formulario.sucursal) }}
+        </div>
+        <div class="form-group col-md-6">
+            {{ form_label(formulario.idZona) }}
+            {{ form_widget(formulario.idZona) }}
+        </div>
+    </div>     
+
+    <hr>          
+
+    <div class="">
+        <a type="button" href="{{path('sucursal_index')}}" class="btn btn-sm btn-danger">Volver</a>
+        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+    </div>
+    {{ form_end(formulario) }}
+
+{% endblock %}
+

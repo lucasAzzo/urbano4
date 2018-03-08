@@ -1,5 +1,12 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
+{% block app_subzona_widget %}
+    {% spaceless %}
+        <td class="d-inline-block col-md-11">{{ form_widget(form.subzona) }}</td>
+        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+    {% endspaceless %}
+{% endblock app_subzona_widget %}
+
 {% block form_errors -%}
     {%- if errors|length > 0 -%}
     <div class="{% if form is not rootform %}invalid-feedback{% else %}alert alert-danger alert-dismissible fade show{% endif %}" role="alert">
