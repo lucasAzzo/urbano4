@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}Productos{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formulario) }}
+
+    {{ form_errors(formulario) }}
+      
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            {{ form_label(formulario.producto) }}
+            {{ form_widget(formulario.producto) }}
+        </div>
+    </div>     
+
+    <hr>          
+
+    <div class="">
+        <a type="button" href="{{path('producto_index')}}" class="btn btn-sm btn-danger">Volver</a>
+        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+    </div>
+    {{ form_end(formulario) }}
+
+{% endblock %}
+

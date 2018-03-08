@@ -11,66 +11,66 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Description of Sucursal
+ * Description of Subzona
  *
  * @author Lucas
- * @ORM\Table(name="sucursal")
+ * @ORM\Table(name="subzona")
  * @ORM\Entity
  */
-class Sucursal {
+class Subzona {
     
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_sucursal", type="integer")
+     * @ORM\Column(name="id_subzona", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      */
-    private $idSucursal;
+    private $idSubzona;
     
     /**
      * @var string
      *
-     * @ORM\Column(name="sucursal", type="string", length=255, nullable=false)
+     * @ORM\Column(name="subzona", type="string", length=255, nullable=false)
      */
-    private $sucursal;
+    private $subzona;
     
-     /**
+    /**
      * @var \AppBundle\Entity\Zona
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zona")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zona",inversedBy="subzonas")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id_zona")
      * })
      */
     private $idZona;
     
-    public function getIdSucursal() {
-        return $this->idSucursal;
+    public function getIdSubzona() {
+        return $this->idSubzona;
     }
 
-    public function getSucursal() {
-        return $this->sucursal;
+    public function getSubzona() {
+        return $this->subzona;
     }
 
-    public function setIdSucursal($idSucursal) {
-        $this->idSucursal = $idSucursal;
-    }
-
-    public function setSucursal($sucursal) {
-        $this->sucursal = $sucursal;
-    }
-
-    public function __toString() {
-        return $this->sucursal;
-    }
-    
     public function getIdZona(){
         return $this->idZona;
     }
 
+    public function setIdSubzona($idSubzona) {
+        $this->idSubzona = $idSubzona;
+    }
+
+    public function setSubzona($subzona) {
+        $this->subzona = $subzona;
+    }
+
     public function setIdZona(\AppBundle\Entity\Zona $idZona) {
         $this->idZona = $idZona;
+    }
+    
+    public function __toString() {
+        return $this->subzona;
     }
 
 

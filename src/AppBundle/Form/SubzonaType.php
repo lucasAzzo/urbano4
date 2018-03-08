@@ -11,17 +11,15 @@ namespace AppBundle\Form;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use AppBundle\Entity\Sucursal;
+use AppBundle\Entity\Subzona;
 
 /**
- * Description of SucursalType
+ * Description of SubzonaType
  *
  * @author Lucas
  */
-class SucursalType extends AbstractType {
+class SubzonaType extends AbstractType {
     
     /**
      * @param FormBuilderInterface $builder
@@ -29,12 +27,7 @@ class SucursalType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('sucursal', TextType::class)
-                ->add('idZona', EntityType::class, array(
-                    'placeholder' => 'Seleccione una opción',
-                    //'required' => false,
-                    'class' => 'AppBundle:Zona',
-                    'label' => 'Zona'))
+                ->add('subzona', TextType::class)
                 
         ;
     }
@@ -44,7 +37,7 @@ class SucursalType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'data_class' => Sucursal::class,
+            'data_class' => Subzona::class,
             'attr' => array('class' => 'was-validated', 'novalidate' => ''),
         ));
     }
@@ -53,7 +46,14 @@ class SucursalType extends AbstractType {
      * @return string
      */
     public function getName() {
-        return 'appbundle_sucursal';
+        return 'appbundle_subzona';
+    }
+    
+    /**
+     * @return null|string
+     */
+    public function getBlockPrefix() {
+        return 'app_subzona';
     }
     
 }
