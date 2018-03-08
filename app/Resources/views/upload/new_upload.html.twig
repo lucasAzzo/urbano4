@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nuevo Upload{% endblock %}
+
+{% block titulo_operacion %}Upload{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formulario) }}
+
+    {{ form_errors(formulario) }}
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            {{ form_label(formulario.upload_file) }}
+            {{ form_widget(formulario.upload_file) }}
+        </div>
+        <div class="form-group col-md-12">
+            {{ form_label(formulario.upload_shippers) }}
+            {{ form_widget(formulario.upload_shippers) }}
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="">
+        <a type="button" href="{{path('upload_create')}}" class="btn btn-sm btn-danger">Volver</a>
+        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+    </div>
+    {{ form_end(formulario) }}
+
+{% endblock %}
