@@ -25,6 +25,14 @@
                             </button>
                         </div>
                     {% endfor %}
+                    {% for flash_message in app.session.flashbag.get('error') %}
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            {{ flash_message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                    {% endfor %}
                     {% block body %}{% endblock %}
                     {% block fos_user_content %}{% endblock %}
                 </div>

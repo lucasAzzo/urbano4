@@ -89,4 +89,9 @@ doctrine_migrations:
     table_name: migration_versions
     name: Application Migrations
     organize_migrations: false # Version >= 1.2, possible values are: "BY_YEAR", "BY_YEAR_AND_MONTH", false
-    custom_template: ~ # Version >= 1.2, path to your custom migrations template        
+    custom_template: ~ # Version >= 1.2, path to your custom migrations template     
+
+    
+knp_menu:
+    twig:  # use "twig: false" to disable the Twig extension and the TwigRenderer
+        template: KnpMenuBundle::knp_menu.html.twig        

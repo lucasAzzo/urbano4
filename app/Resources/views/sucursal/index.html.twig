@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}Sucursales{% endblock %}
+{% block body %}
+    <table class="table table-bordered">
+        <thead class="table_head">
+            <tr>
+                <th>Sucursal</th>
+                <th><a type="button" class="btn btn-sm btn-success" href="{{path('sucursal_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for sucursal in sucursales %}
+                <tr>
+                    <td>{{sucursal.sucursal}}</td>
+                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('sucursal_edit',{'id_sucursal':sucursal.idSucursal})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a type="button" class="btn btn-sm btn-danger" href="{{path('sucursal_delete',{'id_sucursal':sucursal.idSucursal})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+{% endblock %}
