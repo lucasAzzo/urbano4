@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Users{% endblock %}
+
+{% block body %}
+    
+    <h1>Users List Page</h1>
+    <table class="table">
+        <tr>
+            <th>Nombre de Usuario</th>
+            <th>Email</th>
+            <th>Roles</th>
+            <th colspan="2">
+                <a href="{{ path('users_new') }}">Crear Nuevo</a>
+            </th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.username }}</td>
+                <td>{{ user.email }}</td>
+                <td>{{ user.roles|join(' | ') }}</td>
+                {# <td><a href="{{ path('users_edit', { 'id' : user.id }) }}">Editar</a></td> #}
+                {# <td>
+                    <form method="POST" action="{{ path('users_delete', { 'id' : user.id }) }}">
+                        <input type="hidden" name="_method" value="DELETE">
+                        <input type="submit" value="Eliminar">
+                    </form>
+                </td> #}
+            </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}
