@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}ZONAS{% endblock %}
+{% block body %}
+    <table class="table table-bordered">
+        <thead class="table_head">
+            <tr>
+                <th>Zona</th>
+                <th><a type="button" class="btn btn-sm btn-success" href="{{path('zona_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for zona in zonas %}
+                <tr>
+                    <td>{{zona.zona}}</td>
+                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('zona_edit',{'id_zona':zona.idZona})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                    <a type="button" class="btn btn-sm btn-danger" href="{{path('zona_delete',{'id_zona':zona.idZona})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+{% endblock %}
