@@ -1,5 +1,49 @@
 {% extends 'bootstrap_4_layout.html.twig' %}
 
+{% block app_documento_widget %}
+    {% spaceless %}
+        <td class="d-inline-block col-md-6">{{ form_widget(form.idDocumentoTipo) }}</td>
+        <td class="d-inline-block col-md-5">{{ form_widget(form.numero,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
+        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+            {% endspaceless %}
+        {% endblock app_documento_widget %}
+
+{% block app_idioma_widget %}
+    {% spaceless %}
+        <td class="d-inline-block col-md-6">{{ form_widget(form.idIdioma) }}</td>
+        <td class="d-inline-block col-md-5">{{ form_widget(form.nivel) }}</td>
+        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+            {% endspaceless %}
+        {% endblock app_idioma_widget %}
+
+{% block app_contacto_widget %}
+    {% spaceless %}
+        <td class="d-inline-block col-md-6">{{ form_widget(form.idContactoTipo) }}</td>
+        <td class="d-inline-block col-md-5">{{ form_widget(form.numeroContacto,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
+        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+            {% endspaceless %}
+        {% endblock app_contacto_widget %}
+
+{% block app_domicilio_widget %}
+    {% spaceless %}
+        <td class="d-inline-block col-md-3">{{ form_widget(form.idDomicilioTipo) }}</td>
+        <td class="d-inline-block col-md-3">{{ form_widget(form.calle) }}</td>
+        <td class="d-inline-block col-md-2">{{ form_widget(form.numero,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
+        <td class="d-inline-block col-md-1">{{ form_widget(form.piso) }}</td>
+        <td class="d-inline-block col-md-2">{{ form_widget(form.depto) }}</td>
+        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+            {% endspaceless %}
+        {% endblock app_domicilio_widget %}
+
+{% block app_categoria_widget %}
+    {% spaceless %}
+        <td class="d-inline-block col-md-3">{{ form_widget(form.idCategoria) }}</td>
+        <td class="d-inline-block col-md-3">{{ form_widget(form.puesto) }}</td>
+        <td class="d-inline-block col-md-5">{{ form_widget(form.descripcionPuesto) }}</td>
+        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+            {% endspaceless %}
+        {% endblock app_categoria_widget %}
+
 {% block app_subzona_widget %}
     {% spaceless %}
         <td class="d-inline-block col-md-11">{{ form_widget(form.subzona) }}</td>
