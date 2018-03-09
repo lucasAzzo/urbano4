@@ -1,0 +1,147 @@
+{% extends 'base.html.twig' %}
+{% form_theme formulario with 'form/fields.html.twig' %}
+
+{% block titulo_operacion %}ABM DE PERSONAS{% endblock %}
+
+{% block body %}
+
+    {{ form_start(formulario) }}
+
+    {{ form_errors(formulario) }}
+
+
+    <div class="form-row">
+        <div class="form-group col-md-5">
+            {{ form_label(formulario.nombre) }}
+            {{ form_widget(formulario.nombre) }}
+        </div>
+        <div class="form-group col-md-5">
+            {{ form_label(formulario.apellido) }}
+            {{ form_widget(formulario.apellido) }}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form_label(formulario.fisicaJuridica) }}
+            {{ form_widget(formulario.fisicaJuridica) }}
+        </div>
+        <div class="form-group col-md-3">
+            {{ form_label(formulario.fechaNacimiento) }}
+            {{ form_widget(formulario.fechaNacimiento) }}
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form_label(formulario.puesto) }}
+            {{ form_widget(formulario.puesto) }}
+        </div>
+        <div class="form-group col-md-8">
+            {{ form_label(formulario.descripcionPuesto) }}
+            {{ form_widget(formulario.descripcionPuesto) }}
+        </div>
+    </div>    
+
+
+    <table id="documentos" class="table table-bordered collection-fields-list" data-prototype="{{ form_widget(formulario.documentos.vars.prototype)|e }}">
+        <thead class="table_head text-secondary text-bold">
+            <tr>
+                <th>Documentos
+                    <button type="button" class="btn btn-sm btn-success add-another-collection"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for documento in formulario.documentos %}
+                <tr>
+                    {{ form_widget(documento) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+
+
+    <table id="idiomas" class="table table-bordered collection-fields-list" data-prototype="{{ form_widget(formulario.idiomas.vars.prototype)|e }}">
+        <thead class="table_head text-secondary text-bold">
+            <tr>
+                <th>Idiomas
+                    <button type="button" class="btn btn-sm btn-success add-another-collection"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for idioma in formulario.idiomas %}
+                <tr>
+                    {{ form_widget(idioma) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+
+
+    <table id="contactos" class="table table-bordered collection-fields-list" data-prototype="{{ form_widget(formulario.contactos.vars.prototype)|e }}">
+        <thead class="table_head text-secondary text-bold">
+            <tr>
+                <th>Contactos
+                    <button type="button" class="btn btn-sm btn-success add-another-collection"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for contacto in formulario.contactos %}
+                <tr>
+                    {{ form_widget(contacto) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+
+
+    <table id="domicilios" class="table table-bordered collection-fields-list" data-prototype="{{ form_widget(formulario.domicilios.vars.prototype)|e('html_attr') }}">
+        <thead class="table_head text-secondary text-bold">
+            <tr>
+                <th>Domicilios
+                    <button type="button" class="btn btn-sm btn-success add-another-collection"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for domicilio in formulario.domicilios %}
+                <tr>
+                    {{ form_widget(domicilio) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <hr>
+
+
+
+    {#<table id="categorias" class="table table-bordered collection-fields-list" data-prototype="{{ form_widget(formulario.categorias.vars.prototype)|e('html_attr') }}">
+        <thead class="table_head text-secondary text-bold">
+            <tr>
+                <th>Categorias
+                <button type="button" class="btn btn-sm btn-success add-another-collection"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for categoria in formulario.categorias %}
+                <tr>
+                    {{ form_widget(categoria) }}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>#}
+
+
+    <hr>          
+
+    <div class="">
+        <a type="button" href="{{path('persona_index',{'categoria':app.session.get('categoria')})}}" class="btn btn-sm btn-danger">Volver</a>
+        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+    </div>
+    {{ form_end(formulario) }}
+
+{% endblock %}
+
+

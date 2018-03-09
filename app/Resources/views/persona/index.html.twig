@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}ABM DE PERSONAS{% endblock %}
+{% block body %}
+
+    <table class="table table-bordered">
+        <thead class="table_head">
+            <tr>
+                <th>Apellido</th>
+                <th>Nombre</th>
+                <th>Fecha de Nacimiento</th>
+                <th><a type="button" class="btn btn-sm btn-success" href="{{path('persona_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+                <tr>
+                    <td>{{persona.apellido}}</td>
+                    <td>{{persona.nombre}}</td>
+                    <td>{{persona.fechaNacimiento|date('d/m/Y')}}</td>
+                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('persona_edit',{'id_persona':persona.idPersona})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a type="button" class="btn btn-sm btn-danger" href="{{path('persona_delete',{'id_persona':persona.idPersona})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+
+{% endblock %}
