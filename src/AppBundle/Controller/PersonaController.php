@@ -37,9 +37,13 @@ class PersonaController extends Controller {
      */
     public function indexAction(Request $request, $categoria) {
 
+        $em = $this->getDoctrine()->getManager();
+        
+        $categoria_ = $em->getRepository('AppBundle:Categoria')->find($categoria);
+        $this->get("session")->set('titulo_operacion', $categoria_->getCategoria());
+        
         $this->get("session")->set('categoria', $categoria);
         
-        $em = $this->getDoctrine()->getManager();
         $personas = $em->getRepository('AppBundle:Persona')->findByCategoria($this->get("session")->get('categoria'));
 
         return $this->render('persona/index.html.twig', [
@@ -53,13 +57,9 @@ class PersonaController extends Controller {
      * @Security("is_authenticated()")
      */
     public function newAction(Request $request) {
+        
         $persona = new Persona();
         
-//        $em = $this->getDoctrine()->getManager();
-//        $categoria = new PersonaCategoria();
-//        $categoria->setIdCategoria($em->getRepository('AppBundle:Categoria')->find($this->get("session")->get('categoria')));
-//        $persona->addCategoria($categoria);
-
         $persona->addContacto(new PersonaContacto());
         $persona->addDocumento(new PersonaDocumento());
         $persona->addIdioma(new PersonaIdioma());
@@ -100,6 +100,7 @@ class PersonaController extends Controller {
 
             $em->persist($persona);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha creado la persona : "'. $persona->getApellido() . ' ,' . $persona->getNombre() . '" satisfactoriamente.');
             return $this->redirectToRoute('persona_edit', array('id_persona' => $persona->getIdPersona()));
         }
 
@@ -155,6 +156,7 @@ class PersonaController extends Controller {
             
             $em->persist($persona);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha editado la persona : "'. $persona->getApellido() . ' ,' . $persona->getNombre() . '" satisfactoriamente.');
             return $this->redirectToRoute('persona_edit', array('id_persona' => $id_persona));
         }
 

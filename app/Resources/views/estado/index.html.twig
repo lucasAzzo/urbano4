@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}ESTADOS{% endblock %}
+{% block body %}
+
+    <table class="table table-bordered">
+        <thead class="table_head">
+            <tr>
+                <th>Estado</th>
+                <th>Abreviado</th>
+                <th><a type="button" class="btn btn-sm btn-success" href="{{path('estado_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estado in estados %}
+                <tr>
+                    <td>{{estado.estado}}</td>
+                    <td>{{estado.abreviado}}</td>
+                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('estado_edit',{'id_estado':estado.idEstado})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        {#<a type="button" class="btn btn-sm btn-danger" href="{{path('estado_delete',{'id_estado':estado.idEstado})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>#}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>    
+
+{% endblock %}
