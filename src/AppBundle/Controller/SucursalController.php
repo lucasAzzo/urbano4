@@ -76,6 +76,7 @@ class SucursalController extends Controller {
 
             $em->persist($sucursal);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha creado la sucursal : "'. $sucursal->getSucursal() . '" satisfactoriamente.');
             return $this->redirectToRoute('sucursal_edit', array('id_sucursal' => $sucursal->getIdSucursal()));
         }
 
@@ -122,6 +123,7 @@ class SucursalController extends Controller {
 
             $em->persist($sucursal);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha editado la sucursal : "'. $sucursal->getSucursal() . '" satisfactoriamente.');
             return $this->redirectToRoute('sucursal_edit', array('id_sucursal' => $id_sucursal));
         }
 
@@ -139,6 +141,7 @@ class SucursalController extends Controller {
         $sucursal = $em->getRepository(Sucursal::class)->find($id_sucursal);
         $em->remove($sucursal);
         $em->flush();
+        $request->getSession()->getFlashBag()->add('success','Se ha eliminado la sucursal : "'. $sucursal->getSucursal() . '" satisfactoriamente.');
         return $this->redirectToRoute('sucursal_index');
     }
     

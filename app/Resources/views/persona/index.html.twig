@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block titulo_operacion %}ABM DE PERSONAS{% endblock %}
+{% block titulo_operacion %}{{app.session.get('titulo_operacion')}}{% endblock %}
 {% block body %}
 
     <table class="table table-bordered">

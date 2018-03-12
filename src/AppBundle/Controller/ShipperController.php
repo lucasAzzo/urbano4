@@ -82,6 +82,7 @@ class ShipperController extends Controller {
             
             $em->persist($shipper);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha creado el shipper: "'. $shipper->getShiRazonSocial() . '" satisfactoriamente.');
             return $this->redirectToRoute('shipper_edit', array('id_shipper' => $shipper->getIdShipper()));
         }
 
@@ -134,6 +135,7 @@ class ShipperController extends Controller {
 
             $em->persist($shipper);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha editado el shipper: "'. $shipper->getShiRazonSocial() . '" satisfactoriamente.');
             return $this->redirectToRoute('shipper_edit', array('id_shipper' => $id_shipper));
         }
         

@@ -123,15 +123,14 @@ class Shipper {
     private $shiObservacion;
     
     /**
-     * @var string
+     * @var \AppBundle\Entity\Estado
      *
-     * @ORM\Column(name="ref_estado", type="string", length=2, nullable=false)
-     * @Assert\Length(
-     *      max = 2,
-     *      maxMessage = "El campo refEstado no puede tener mas de 2 caracteres."
-     * )
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     * })
      */
-    private $refEstado;
+    private $idEstado;
     
     /**
      * @var \AppBundle\Entity\User
@@ -212,9 +211,6 @@ class Shipper {
         return $this->shiObservacion;
     }
 
-    public function getRefEstado() {
-        return $this->refEstado;
-    }
 
     public function getIdUsuario(){
         return $this->idUsuario;
@@ -280,10 +276,7 @@ class Shipper {
         $this->shiObservacion = $shiObservacion;
     }
 
-    public function setRefEstado($refEstado) {
-        $this->refEstado = $refEstado;
-    }
-
+    
     public function setIdUsuario(\AppBundle\Entity\User $idUsuario) {
         $this->idUsuario = $idUsuario;
     }
@@ -299,6 +292,16 @@ class Shipper {
     public function setAudHoraProc($audHoraProc) {
         $this->audHoraProc = $audHoraProc;
     }
+    
+    public function getIdEstado(){
+        return $this->idEstado;
+    }
+
+    public function setIdEstado(\AppBundle\Entity\Estado $idEstado) {
+        $this->idEstado = $idEstado;
+    }
+
+
 
 
     

@@ -102,7 +102,6 @@ class MenuController extends Controller {
         $modulos = $em->getRepository('AppBundle:Menu')->findBy(['idMenuPadre' => null],['orden' => 'ASC']);
         $menu = $em->getRepository(Menu::class)->find($id_menu);
         
-        dump($menu);
 
         $formulario = $this->createForm(
                 MenuType::class, $menu, array('action' => $this->generateUrl('menu_update', array('id_menu' => $id_menu)),

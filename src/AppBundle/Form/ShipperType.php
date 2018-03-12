@@ -60,7 +60,11 @@ class ShipperType extends AbstractType {
                 ->add('shiTelefono', TextType::class)
                 ->add('shiCuit', TextType::class)
                 ->add('shiObservacion', TextType::class,array('required' => false))
-                ->add('refEstado', TextType::class)
+                ->add('idEstado', EntityType::class, array(
+                    'placeholder' => 'Seleccione una opción',
+                    //'required' => false,
+                    'class' => 'AppBundle:Estado',
+                    'label' => 'Estado'))
                 
         ;
     }

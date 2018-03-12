@@ -76,6 +76,7 @@ class ZonaController extends Controller {
 
             $em->persist($zona);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha creado la zona : "'. $zona->getZona() . '" satisfactoriamente.');
             return $this->redirectToRoute('zona_edit', array('id_zona' => $zona->getIdZona()));
         }
 
@@ -124,6 +125,7 @@ class ZonaController extends Controller {
 
             $em->persist($zona);
             $em->flush();
+            $request->getSession()->getFlashBag()->add('success','Se ha editado la zona : "'. $zona->getZona() . '" satisfactoriamente.');
             return $this->redirectToRoute('zona_edit', array('id_zona' => $id_zona));
         }
 
@@ -141,6 +143,7 @@ class ZonaController extends Controller {
         $zona = $em->getRepository(Zona::class)->find($id_zona);
         $em->remove($zona);
         $em->flush();
+        $request->getSession()->getFlashBag()->add('success','Se ha eliminado la zona : "'. $zona->getZona() . '" satisfactoriamente.');
         return $this->redirectToRoute('zona_index');
     }
     

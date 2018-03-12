@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% form_theme formulario with 'form/fields.html.twig' %}
 
-{% block titulo_operacion %}ABM DE PERSONAS{% endblock %}
+{% block titulo_operacion %}{{app.session.get('titulo_operacion')}}{% endblock %}
 
 {% block body %}
 

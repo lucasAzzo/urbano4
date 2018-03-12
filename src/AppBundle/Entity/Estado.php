@@ -21,6 +21,8 @@ class Estado {
     
     const ACTIVO = 1;
     const INACTIVO = 2;
+    const ANULADO = 3;
+    const PROCESADO = 4;
 
         /**
      * @var integer
