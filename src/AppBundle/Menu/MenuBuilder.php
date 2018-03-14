@@ -28,13 +28,13 @@ class MenuBuilder /*extends \Twig_Extension*/ {
         
         
         foreach ($modulos as $modulo) {
-            $menu->addChild($modulo->getNombre(), array('route' => ''));
+            $menu->addChild($modulo->getNombre(), array('route' => '', 'attibutes' => array('route' => $modulo->getPath(), 'params' => eval( 'return ' . $modulo->getParametro() . ';'))));
             
             foreach ($modulo->getHijos() as $submodulo) {
-                $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getPath(),'routeParameters' => eval("return " . $submodulo->getParametro() . ";")));
+                $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('attributes' => array('route' => $submodulo->getPath(), 'params' => eval( 'return ' . $submodulo->getParametro() . ';')),'route' => $submodulo->getPath(),'routeParameters' => eval("return " . $submodulo->getParametro() . ";")));
                 
                 foreach ($submodulo->getHijos() as $operacion) {
-                    $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getPath(), 'routeParameters' => eval("return " . $operacion->getParametro() . ";")));
+                    $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('attributes' => array('route' => $operacion->getPath(), 'params' => eval( 'return ' . $operacion->getParametro() . ';')),'route' => $operacion->getPath(), 'routeParameters' => eval("return " . $operacion->getParametro() . ";")));
                 }
             }
         }
