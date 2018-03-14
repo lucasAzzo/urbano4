@@ -1,11 +1,85 @@
-<ul class="nav nav-pills navbar-expand-lg bg-dark justify-content-end">
-    <li class="nav-item dropdown justify-content-end">
-        <a class="btn btn-primary btn-sm nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ app.user.username|upper }}</a>
-        <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" href="{{ path('fos_user_change_password') }}">Cambiar contraseña</a>
-            <a class="dropdown-item" href="{{path('fos_user_registration_register')}}">Crear Nuevo Usuario</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="{{path('fos_user_security_logout')}}">Cerrar sesión</a>
-        </div>
-    </li>
-</ul>
+<!-- START HEADER -->
+<header id="header" class="page-topbar">
+    <!-- start header nav-->
+    <div class="navbar-fixed">
+        <nav class="navbar-color gradient-45deg-urbano-black-red gradient-shadow">
+            <div class="nav-wrapper">
+             <!--   <div class="header-search-wrapper hide-on-med-and-down sideNav-lock">
+                    <i class="material-icons">search</i>
+                    <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Menu rapido " />
+                </div> -->
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light toggle-fullscreen">
+                            <i class="material-icons">settings_overscan</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light notification-button" data-activates="notifications-dropdown">
+                            <i class="material-icons">notifications_none
+                                <small class="notification-badge">2</small>
+                            </i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0);" class="waves-effect waves-block waves-light profile-button" data-activates="profile-dropdown">
+                            <i class="material-icons">person_pin</i>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" data-activates="chat-out" class="waves-effect waves-block waves-light chat-collapse">
+                            <i class="material-icons">format_indent_increase</i>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- notifications-dropdown -->
+                <ul id="notifications-dropdown" class="dropdown-content">
+                    <li>
+                        <h6>NOTIFICATIONS
+                            <span class="new badge">2</span>
+                        </h6>
+                    </li>
+                    <li class="divider"></li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2">
+                            <span class="material-icons icon-bg-circle cyan small">add_shopping_cart</span> Existe un nuevo pedido</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">hace 1 hora</time>
+                    </li>
+                    <li>
+                        <a href="#!" class="grey-text text-darken-2">
+                            <span class="material-icons icon-bg-circle red small">stars</span> Pieza entregada</a>
+                        <time class="media-meta" datetime="2015-06-12T20:50:48+08:00">3 dias </time>
+                    </li>
+
+                </ul>
+                <!-- profile-dropdown -->
+                <ul id="profile-dropdown" class="dropdown-content">
+                 <!--   <li>
+                        <a href="#" class="grey-text text-darken-1">
+                            <i class="material-icons">face</i> Profile</a>
+                    </li>
+                    <li>
+                        <a href="#" class="grey-text text-darken-1">
+                            <i class="material-icons">settings</i> Settings</a>
+                    </li>
+                    <li> -->
+                        <a href="{{ path('fos_user_change_password') }}" class="grey-text text-darken-2">
+                            <span class="material-icons">trending_up</span> Cambiar contraseña
+                            </a>
+                    </li>
+                   <!-- <li class="divider"></li> -->
+                    <li>
+                        <a href="{{path('fos_user_registration_register')}}" class="grey-text text-darken-1">
+                            <i class="material-icons">lock_outline</i>Crear Nuevo Usuario</a>
+                    </li>
+                    <li>
+                        <a href="{{path('fos_user_security_logout')}}" class="grey-text text-darken-1">
+                            <i class="material-icons">keyboard_tab</i> Cerrar sesión</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
+<!-- END HEADER -->
