@@ -17,9 +17,9 @@
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
             {% include 'barra_superior.html.twig' %}
             <div class="row">
-                <div class="col-md-2">{{ knp_menu_render('main') }}</div>
-                <div class="col-md-10">
-                    <div class="col-md-12 text-muted"><hr><h4>{% block titulo_operacion %}{% endblock %}</h4><hr></div>
+                <div class="col s12 m2">{{ knp_menu_render('main') }}</div>
+                <div class="col s12 m10">
+                    <div class="col s12 m12"><hr><h4>{% block titulo_operacion %}{% endblock %}</h4><hr></div>
                     {% for flash_message in app.session.flashbag.get('success') %}
                         <div class="alert alert-success alert-dismissible fade show" role="alert">
                             {{ flash_message }}
