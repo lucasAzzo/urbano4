@@ -6,7 +6,21 @@
     
     <h1>User Form</h1>
     {{ form_start(form) }}
-        {{ form_widget(form) }}
+
+        {{ form_label(form.username) }}
+        {{ form_widget(form.username) }}
+
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+
+        <div class="{{ (pw_required) ? '' : 'invisible d-none' }}" >
+            {{ form_widget(form.plainPassword) }}
+        </div>
+
+        {% for role in roles %}
+            <input type="checkbox" name="roles[]" value="{{ role.role }}" 
+            {{ (role.role in user.roles) ? 'checked' : '' }} />{{ role.role }}<br>
+        {% endfor %}
         <input type="submit" name="submit" value="Save">
     {{ form_end(form) }}
     

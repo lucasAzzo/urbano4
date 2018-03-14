@@ -19,13 +19,13 @@
                 <td>{{ user.username }}</td>
                 <td>{{ user.email }}</td>
                 <td>{{ user.roles|join(' | ') }}</td>
-                {# <td><a href="{{ path('users_edit', { 'id' : user.id }) }}">Editar</a></td> #}
-                {# <td>
+                <td><a href="{{ path('users_edit', { 'id' : user.id }) }}">Editar</a></td>
+                <td>
                     <form method="POST" action="{{ path('users_delete', { 'id' : user.id }) }}">
                         <input type="hidden" name="_method" value="DELETE">
                         <input type="submit" value="Eliminar">
                     </form>
-                </td> #}
+                </td>
             </tr>
         {% endfor %}
     </table>
