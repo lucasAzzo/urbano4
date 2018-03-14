@@ -1,3 +1,4 @@
+
 <aside id="left-sidebar-nav" class="nav-expanded nav-lock nav-collapsible">
     <div class="brand-sidebar">
         <h1 class="logo-wrapper">
@@ -10,45 +11,36 @@
             </a>
         </h1>
     </div>
-
     <ul id="slide-out" class="side-nav fixed leftside-navigation">
-        {% for modulo in item.children %}
-            <li class="no-padding">
-                <ul class="collapsible" data-collapsible="accordion">
+        <li class="no-padding">
+            <ul class="collapsible" data-collapsible="accordion">
+                {% for modulo in item.children %}
                     <li class="bold">
                         <a class="collapsible-header waves-effect waves-cyan">
                             <i class="material-icons">dashboard</i>
                             <span class="nav-text">{{modulo.label}}</span>
                         </a>
                         <div class="collapsible-body">
-                            {% for submodulo in modulo.children %}
-                                <ul class="collapsible" data-collapsible="accordion">
-                                    {% if submodulo.hasChildren %}
-                                        <ul class="collapsible" data-collapsible="accordion">
-                                            <li class="bold">
-                                                <a class="collapsible-header waves-effect waves-cyan">
-                                                    {{submodulo.label}}
-                                                </a>
-                                                <div class="collapsible-body">
-                                                    <ul class="collapsible" data-collapsible="accordion">
-                                                        {% for operacion in submodulo.children %}
-                                                            <li class="bold"><a href="{{operacion.uri}}">{{operacion.label}}</a></li>
-                                                            {% endfor %} 
-                                                    </ul>
-                                                </div>
-                                            </li>
-                                        </ul>    
-                                    {% else %}    
-                                        <li class="bold"><a href="{{submodulo.uri}}">{{submodulo.label}}</a></li>
-                                    {% endif %}
-                                </ul>
-                            {% endfor %}    
+                            <ul>
+                                {% for submodulo in modulo.children %}
+                                    <li class="{% if app.request.attributes.get('_route') == submodulo.attributes['route'] and
+                                        app.request.attributes.get('_route_params') == submodulo.attributes['params']  %}active{% endif %}">
+                                        <a href="{{submodulo.uri}}">
+                                            <i class="material-icons">keyboard_arrow_right</i>
+                                            <span>{{submodulo.label}}</span>
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </li>
-                </ul>
-            </li>        
-        {% endfor %}
+                {% endfor %}
+            </ul>
+        </li>
     </ul>
-</aside>                
-
+    <a href="#" data-activates="slide-out" class="sidebar-collapse btn-floating btn-medium waves-effect waves-light hide-on-large-only gradient-45deg-light-blue-cyan gradient-shadow">
+        <i class="material-icons">menu</i>
+    </a>        
+</aside>
+        
 
