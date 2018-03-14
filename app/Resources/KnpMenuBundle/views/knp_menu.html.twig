@@ -16,50 +16,39 @@
             <li class="no-padding">
                 <ul class="collapsible" data-collapsible="accordion">
                     <li class="bold">
-                        <a class="collapsible-header waves-effect waves-cyan active">
+                        <a class="collapsible-header waves-effect waves-cyan">
                             <i class="material-icons">dashboard</i>
                             <span class="nav-text">{{modulo.label}}</span>
                         </a>
                         <div class="collapsible-body">
-                            <div>
-                                {% for submodulo in modulo.children %}
-                                    <ul class="collapsible" data-collapsible="accordion">
-                                        {% if submodulo.hasChildren %}
-                                            <ul class="collapsible" data-collapsible="accordion">
-                                                <li>
-                                                    <div>
-                                                        <h7>
-                                                            <a class="collapsible-header waves-effect waves-cyan active">
-                                                                {{submodulo.label}}
-                                                            </a>
-                                                        </h7>
-                                                    </div>
-                                                </li>
-
-                                                <div>
-                                                    <div>
-                                                        <ul>
-                                                            {% for operacion in submodulo.children %}
-                                                                <li><a href="{{operacion.uri}}">{{operacion.label}}</a></li>
-                                                                {% endfor %} 
-                                                        </ul>
-                                                    </div>
+                            {% for submodulo in modulo.children %}
+                                <ul class="collapsible" data-collapsible="accordion">
+                                    {% if submodulo.hasChildren %}
+                                        <ul class="collapsible" data-collapsible="accordion">
+                                            <li class="bold">
+                                                <a class="collapsible-header waves-effect waves-cyan">
+                                                    {{submodulo.label}}
+                                                </a>
+                                                <div class="collapsible-body">
+                                                    <ul class="collapsible" data-collapsible="accordion">
+                                                        {% for operacion in submodulo.children %}
+                                                            <li class="bold"><a href="{{operacion.uri}}">{{operacion.label}}</a></li>
+                                                            {% endfor %} 
+                                                    </ul>
                                                 </div>
-                                            </ul>    
-                                        {% else %}    
-                                            <li><a href="{{submodulo.uri}}">{{submodulo.label}}</a></li>
-                                            {% endif %}
-                                    </ul>
-                                {% endfor %}    
-                            </div>
+                                            </li>
+                                        </ul>    
+                                    {% else %}    
+                                        <li class="bold"><a href="{{submodulo.uri}}">{{submodulo.label}}</a></li>
+                                    {% endif %}
+                                </ul>
+                            {% endfor %}    
                         </div>
                     </li>
                 </ul>
             </li>        
         {% endfor %}
     </ul>
-
-
 </aside>                
 
 
