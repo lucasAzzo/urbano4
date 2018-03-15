@@ -30,8 +30,9 @@ class PersonaCategoriaType extends AbstractType{
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
         ->add('idCategoria', EntityType::class, array(
-        'placeholder' => 'Seleccione una opción',    
+        'placeholder' => 'Seleccione una categoría',    
         'class' => 'AppBundle:Categoria',
+        'attr' => array('class' => 'browser-default'),    
         'choice_label' => 'categoria',
         'label' => 'Categoria'))           
         ->add('puesto', TextType::class,array('attr' => array('placeholder' => 'Puesto')))

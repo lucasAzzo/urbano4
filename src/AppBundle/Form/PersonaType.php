@@ -31,9 +31,9 @@ class PersonaType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('fisicaJuridica', ChoiceType::class, array(
-                    'label' => 'Tipo de persona',
+                    //'label' => 'Tipo de persona',
                     'choices' => array(
-                        'Seleccione una opcion' => '',
+                        'Tipo de persona' => '',
                         'Fisica' => 'F',
                         'Juridica' => 'J'
                     ))
@@ -83,10 +83,9 @@ class PersonaType extends AbstractType {
         $builder->add('nombre', TextType::class, array('required' => 'required'))
                 ->add('apellido', TextType::class, array('required' => 'required'))
                 ->add('fechaNacimiento', DateType::class, array(
-                    'widget' => 'choice',
+                    'widget' => 'single_text',
+                    'attr' => array('class' => 'datepicker'),
                     'label' => 'Fecha de nacimiento',
-                    'years' => range(1920, 2018)
-//                    'html5' => false,
         ));
     }
 
@@ -97,7 +96,7 @@ class PersonaType extends AbstractType {
         $resolver->setDefaults(array(
             'categoria' => null,
             'data_class' => Persona::class,
-            'attr' => array('class' => 'was-validated', 'novalidate' => ''),
+            'attr' => array('novalidate' => ''),
                 //'validation_groups' => array('registration'),
         ));
     }
