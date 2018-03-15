@@ -30,9 +30,9 @@ class PersonaContactoType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
         ->add('idContactoTipo', EntityType::class, array(
-        'placeholder' => 'Seleccione una opción',
+        'placeholder' => 'Seleccione un contacto',
         'class' => 'AppBundle:ContactoTipo',
-        // use the User.username property as the visible option string
+        'attr' => array('class' => 'browser-default'),    
         'choice_label' => 'contactoTipo',
         'label' => 'Contacto Tipo'))           
         ->add('numeroContacto', TextType::class,array('attr' => array('placeholder' => 'Número de contacto')))

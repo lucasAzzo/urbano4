@@ -72,6 +72,8 @@
         {% endif %}    
         
         <script src="{{ asset('js/jquery-3.2.1.min.js') }}" ></script>
+        <script src="{{ asset('js/collections.js') }}"></script>
+        <script src="{{ asset('js/comun.js') }}"></script>
         <script src="{{ asset('js/materialize.js') }}" ></script>
         <!--prism-->
         <script type="text/javascript" src="{{ asset('vendors/prism/prism.js') }}"></script>
@@ -85,8 +87,28 @@
         <script type="text/javascript" src="{{ asset('js/custom-script.js') }}"></script>
 
         <script type="text/javascript" src="{{ asset('js/scripts/dashboard-ecommerce.js') }}"></script>
+        
 
         {% block formulario_js %}<script src="{{ asset('js/formulario.js') }}"></script>{% endblock %}
         {% block javascripts %}{% endblock %}
+        
+        <script>
+            $('.datepicker').pickadate({
+                selectMonths: true, 
+                selectYears: true, 
+                today: 'Hoy',
+                clear: 'Limpiar',
+                close: 'Ok',
+                closeOnSelect: false,
+                monthsFull: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
+                monthsShort: [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+                weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado' ],
+                weekdaysLetter: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa' ],
+                formatSubmit: 'yyyy-mm-dd',
+                format: 'yyyy-mm-dd',
+                container: undefined
+            });
+        </script>
+        
     </body>
 </html>

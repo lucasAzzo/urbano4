@@ -24,9 +24,9 @@ class PersonaDocumentoType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
         ->add('idDocumentoTipo', EntityType::class, array(
-        'placeholder' => 'Seleccione una opción',
+        'placeholder' => 'Seleccione un documento',
         'class' => 'AppBundle:DocumentoTipo',
-        // use the User.username property as the visible option string
+        'attr' => array('class' => 'browser-default'),    
         'choice_label' => 'documentoTipo',
         'label' => 'Tipo de documento'))           
         ->add('numero', TextType::class,array('attr' => array('placeholder' => 'Número de documento')))
