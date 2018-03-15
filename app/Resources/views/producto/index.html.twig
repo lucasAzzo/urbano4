@@ -1,8 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}Productos{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Productos</li>
+{% endblock %}
 {% block body %}
-    <table class="striped">
+    <table class="striped" id="example">
         <thead>
             <tr>
                 <th>Producto</th>
@@ -20,3 +24,17 @@
         </tbody>
     </table>    
 {% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#example').DataTable( {
+        //dom: "Bfrtip",
+        //ajax: "../php/staff.php",
+        columns: [
+            { data: "producto" },
+            { data: ""}
+        ],
+        select: true,
+        } );
+    </script>
+{% endblock %}    
