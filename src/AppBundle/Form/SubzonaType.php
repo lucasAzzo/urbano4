@@ -27,7 +27,7 @@ class SubzonaType extends AbstractType {
      */
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
-                ->add('subzona', TextType::class)
+                ->add('subzona', TextType::class, array('attr' => array('placeholder' => 'Nombre de la subzona')))
                 
         ;
     }

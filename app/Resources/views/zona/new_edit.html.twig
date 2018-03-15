@@ -2,43 +2,50 @@
 {% form_theme formulario with 'form/fields.html.twig' %}
 
 {% block titulo_operacion %}ZONAS{% endblock %}
+{% block breadcrumbs %}
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Nueva Zona</li>
+{% endblock %}
 
 {% block body %}
 
-    {{ form_start(formulario) }}
+<div class="container">
+    <div class="card-panel">
+        <h4 class="header2">Nueva Zona</h4>
+        {{ form_start(formulario) }}
 
-    {{ form_errors(formulario) }}
+        {{ form_errors(formulario) }}
 
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.zona) }}
-            {{ form_widget(formulario.zona) }}
+        <div class="row">
+            <div class="input-field col s6">
+                {{ form_label(formulario.zona) }}
+                {{ form_widget(formulario.zona) }}
+            </div>
         </div>
-    </div>
 
-    <table id="subzonas" class="table table-bordered collection-fields-list" data-prototype="{{ form_widget(formulario.subzonas.vars.prototype)|e }}">
-        <thead class="table_head text-secondary text-bold">
-            <tr>
-                <th>Subzonas
-                    <button type="button" class="btn btn-sm btn-success add-another-collection"><i class="fa fa-plus" aria-hidden="true"></i></button></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for subzona in formulario.subzonas %}
+        <table id="subzonas" class="collection-fields-list" data-prototype="{{ form_widget(formulario.subzonas.vars.prototype)|e }}">
+            <thead>
                 <tr>
-                    {{ form_widget(subzona) }}
+                    <th>Subzonas
+                        <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                {% for subzona in formulario.subzonas %}
+                    <tr>
+                        {{ form_widget(subzona) }}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
 
-    <hr>          
-
-    <div class="">
-        <a type="button" href="{{path('zona_index')}}" class="btn btn-sm btn-danger">Volver</a>
-        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+        <div>
+            <a type="button" href="{{path('zona_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+            <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+        </div>
+        {{ form_end(formulario) }}
     </div>
-    {{ form_end(formulario) }}
+</div>    
 
 {% endblock %}
 

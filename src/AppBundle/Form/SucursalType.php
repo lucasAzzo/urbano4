@@ -31,7 +31,7 @@ class SucursalType extends AbstractType {
         $builder
                 ->add('sucursal', TextType::class)
                 ->add('idZona', EntityType::class, array(
-                    'placeholder' => 'Seleccione una opción',
+                    'placeholder' => 'Seleccione una zona',
                     //'required' => false,
                     'class' => 'AppBundle:Zona',
                     'label' => 'Zona'))

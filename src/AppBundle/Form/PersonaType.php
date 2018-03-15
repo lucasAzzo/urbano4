@@ -31,9 +31,9 @@ class PersonaType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
                 ->add('fisicaJuridica', ChoiceType::class, array(
-                    //'label' => 'Tipo de persona',
+                    'label' => 'Tipo de persona',
                     'choices' => array(
-                        'Tipo de persona' => '',
+                        'Seleccione una opción' => '',
                         'Fisica' => 'F',
                         'Juridica' => 'J'
                     ))

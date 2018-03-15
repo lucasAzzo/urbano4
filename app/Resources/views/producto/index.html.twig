@@ -6,35 +6,26 @@
         <li class="active">Productos</li>
 {% endblock %}
 {% block body %}
-    <table class="striped" id="example">
-        <thead>
-            <tr>
-                <th>Producto</th>
-                <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('producto_new')}}"><i class="material-icons">add</i></a></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for producto in productos %}
-                <tr>
-                    <td>{{producto.producto}}</td>
-                    <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('producto_edit',{'id_producto':producto.idProducto})}}"><i class="material-icons">mode_edit</i></a>
-                    <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('producto_delete',{'id_producto':producto.idProducto})}}"><i class="material-icons">clear</i></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>    
+    <div class="container">
+        <div class="card-panel">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Producto</th>
+                        <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('producto_new')}}"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for producto in productos %}
+                        <tr>
+                            <td>{{producto.producto}}</td>
+                            <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('producto_edit',{'id_producto':producto.idProducto})}}"><i class="material-icons">mode_edit</i></a>
+                            <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('producto_delete',{'id_producto':producto.idProducto})}}"><i class="material-icons">clear</i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>    
+    </div>            
 {% endblock %}
-
-{% block javascript %}
-    <script>
-        $('#example').DataTable( {
-        //dom: "Bfrtip",
-        //ajax: "../php/staff.php",
-        columns: [
-            { data: "producto" },
-            { data: ""}
-        ],
-        select: true,
-        } );
-    </script>
-{% endblock %}    
+ 

@@ -1,28 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}{{app.session.get('titulo_operacion')}}{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Personas</li>
+{% endblock %}
 {% block body %}
 
-    <table class="striped">
-        <thead>
-            <tr>
-                <th>Apellido</th>
-                <th>Nombre</th>
-                <th>Fecha de Nacimiento</th>
-                <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('persona_new')}}"><i class="material-icons">add</i></a></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for persona in personas %}
-                <tr>
-                    <td>{{persona.apellido}}</td>
-                    <td>{{persona.nombre}}</td>
-                    <td>{{persona.fechaNacimiento|date('d/m/Y')}}</td>
-                    <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('persona_edit',{'id_persona':persona.idPersona})}}"><i class="material-icons">mode_edit</i></a>
-                        <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('persona_delete',{'id_persona':persona.idPersona})}}"><i class="material-icons">clear</i></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>    
+    <div class="container">
+        <div class="card-panel">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Apellido</th>
+                        <th>Nombre</th>
+                        <th>Fecha de Nacimiento</th>
+                        <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('persona_new')}}"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for persona in personas %}
+                        <tr>
+                            <td>{{persona.apellido}}</td>
+                            <td>{{persona.nombre}}</td>
+                            <td>{{persona.fechaNacimiento|date('d/m/Y')}}</td>
+                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('persona_edit',{'id_persona':persona.idPersona})}}"><i class="material-icons">mode_edit</i></a>
+                                <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('persona_delete',{'id_persona':persona.idPersona})}}"><i class="material-icons">clear</i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>            
 
 {% endblock %}
