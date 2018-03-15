@@ -58,6 +58,16 @@
                                 </div>
                             </div>
                         </div>
+                        <div id="card-alert" class="card green">                     
+                            {% for flash_message in app.session.flashbag.get('success') %}
+                                <div class="card-content white-text"> 
+                                    <p>{{ flash_message }}</p>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {% endfor %} 
+                        </div>    
                         {% block body %}
 
 
