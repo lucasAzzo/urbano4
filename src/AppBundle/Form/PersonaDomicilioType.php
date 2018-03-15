@@ -30,9 +30,9 @@ class PersonaDomicilioType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
         ->add('idDomicilioTipo', EntityType::class, array(
-        'placeholder' => 'Seleccione una opción',
+        'placeholder' => 'Seleccione un domicilio',
         'class' => 'AppBundle:DomicilioTipo',
-        // use the User.username property as the visible option string
+        'attr' => array('class' => 'browser-default'),    
         'choice_label' => 'domicilioTipo',
         'label' => 'Tipo de Domicilio'))           
         ->add('calle', TextType::class,array('attr' => array('placeholder' => 'Calle')))

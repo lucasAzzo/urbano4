@@ -1,22 +1,40 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}Productos{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Productos</li>
+{% endblock %}
 {% block body %}
-    <table class="table table-bordered">
-        <thead class="table_head">
+    <table class="striped" id="example">
+        <thead>
             <tr>
                 <th>Producto</th>
-                <th><a type="button" class="btn btn-sm btn-success" href="{{path('producto_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
+                <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('producto_new')}}"><i class="material-icons">add</i></a></th>
             </tr>
         </thead>
         <tbody>
             {% for producto in productos %}
                 <tr>
                     <td>{{producto.producto}}</td>
-                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('producto_edit',{'id_producto':producto.idProducto})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a type="button" class="btn btn-sm btn-danger" href="{{path('producto_delete',{'id_producto':producto.idProducto})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+                    <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('producto_edit',{'id_producto':producto.idProducto})}}"><i class="material-icons">mode_edit</i></a>
+                    <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('producto_delete',{'id_producto':producto.idProducto})}}"><i class="material-icons">clear</i></a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>    
 {% endblock %}
+
+{% block javascript %}
+    <script>
+        $('#example').DataTable( {
+        //dom: "Bfrtip",
+        //ajax: "../php/staff.php",
+        columns: [
+            { data: "producto" },
+            { data: ""}
+        ],
+        select: true,
+        } );
+    </script>
+{% endblock %}    

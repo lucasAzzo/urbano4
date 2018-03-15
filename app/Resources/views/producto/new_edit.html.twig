@@ -1,27 +1,33 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}Productos{% endblock %}
+{% block breadcrumbs %}
+        <li><a class="active">Inicio</a></li>
+        <li href="#">Nuevo producto</li>
+{% endblock %}
 
 {% block body %}
+    
+    <div class="card-panel">
 
-    {{ form_start(formulario) }}
+        {{ form_start(formulario) }}
 
-    {{ form_errors(formulario) }}
-      
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.producto) }}
-            {{ form_widget(formulario.producto) }}
+        {{ form_errors(formulario) }}
+
+        <div class="row">
+            <div class="input-field col s6">
+                {{ form_label(formulario.producto) }}
+                {{ form_widget(formulario.producto) }}
+            </div>
+        </div>     
+
+        <div class="row">
+            <a type="button" href="{{path('producto_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+            <input type="submit" value="Guardar" class="btn"/>
         </div>
-    </div>     
 
-    <hr>          
-
-    <div class="">
-        <a type="button" href="{{path('producto_index')}}" class="btn btn-sm btn-danger">Volver</a>
-        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
-    </div>
-    {{ form_end(formulario) }}
+        {{ form_end(formulario) }}
+    </div>    
 
 {% endblock %}
 

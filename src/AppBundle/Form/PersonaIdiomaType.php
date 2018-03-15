@@ -30,9 +30,9 @@ class PersonaIdiomaType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
         $builder
         ->add('idIdioma', EntityType::class, array(
-        'placeholder' => 'Seleccione una opción',
+        'placeholder' => 'Seleccione un idioma',
         'class' => 'AppBundle:Idioma',
-        // use the User.username property as the visible option string
+        'attr' => array('class' => 'browser-default'),    
         'choice_label' => 'idioma',
         'label' => 'Idioma'))           
         ->add('nivel', TextType::class,array('attr' => array('placeholder' => 'Nivel')))

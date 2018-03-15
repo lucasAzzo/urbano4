@@ -3,6 +3,7 @@
         
         
         jQuery('.add-another-collection').click(function (e) {
+            
             e.preventDefault();
             
             var collectionList = $(this).parent().parent().parent().parent();

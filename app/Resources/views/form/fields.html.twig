@@ -1,82 +1,78 @@
-{% extends 'bootstrap_4_layout.html.twig' %}
+{% extends 'form_div_layout.html.twig' %}
 
 {% block app_documento_widget %}
     {% spaceless %}
-        <td class="d-inline-block col-md-6">{{ form_widget(form.idDocumentoTipo) }}</td>
-        <td class="d-inline-block col-md-5">{{ form_widget(form.numero,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
-        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-            {% endspaceless %}
-        {% endblock app_documento_widget %}
+        <td>{{ form_widget(form.idDocumentoTipo) }}</td>
+        <td>{{ form_widget(form.numero,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
+        <td><button type="button" class="btn-floating waves-effect waves-light red remove-collection"><i class="material-icons">clear</i></button></td>
+    {% endspaceless %}
+{% endblock app_documento_widget %}
 
 {% block app_idioma_widget %}
     {% spaceless %}
-        <td class="d-inline-block col-md-6">{{ form_widget(form.idIdioma) }}</td>
-        <td class="d-inline-block col-md-5">{{ form_widget(form.nivel) }}</td>
-        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-            {% endspaceless %}
-        {% endblock app_idioma_widget %}
+        <td>{{ form_widget(form.idIdioma) }}</td>
+        <td>{{ form_widget(form.nivel) }}</td>
+        <td><button type="button" class="btn-floating waves-effect waves-light red remove-collection"><i class="material-icons">clear</i></button></td>
+    {% endspaceless %}
+{% endblock app_idioma_widget %}
 
 {% block app_contacto_widget %}
     {% spaceless %}
-        <td class="d-inline-block col-md-6">{{ form_widget(form.idContactoTipo) }}</td>
-        <td class="d-inline-block col-md-5">{{ form_widget(form.numeroContacto,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
-        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-            {% endspaceless %}
-        {% endblock app_contacto_widget %}
+        <td>{{ form_widget(form.idContactoTipo) }}</td>
+        <td>{{ form_widget(form.numeroContacto,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
+        <td><button type="button" class="btn-floating waves-effect waves-light red remove-collection"><i class="material-icons">clear</i></button></td>
+    {% endspaceless %}
+{% endblock app_contacto_widget %}
 
 {% block app_domicilio_widget %}
     {% spaceless %}
-        <td class="d-inline-block col-md-3">{{ form_widget(form.idDomicilioTipo) }}</td>
-        <td class="d-inline-block col-md-3">{{ form_widget(form.calle) }}</td>
-        <td class="d-inline-block col-md-2">{{ form_widget(form.numero,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
-        <td class="d-inline-block col-md-1">{{ form_widget(form.piso) }}</td>
-        <td class="d-inline-block col-md-2">{{ form_widget(form.depto) }}</td>
-        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-            {% endspaceless %}
-        {% endblock app_domicilio_widget %}
+        <td>{{ form_widget(form.idDomicilioTipo) }}</td>
+        <td>{{ form_widget(form.calle) }}</td>
+        <td>{{ form_widget(form.numero,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}</td>
+        <td>{{ form_widget(form.piso) }}</td>
+        <td>{{ form_widget(form.depto) }}</td>
+        <td><button type="button" class="btn-floating waves-effect waves-light red remove-collection"><i class="material-icons">clear</i></button></td>
+    {% endspaceless %}
+{% endblock app_domicilio_widget %}
 
 {% block app_categoria_widget %}
     {% spaceless %}
-        <td class="d-inline-block col-md-3">{{ form_widget(form.idCategoria) }}</td>
-        <td class="d-inline-block col-md-3">{{ form_widget(form.puesto) }}</td>
-        <td class="d-inline-block col-md-5">{{ form_widget(form.descripcionPuesto) }}</td>
-        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
-            {% endspaceless %}
-        {% endblock app_categoria_widget %}
+        <td>{{ form_widget(form.idCategoria) }}</td>
+        <td>{{ form_widget(form.puesto) }}</td>
+        <td>{{ form_widget(form.descripcionPuesto) }}</td>
+        <td><button type="button" class="btn-floating waves-effect waves-light red remove-collection"><i class="material-icons">clear</i></button></td>
+    {% endspaceless %}
+{% endblock app_categoria_widget %}
 
 {% block app_subzona_widget %}
     {% spaceless %}
-        <td class="d-inline-block col-md-11">{{ form_widget(form.subzona) }}</td>
-        <td class="d-inline-block col-md-1"><button type="button" class="btn btn-sm btn-danger remove-collection"><i class="fa fa-trash" aria-hidden="true"></i></button></td>
+        <td>{{ form_widget(form.subzona) }}</td>
+        <td><button type="button" class="btn-floating waves-effect waves-light red remove-collection"><i class="material-icons">clear</i></button></td>
     {% endspaceless %}
 {% endblock app_subzona_widget %}
 
 {% block form_errors -%}
     {%- if errors|length > 0 -%}
-    <div class="{% if form is not rootform %}invalid-feedback{% else %}alert alert-danger alert-dismissible fade show{% endif %}" role="alert">
-        <ul class="list-unstyled mb-0">
+        <div id="card-alert" class="card red">
             {%- for error in errors -%}
-            <li>
-                {{ error.message }} 
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                <div class="card-content white-text"><p>{{ error.message }}</p></div>
+                <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">×</span>
                 </button>
-            </li>
             {%- endfor -%}
-        </ul>
-    </div>
+        </div>
     {%- endif %}
-    {%- endblock form_errors %}
+{%- endblock form_errors %}
 
 
-    {% block form_label -%}
-        {%- if compound is defined and compound -%}
+{% block form_label -%}
+    {%- if compound is defined and compound -%}
         {%- set element = 'legend' -%}
         {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' col-form-legend text-muted')|trim}) -%}
-        {%- else -%}
+    {%- else -%}
         {%- set label_attr = label_attr|merge({class: (label_attr.class|default('') ~ ' form-control-label text-muted')|trim}) -%}
-        {%- endif -%}
-        {{- parent() -}}
-        {%- endblock form_label %}
+    {%- endif -%}
+    {{- parent() -}}
+{%- endblock form_label %}
 
 
