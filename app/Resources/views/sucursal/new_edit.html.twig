@@ -1,10 +1,13 @@
 {% extends 'base.html.twig' %}
-
-
-
+{% block titulo_operacion %}<h4 class="header2">Sucursales</h4>{% endblock %}
+{% block breadcrumbs %}
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Nueva Sucursal</li>
+{% endblock %}
 {% block body %}
 <div class="card-panel">
-    {% block titulo_operacion %}<h4 class="header2">Sucursales</h4>{% endblock %}
+    <h4 class="header2">Nueva Sucursal</h4>
+
 
     {{ form_start(formulario) }}
 
