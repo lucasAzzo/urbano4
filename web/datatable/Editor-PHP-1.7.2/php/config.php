@@ -10,7 +10,7 @@ ini_set('display_errors', '1');
  */
 $sql_details = array(
 	"type" => "Postgres",   // Database type: "Mysql", "Postgres", "Sqlserver", "Sqlite" or "Oracle"
-	"user" => "postgres",        // Database user name
+	"user" => "urbano",        // Database user name
 	"pass" => "Urb4n0*#",        // Database password
 	"host" => "urbanotesting.cxyyzovbwtwj.us-east-2.rds.amazonaws.com",        // Database host
 	"port" => "5432",        // Database connection port (can be left empty for default)
