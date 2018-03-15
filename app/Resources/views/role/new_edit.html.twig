@@ -1,13 +1,37 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Roles{% endblock %}
+{% block titulo_operacion %}Roles{% endblock %}
+{% block breadcrumbs %}
+    <li><a class="active">Inicio</a></li>
+    <li href="#">Nuevo Rol</li>
+    {% endblock %}
 
 {% block body %}
-    
-    <h1>Role Form</h1>
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" name="submit" value="Save">
-    {{ form_end(form) }}
-    
+
+    <div class="container">
+        <div class="card-panel">
+            {{ form_start(form) }}
+
+            {{ form_errors(form) }}
+
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_label(form.role) }}
+                    {{ form_widget(form.role) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_label(form.description) }}
+                    {{ form_widget(form.description) }}
+                </div>
+            </div>   
+
+            <div class="row">
+                <a type="button" href="{{path('roles_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+                <input type="submit" value="Guardar" class="btn"/>
+            </div>    
+            
+            {{ form_end(form) }}
+        </div>
+    </div>    
+
 {% endblock %}

@@ -1,22 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}SHIPPERS{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Shippers</li>
+{% endblock %}
 {% block body %}
-    <table class="table table-bordered">
-        <thead class="table_head">
-            <tr>
-                <th>Shipper</th>
-                <th><a type="button" class="btn btn-sm btn-success" href="{{path('shipper_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for shipper in shippers %}
-                <tr>
-                    <td>{{shipper.shiRepresentante}}</td>
-                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('shipper_edit',{'id_shipper':shipper.idShipper})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a type="button" class="btn btn-sm btn-danger" href="{{path('shipper_delete',{'id_shipper':shipper.idShipper})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>    
+<div class="container">
+        <div class="card-panel">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Shipper</th>
+                        <th><a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('shipper_new')}}"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for shipper in shippers %}
+                        <tr>
+                            <td>{{shipper.shiRepresentante}}</td>
+                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('shipper_edit',{'id_shipper':shipper.idShipper})}}"><i class="material-icons">mode_edit</i></a>
+                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('shipper_delete',{'id_shipper':shipper.idShipper})}}"><i class="material-icons">clear</i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+</div>                    
 {% endblock %}

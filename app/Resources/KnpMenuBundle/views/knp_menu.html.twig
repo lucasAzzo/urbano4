@@ -18,7 +18,7 @@
                     <li class="bold">
                         <a class="collapsible-header waves-effect waves-cyan">
                             <i class="material-icons">dashboard</i>
-                            <span class="nav-text">{{modulo.label}}</span>
+                            <span class="nav-text">{{modulo.label|upper}}</span>
                         </a>
                         <div class="collapsible-body">
                             <ul>
@@ -27,7 +27,7 @@
                                         app.request.attributes.get('_route_params') == submodulo.attributes['params']  %}active{% endif %}">
                                         <a href="{{submodulo.uri}}">
                                             <i class="material-icons">keyboard_arrow_right</i>
-                                            <span>{{submodulo.label}}</span>
+                                            <span>{{submodulo.label|upper}}</span>
                                         </a>
                                     </li>
                                 {% endfor %}

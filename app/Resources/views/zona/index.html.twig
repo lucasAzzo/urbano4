@@ -1,22 +1,36 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}ZONAS{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Zonas</li>
+{% endblock %}
 {% block body %}
-    <table class="table table-bordered">
-        <thead class="table_head">
-            <tr>
-                <th>Zona</th>
-                <th><a type="button" class="btn btn-sm btn-success" href="{{path('zona_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for zona in zonas %}
-                <tr>
-                    <td>{{zona.zona}}</td>
-                    <td><a type="button" class="btn btn-sm btn-warning" href="{{path('zona_edit',{'id_zona':zona.idZona})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                    <a type="button" class="btn btn-sm btn-danger" href="{{path('zona_delete',{'id_zona':zona.idZona})}}"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>    
+    <div class="container">
+        <div class="card-panel">
+            <table class="striped">
+                <thead>
+                    <tr>
+                        <th>Zona</th>
+                        <th>SubZonas</th>
+                        <th><a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('zona_new')}}"><i class="material-icons">add</i></a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for zona in zonas %}
+                        <tr>
+                            <td>{{zona.zona}}</td>
+                            <td>
+                                {% for subzona in zona.subzonas %}
+                                    {{subzona.subzona}}<br>
+                                {% endfor %}    
+                            </td>
+                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('zona_edit',{'id_zona':zona.idZona})}}"><i class="material-icons">mode_edit</i></a>
+                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('zona_delete',{'id_zona':zona.idZona})}}"><i class="material-icons">clear</i></a></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>                
 {% endblock %}

@@ -1,31 +1,31 @@
 {% extends "base.html.twig" %}
 
-{% block title %}Roles{% endblock %}
+{% block titulo_operacion %}Roles{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Roles</li>
+{% endblock %}
 
 {% block body %}
     
-    <h1>Roles List Page</h1>
-    <table class="table">
-        <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th colspan="2">
-                <a href="{{ path('roles_new') }}">Crear Nuevo</a>
-            </th>
-        </tr>
-        {% for role in roles %}
-            <tr>
-                <td>{{ role.role }}</td>
-                <td>{{ role.description }}</td>
-                <td><a href="{{ path('roles_edit', { 'id' : role.id }) }}">Editar</a></td>
-                <td>
-                    <form method="POST" action="{{ path('roles_delete', { 'id' : role.id }) }}">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="submit" value="Eliminar">
-                    </form>
-                </td>
-            </tr>
-        {% endfor %}
-    </table>
+    <div class="container">
+        <div class="card-panel">
+            <table class="striped">
+                <thead>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('roles_new')}}"><i class="material-icons">add</i></a></th>
+                </thead>
+                {% for role in roles %}
+                    <tr>
+                        <td>{{ role.role }}</td>
+                        <td>{{ role.description }}</td>
+                        <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('roles_edit',{'id':role.id})}}"><i class="material-icons">mode_edit</i></a>
+                            <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('roles_delete',{'id':role.id})}}"><i class="material-icons">clear</i></a></td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>        
 
 {% endblock %}

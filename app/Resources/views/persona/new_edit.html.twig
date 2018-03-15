@@ -2,121 +2,129 @@
 {% form_theme formulario with 'form/fields.html.twig' %}
 
 {% block titulo_operacion %}{{app.session.get('titulo_operacion')}}{% endblock %}
+{% block breadcrumbs %}
+    <li><a href="#">Inicio</a></li>
+    <li class="active">Nueva Persona</li>
+{% endblock %}
 
 {% block body %}
+    <div class="container">
+        <div class="card-panel">
 
-    {{ form_start(formulario) }}
+            {{ form_start(formulario) }}
 
-    {{ form_errors(formulario) }}
+            {{ form_errors(formulario) }}
 
 
-    <div class="row">
-        <div class="input-field col s6">
-            {{ form_label(formulario.nombre) }}
-            {{ form_widget(formulario.nombre) }}
-        </div>
-        <div class="input-field col s6">
-            {{ form_label(formulario.apellido) }}
-            {{ form_widget(formulario.apellido) }}
-        </div>
-    </div>
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_label(formulario.nombre) }}
+                    {{ form_widget(formulario.nombre) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_label(formulario.apellido) }}
+                    {{ form_widget(formulario.apellido) }}
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="input-field col s4">
-            {#{{ form_label(formulario.fisicaJuridica) }}#}
-            {{ form_widget(formulario.fisicaJuridica) }}
-        </div>
-        <div class="input-field col s3">
-            {{ form_label(formulario.fechaNacimiento) }}
-            {{ form_widget(formulario.fechaNacimiento) }}
-        </div>
-    </div>
+            <div class="row">
+                <div class="input-field col s4">
+                    {{ form_widget(formulario.fisicaJuridica) }}
+                    {{ form_label(formulario.fisicaJuridica) }}
+                </div>
+                <div class="input-field col s3">
+                    {{ form_label(formulario.fechaNacimiento) }}
+                    {{ form_widget(formulario.fechaNacimiento) }}
+                </div>
+            </div>
 
-    <div class="row">
-        <div class="input-field col s4">
-            {{ form_label(formulario.puesto) }}
-            {{ form_widget(formulario.puesto) }}
-        </div>
-        <div class="input-field col s8">
-            {{ form_label(formulario.descripcionPuesto) }}
-            {{ form_widget(formulario.descripcionPuesto) }}
+            <div class="row">
+                <div class="input-field col s4">
+                    {{ form_label(formulario.puesto) }}
+                    {{ form_widget(formulario.puesto) }}
+                </div>
+                <div class="input-field col s8">
+                    {{ form_label(formulario.descripcionPuesto) }}
+                    {{ form_widget(formulario.descripcionPuesto) }}
+                </div>
+            </div>    
+
+
+            <table id="documentos" class="collection-fields-list" data-prototype="{{ form_widget(formulario.documentos.vars.prototype)|e }}">
+                <thead>
+                    <tr>
+                        <th>Documentos
+                            <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for documento in formulario.documentos %}
+                        <tr>
+                            {{ form_widget(documento) }}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <table id="idiomas" class="collection-fields-list" data-prototype="{{ form_widget(formulario.idiomas.vars.prototype)|e }}">
+                <thead>
+                    <tr>
+                        <th>Idiomas
+                            <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for idioma in formulario.idiomas %}
+                        <tr>
+                            {{ form_widget(idioma) }}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <table id="contactos" class="collection-fields-list" data-prototype="{{ form_widget(formulario.contactos.vars.prototype)|e }}">
+                <thead>
+                    <tr>
+                        <th>Contactos
+                            <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for contacto in formulario.contactos %}
+                        <tr>
+                            {{ form_widget(contacto) }}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <table id="domicilios" class="collection-fields-list" data-prototype="{{ form_widget(formulario.domicilios.vars.prototype)|e }}">
+                <thead>
+                    <tr>
+                        <th>Domicilios
+                            <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for domicilio in formulario.domicilios %}
+                        <tr>
+                            {{ form_widget(domicilio) }}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+
+            <div class="row">
+                <a type="button" href="{{path('persona_index',{'categoria':app.session.get('categoria')})}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+                <input type="submit" value="Guardar" class="btn"/>
+            </div>
+            {{ form_end(formulario) }}
         </div>
     </div>    
-
-
-    <table id="documentos" class="collection-fields-list" data-prototype="{{ form_widget(formulario.documentos.vars.prototype)|e }}">
-        <thead>
-            <tr>
-                <th>Documentos
-                    <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for documento in formulario.documentos %}
-                <tr>
-                    {{ form_widget(documento) }}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
-    <table id="idiomas" class="collection-fields-list" data-prototype="{{ form_widget(formulario.idiomas.vars.prototype)|e }}">
-        <thead>
-            <tr>
-                <th>Idiomas
-                    <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for idioma in formulario.idiomas %}
-                <tr>
-                    {{ form_widget(idioma) }}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
-    <table id="contactos" class="collection-fields-list" data-prototype="{{ form_widget(formulario.contactos.vars.prototype)|e }}">
-        <thead>
-            <tr>
-                <th>Contactos
-                    <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for contacto in formulario.contactos %}
-                <tr>
-                    {{ form_widget(contacto) }}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
-    <table id="domicilios" class="collection-fields-list" data-prototype="{{ form_widget(formulario.domicilios.vars.prototype)|e }}">
-        <thead>
-            <tr>
-                <th>Domicilios
-                    <button type="button" class="btn-floating waves-effect waves-light green darken-1 add-another-collection"><i class="material-icons">add</i></button></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for domicilio in formulario.domicilios %}
-                <tr>
-                    {{ form_widget(domicilio) }}
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-
-    <div class="row">
-        <a type="button" href="{{path('persona_index',{'categoria':app.session.get('categoria')})}}" class="btn waves-effect waves-light red accent-2">Volver</a>
-        <input type="submit" value="Guardar" class="btn"/>
-    </div>
-    {{ form_end(formulario) }}
 
 {% endblock %}
 

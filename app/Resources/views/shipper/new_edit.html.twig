@@ -1,89 +1,94 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}SHIPPERS{% endblock %}
+{% block breadcrumbs %}
+        <li><a class="active">Inicio</a></li>
+        <li href="#">Nuevo shipper</li>
+{% endblock %}
 
 {% block body %}
+    <div class="container">
+        <div class="card-panel">
+            {{ form_start(formulario) }}
 
-    {{ form_start(formulario) }}
+            {{ form_errors(formulario) }}
 
-    {{ form_errors(formulario) }}
-    
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.idPais) }}
-            {{ form_widget(formulario.idPais) }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.idRegion) }}
-            {{ form_widget(formulario.idRegion) }}
-        </div>
-    </div>
-        
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.idProvincia) }}
-            {{ form_widget(formulario.idProvincia) }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.idCiudad) }}
-            {{ form_widget(formulario.idCiudad) }}
-        </div>
-    </div>
-        
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.idSucursalDefecto) }}
-            {{ form_widget(formulario.idSucursalDefecto) }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.shiRepresentante) }}
-            {{ form_widget(formulario.shiRepresentante) }}
-        </div>
-    </div>
-        
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.shiRazonSocial) }}
-            {{ form_widget(formulario.shiRazonSocial) }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.shiDireccion) }}
-            {{ form_widget(formulario.shiDireccion) }}
-        </div>
-    </div>
-        
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.shiTelefono) }}
-            {{ form_widget(formulario.shiTelefono) }}
-        </div>
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.shiCuit) }}
-            {{ form_widget(formulario.shiCuit) }}
-        </div>
-    </div>
-    
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            {{ form_label(formulario.shiObservacion) }}
-            {{ form_widget(formulario.shiObservacion) }}
-        </div>
-    </div>
-        
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            {{ form_label(formulario.idEstado) }}
-            {{ form_widget(formulario.idEstado) }}
-        </div>
-    </div>     
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_widget(formulario.idPais) }}
+                    {{ form_label(formulario.idPais) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(formulario.idRegion) }}
+                    {{ form_label(formulario.idRegion) }}
+                </div>
+            </div>
 
-    <hr>          
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_widget(formulario.idProvincia) }}
+                    {{ form_label(formulario.idProvincia) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_widget(formulario.idCiudad) }}
+                    {{ form_label(formulario.idCiudad) }}
+                </div>
+            </div>
 
-    <div class="">
-        <a type="button" href="{{path('shipper_index')}}" class="btn btn-sm btn-danger">Volver</a>
-        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
-    </div>
-    {{ form_end(formulario) }}
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_widget(formulario.idSucursalDefecto) }}
+                    {{ form_label(formulario.idSucursalDefecto) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_label(formulario.shiRepresentante) }}
+                    {{ form_widget(formulario.shiRepresentante) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_label(formulario.shiRazonSocial) }}
+                    {{ form_widget(formulario.shiRazonSocial) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_label(formulario.shiDireccion) }}
+                    {{ form_widget(formulario.shiDireccion) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_label(formulario.shiTelefono) }}
+                    {{ form_widget(formulario.shiTelefono) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_label(formulario.shiCuit) }}
+                    {{ form_widget(formulario.shiCuit) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_label(formulario.shiObservacion) }}
+                    {{ form_widget(formulario.shiObservacion) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="input-field col s6">
+                    {{ form_widget(formulario.idEstado) }}
+                    {{ form_label(formulario.idEstado) }}
+                </div>
+            </div>     
+
+            <div class="row">
+                <a type="button" href="{{path('shipper_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+                <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+            </div>
+            {{ form_end(formulario) }}
+        </div>
+    </div>    
 
 {% endblock %}
 
