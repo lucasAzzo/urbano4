@@ -33,7 +33,7 @@ class UserController extends Controller
     /**
      * @Route("/users/new", name="users_new" )
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
      */
     public function newAction()
     {
@@ -59,7 +59,7 @@ class UserController extends Controller
     /**
      * @Route("/users/create", name="users_create" )
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
      */
     public function createAction(Request $request)
     {
@@ -98,7 +98,7 @@ class UserController extends Controller
     /**
      * @Route("/users/edit/{id}", name="users_edit" )
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
      */
     public function editAction($id)
     {
@@ -126,7 +126,7 @@ class UserController extends Controller
     /**
      * @Route("/users/update/{id}", name="users_update" )
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
      */
     public function updateAction(Request $request, $id)
     {
@@ -174,7 +174,7 @@ class UserController extends Controller
     /**
      * @Route("/users/delete/{id}", name="users_delete" )
      * @Method("DELETE")
-     * @Security("is_authenticated()")
+     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
      */
     public function deleteAction($id)
     {

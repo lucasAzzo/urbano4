@@ -6,7 +6,7 @@
     
     <h1>User Form</h1>
     {{ form_start(form) }}
-
+        {{ form_errors(form) }}
         {{ form_label(form.username) }}
         {{ form_widget(form.username) }}
 
