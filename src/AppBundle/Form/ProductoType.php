@@ -38,7 +38,7 @@ class ProductoType extends AbstractType {
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
             'data_class' => Producto::class,
-            'attr' => array('class' => 'was-validated', 'novalidate' => ''),
+            'attr' => array('novalidate' => ''),
         ));
     }
 

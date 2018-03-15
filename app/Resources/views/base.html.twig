@@ -34,15 +34,9 @@
             <div class="row">
                 <div class="col s12 m2">{{ knp_menu_render('main') }}</div>
                 <div class="col s12 m10">
-                    <div class="col s12 m12"><hr><h4>{% block titulo_operacion %}{% endblock %}</h4><hr></div>
-                    {% for flash_message in app.session.flashbag.get('success') %}
-                        <div class="alert alert-success alert-dismissible fade show" role="alert">
-                            {{ flash_message }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                    {% endfor %}
+                    <div class="col s12 m12 card-panel waves-effect grey lighten-1">
+                        <h4>{% block titulo_operacion %}{% endblock %}</h4>
+                    </div>
                     {% block body %}{% endblock %}
                     {% block fos_user_content %}{% endblock %}
                 </div>

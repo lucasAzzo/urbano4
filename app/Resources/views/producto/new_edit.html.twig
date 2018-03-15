@@ -8,19 +8,18 @@
 
     {{ form_errors(formulario) }}
       
-    <div class="form-row">
-        <div class="form-group col-md-6">
+    <div class="row">
+        <div class="input-field col s6">
             {{ form_label(formulario.producto) }}
             {{ form_widget(formulario.producto) }}
         </div>
     </div>     
 
-    <hr>          
-
-    <div class="">
-        <a type="button" href="{{path('producto_index')}}" class="btn btn-sm btn-danger">Volver</a>
+    <div class="row">
+        <a type="button" href="{{path('producto_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
         <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
     </div>
+        
     {{ form_end(formulario) }}
 
 {% endblock %}
