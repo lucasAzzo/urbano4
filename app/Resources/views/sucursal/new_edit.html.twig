@@ -5,34 +5,36 @@
     <li class="active">Nueva Sucursal</li>
 {% endblock %}
 {% block body %}
-<div class="card-panel">
-    <h4 class="header2">Nueva Sucursal</h4>
+<div class="container">
+    <div class="card-panel">
+        <h4 class="header2">Nueva Sucursal</h4>
+        <div class="divider"></div>
 
+        {{ form_start(formulario) }}
 
-    {{ form_start(formulario) }}
+        {{ form_errors(formulario) }}
 
-    {{ form_errors(formulario) }}
-      
-    <div class="row">
-        <div class="col s12">
-            <div class="input-field col s6">
-                {{ form_label(formulario.sucursal) }}
-                {{ form_widget(formulario.sucursal) }}
-            </div>
-            <div class="input-field col s6">
-                {{ form_label(formulario.idZona) }}
-                {{ form_widget(formulario.idZona) }}
+        <div class="row">
+            <div class="col s12">
+                <div class="input-field col s6">
+                    {{ form_label(formulario.sucursal) }}
+                    {{ form_widget(formulario.sucursal) }}
+                </div>
+                <div class="input-field col s6">
+                    {{ form_label(formulario.idZona) }}
+                    {{ form_widget(formulario.idZona) }}
+                </div>
             </div>
         </div>
-    </div>     
 
-    <hr>          
 
-    <div class="row">
-        <a type="button" href="{{path('sucursal_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
-        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+
+        <div class="row">
+            <a type="button" href="{{path('sucursal_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+            <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
+        </div>
+        {{ form_end(formulario) }}
     </div>
-    {{ form_end(formulario) }}
 </div>
 {% endblock %}
 
