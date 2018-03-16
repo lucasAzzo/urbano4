@@ -67,6 +67,13 @@ class Menu {
      */
     private $idMenuPadre;
     
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="icono", type="string", length=255, nullable=true)
+     */
+    private $icono;
+    
     
     /**
      * @ORM\OneToMany(targetEntity="Menu",mappedBy="idMenuPadre")
@@ -133,6 +140,16 @@ class Menu {
     public function getHijos() {
         return $this->hijos;
     }
+    
+    public function getIcono() {
+        return $this->icono;
+    }
+
+    public function setIcono($icono) {
+        $this->icono = $icono;
+    }
+
+
 
 
     
