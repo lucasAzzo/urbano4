@@ -21,6 +21,7 @@ use AppBundle\Entity\PersonaCategoria;
 use AppBundle\Form\PersonaType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use AppBundle\Annotation\CheckPermission;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 
 /**
@@ -33,7 +34,7 @@ class PersonaController extends Controller {
     /**
      * @Route("/persona_index/{categoria}", name="persona_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request, $categoria) {
 
@@ -54,7 +55,7 @@ class PersonaController extends Controller {
     /**
      * @Route("/persona_new", name="persona_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         
@@ -77,7 +78,7 @@ class PersonaController extends Controller {
     /**
      * @Route("/persona_create", name="persona_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -112,7 +113,7 @@ class PersonaController extends Controller {
     /**
      * @Route("/persona_edit/{id_persona}", name="persona_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_persona) {
         $em = $this->getDoctrine()->getManager();
@@ -136,7 +137,7 @@ class PersonaController extends Controller {
     /**
      * @Route("/persona_update/{id_persona}", name="persona_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_persona) {
         $em = $this->getDoctrine()->getManager();
@@ -167,7 +168,7 @@ class PersonaController extends Controller {
 
     /**
      * @Route("/persona_delete/{id_persona}", name="persona_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_persona) {
 //        $em = $this->getDoctrine()->getManager();

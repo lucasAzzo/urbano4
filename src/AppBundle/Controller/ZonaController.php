@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Zona;
 use AppBundle\Form\ZonaType;
+use AppBundle\Annotation\CheckPermission;
 
 /**
  * Description of ZonaController
@@ -27,7 +28,7 @@ class ZonaController extends Controller {
     /**
      * @Route("/zona_index", name="zona_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request) {
 
@@ -42,7 +43,7 @@ class ZonaController extends Controller {
     /**
      * @Route("/zona_new", name="zona_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         $zona = new Zona();
@@ -59,7 +60,7 @@ class ZonaController extends Controller {
     /**
      * @Route("/zona_create", name="zona_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -88,7 +89,7 @@ class ZonaController extends Controller {
     /**
      * @Route("/zona_edit/{id_zona}", name="zona_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_zona) {
         $em = $this->getDoctrine()->getManager();
@@ -108,7 +109,7 @@ class ZonaController extends Controller {
     /**
      * @Route("/zona_update/{id_zona}", name="zona_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_zona) {
         
@@ -136,7 +137,7 @@ class ZonaController extends Controller {
 
     /**
      * @Route("/zona_delete/{id_zona}", name="zona_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_zona) {
         $em = $this->getDoctrine()->getManager();

@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Sucursal;
 use AppBundle\Form\SucursalType;
+use AppBundle\Annotation\CheckPermission;
 
 /**
  * Description of SucursalController
@@ -27,7 +28,7 @@ class SucursalController extends Controller {
     /**
      * @Route("/sucursal_index", name="sucursal_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request) {
 
@@ -42,7 +43,7 @@ class SucursalController extends Controller {
     /**
      * @Route("/sucursal_new", name="sucursal_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         $sucursal = new Sucursal();
@@ -59,7 +60,7 @@ class SucursalController extends Controller {
     /**
      * @Route("/sucursal_create", name="sucursal_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -88,7 +89,7 @@ class SucursalController extends Controller {
     /**
      * @Route("/sucursal_edit/{id_sucursal}", name="sucursal_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_sucursal) {
         $em = $this->getDoctrine()->getManager();
@@ -108,7 +109,7 @@ class SucursalController extends Controller {
     /**
      * @Route("/sucursal_update/{id_sucursal}", name="sucursal_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_sucursal) {
         $em = $this->getDoctrine()->getManager();
@@ -134,7 +135,7 @@ class SucursalController extends Controller {
 
     /**
      * @Route("/sucursal_delete/{id_sucursal}", name="sucursal_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_sucursal) {
         $em = $this->getDoctrine()->getManager();

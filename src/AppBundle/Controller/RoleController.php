@@ -9,13 +9,14 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Entity\Role;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Form\RoleType;
+use AppBundle\Annotation\CheckPermission;
 
 class RoleController extends Controller
 {
     /**
      * @Route("/roles", name="roles_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction()
     {
@@ -29,7 +30,7 @@ class RoleController extends Controller
     /**
      * @Route("/roles/new", name="roles_new" )
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction()
     {
@@ -48,7 +49,7 @@ class RoleController extends Controller
     /**
      * @Route("/roles/create", name="roles_create" )
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request)
     {
@@ -80,7 +81,7 @@ class RoleController extends Controller
     /**
      * @Route("/roles/edit/{id}", name="roles_edit" )
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id)
     {
@@ -109,7 +110,7 @@ class RoleController extends Controller
     /**
      * @Route("/roles/update/{id}", name="roles_update" )
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id)
     {
@@ -142,7 +143,7 @@ class RoleController extends Controller
     /**
      * @Route("/roles/delete/{id}", name="roles_delete" )
      * @Method("DELETE")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id)
     {

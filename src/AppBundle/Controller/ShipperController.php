@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Shipper;
 use AppBundle\Form\ShipperType;
+use AppBundle\Annotation\CheckPermission;
 
 /**
  * Description of ShipperController
@@ -27,7 +28,7 @@ class ShipperController extends Controller {
     /**
      * @Route("/shipper_index", name="shipper_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request) {
 
@@ -42,7 +43,7 @@ class ShipperController extends Controller {
     /**
      * @Route("/shipper_new", name="shipper_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         $shipper = new Shipper();
@@ -59,7 +60,7 @@ class ShipperController extends Controller {
     /**
      * @Route("/shipper_create", name="shipper_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -94,7 +95,7 @@ class ShipperController extends Controller {
     /**
      * @Route("/shipper_edit/{id_shipper}", name="shipper_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_shipper) {
         $em = $this->getDoctrine()->getManager();
@@ -114,7 +115,7 @@ class ShipperController extends Controller {
     /**
      * @Route("/shipper_update/{id_shipper}", name="shipper_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_shipper) {
         $em = $this->getDoctrine()->getManager();
@@ -146,7 +147,7 @@ class ShipperController extends Controller {
 
     /**
      * @Route("/shipper_delete/{id_shipper}", name="shipper_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_shipper) {
         $em = $this->getDoctrine()->getManager();

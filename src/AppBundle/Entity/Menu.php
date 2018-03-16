@@ -98,6 +98,10 @@ class Menu {
         $this->roles = new ArrayCollection();
 
     }
+    
+    public function getRoles() {
+        return $this->roles;
+    }
 
     public function getIdMenu() {
         return $this->idMenu;
