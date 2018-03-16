@@ -65,8 +65,19 @@
             </div>
         {% else %}
             {% block content %} {% endblock %}
-        {% endif %}    
-        
+        {% endif %}
+
+        <footer class="page-footer footer-fixed gradient-45deg-urbano-black-red">
+            <div class="footer-copyright">
+                <div class="container">
+          <span>Copyright ©
+            <script type="text/javascript">
+              document.write(new Date().getFullYear());
+            </script> <a class="grey-text text-lighten-4" href="http://www.urbano.com.ar" target="_blank">URBANO EXPRESS</a>.</span>
+                </div>
+            </div>
+        </footer>
+
         <script src="{{ asset('js/jquery-3.2.1.min.js') }}" ></script>
         <script src="{{ asset('js/collections.js') }}"></script>
         <script src="{{ asset('js/comun.js') }}"></script>
@@ -81,8 +92,6 @@
         <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
         <!--custom-script.js - Add your own theme custom JS-->
         <script type="text/javascript" src="{{ asset('js/custom-script.js') }}"></script>
-
-        <script type="text/javascript" src="{{ asset('js/scripts/dashboard-ecommerce.js') }}"></script>
         
 
         {% block formulario_js %}<script src="{{ asset('js/formulario.js') }}"></script>{% endblock %}
