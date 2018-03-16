@@ -67,6 +67,8 @@ class Menu {
      */
     private $idMenuPadre;
     
+   
+    
     
     /**
      * @ORM\OneToMany(targetEntity="Menu",mappedBy="idMenuPadre")
