@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Menu;
 use AppBundle\Form\MenuType;
+use AppBundle\Annotation\CheckPermission;
 
 /**
  * Description of MenuController
@@ -27,7 +28,7 @@ class MenuController extends Controller {
     /**
      * @Route("/menu_index", name="menu_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request) {
 
@@ -42,7 +43,7 @@ class MenuController extends Controller {
     /**
      * @Route("/menu_new", name="menu_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         $menu = new Menu();
@@ -63,7 +64,7 @@ class MenuController extends Controller {
     /**
      * @Route("/menu_create", name="menu_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -94,7 +95,7 @@ class MenuController extends Controller {
     /**
      * @Route("/menu_edit/{id_menu}", name="menu_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_menu) {
         $em = $this->getDoctrine()->getManager();
@@ -117,7 +118,7 @@ class MenuController extends Controller {
     /**
      * @Route("/menu_update/{id_menu}", name="menu_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_menu) {
         
@@ -147,7 +148,7 @@ class MenuController extends Controller {
 
     /**
      * @Route("/menu_delete/{id_menu}", name="menu_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_menu) {
         

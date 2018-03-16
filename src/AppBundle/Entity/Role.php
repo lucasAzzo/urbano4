@@ -49,6 +49,10 @@ class Role
     {
         $this->menus = new ArrayCollection();
     }
+    
+    public function getMenus() {
+        return $this->menus;
+    }
 
     /**
      * Get id

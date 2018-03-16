@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Producto;
 use AppBundle\Form\ProductoType;
+use AppBundle\Annotation\CheckPermission;
 
 /**
  * Description of ProductoController
@@ -27,7 +28,7 @@ class ProductoController extends Controller {
     /**
      * @Route("/producto_index", name="producto_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request) {
 
@@ -42,7 +43,7 @@ class ProductoController extends Controller {
     /**
      * @Route("/producto_new", name="producto_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         $producto = new Producto();
@@ -59,7 +60,7 @@ class ProductoController extends Controller {
     /**
      * @Route("/producto_create", name="producto_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -87,7 +88,7 @@ class ProductoController extends Controller {
     /**
      * @Route("/producto_edit/{id_producto}", name="producto_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_producto) {
         $em = $this->getDoctrine()->getManager();
@@ -107,7 +108,7 @@ class ProductoController extends Controller {
     /**
      * @Route("/producto_update/{id_producto}", name="producto_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_producto) {
         $em = $this->getDoctrine()->getManager();
@@ -132,7 +133,7 @@ class ProductoController extends Controller {
 
     /**
      * @Route("/producto_delete/{id_producto}", name="producto_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_producto) {
         $em = $this->getDoctrine()->getManager();

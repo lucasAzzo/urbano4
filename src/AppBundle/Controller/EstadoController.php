@@ -16,6 +16,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Estado;
 use AppBundle\Form\EstadoType;
+use AppBundle\Annotation\CheckPermission;
 
 /**
  * Description of EstadoController
@@ -27,7 +28,7 @@ class EstadoController extends Controller {
     /**
      * @Route("/estado_index", name="estado_index")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function indexAction(Request $request) {
 
@@ -42,7 +43,7 @@ class EstadoController extends Controller {
     /**
      * @Route("/estado_new", name="estado_new")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function newAction(Request $request) {
         $estado = new Estado();
@@ -63,7 +64,7 @@ class EstadoController extends Controller {
     /**
      * @Route("/estado_create", name="estado_create")
      * @Method("POST")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function createAction(Request $request) {
 
@@ -95,7 +96,7 @@ class EstadoController extends Controller {
     /**
      * @Route("/estado_edit/{id_estado}", name="estado_edit")
      * @Method("GET")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function editAction(Request $request, $id_estado) {
         $em = $this->getDoctrine()->getManager();
@@ -118,7 +119,7 @@ class EstadoController extends Controller {
     /**
      * @Route("/estado_update/{id_estado}", name="estado_update")
      * @Method("PUT")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id_estado) {
 
@@ -149,7 +150,7 @@ class EstadoController extends Controller {
 
     /**
      * @Route("/estado_delete/{id_estado}", name="estado_delete")
-     * @Security("is_authenticated()")
+     * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_estado) {
 
