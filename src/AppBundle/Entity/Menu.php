@@ -6,6 +6,10 @@
  */
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinColumns;
 use Doctrine\Common\Collections\ArrayCollection;
 /**
  * Description of Menu
@@ -78,8 +82,21 @@ class Menu {
     protected $hijos;
 
 
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="menus")
+     * @JoinTable(name="menus_roles",
+     *      joinColumns={@JoinColumn(name="id_menu", referencedColumnName="id_menu")},
+     *      inverseJoinColumns={@JoinColumn(name="id_role", referencedColumnName="id")}
+     *      )
+     */
+    protected $roles;
+    
+    
     public function __construct() {
         $this->hijos = new ArrayCollection();
+        $this->roles = new ArrayCollection();
+
     }
 
     public function getIdMenu() {
