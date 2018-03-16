@@ -2,10 +2,19 @@
 {% trans_default_domain 'FOSUserBundle' %}
 
 {% block fos_user_content %}
-    <div class="row">
-        <div class="col s8 m4" style="position: absolute; top: 50%; left: 50%; margin-left: -215px;margin-top: -174px;">
-            <div class="card darken-1">
-            <div class="card-content">
+    <div id="login-page" class="row">
+        <div class="col s12 z-depth-4 card-panel">
+            <div class="row">
+                <div class="input-field col s12 center">
+                    <svg  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                         width="76px" height="71px" viewBox="0 0 76 71"
+                         preserveAspectRatio="xMidYMid meet" xmlns:svg="http://www.w3.org/2000/svg">
+                        <g id="e6_group" >
+                            <polygon style="stroke:none;fill:red;stroke-width:0.4px;" id="e3_polygon" points="49.3196 15.816 45.8814 24.7554 32.816 33.1792 32.816 50.8862 30.2373 53.9807 25.8105 55.7105 13.9915 55.8932 10.059 54.0935 8.01754 50.4027 8.2969 41.8232 8.15721 32.7145 13.9781 32.7232 13.782 47.8603 16.3365 51.0494 23.7167 50.9248 26.799 49.8118 26.6271 45.7288 26.9709 31.46"></polygon><polygon style="stroke:none;fill:black;stroke-width:1px;" id="e4_polygon" points="49.1477 6.01695 45.3656 15.1283 26.4552 28.1937 26.6271 21.8329"></polygon><polygon style="stroke:none;fill:black;stroke-width:1px;" id="e5_polygon" points="35.3947 36.4455 35.2228 55.3559 40.3801 55.6998 40.2082 37.3051 52.586 37.3481 53.4818 39.3338 53.1742 41.2336 51.0979 43.228 39.9101 43.3315 40.1182 47.0363 47.3749 47.3029 50.3343 51.182 53.6621 55.6573 59.2003 55.3246 53.3307 46.7345 56.8919 44.8545 58.4686 42.1643 58.6996 38.4172 57.2975 35.6585 53.4026 33.4156 46.9128 33.2651 49.5775 26.8184"></polygon></g>
+                    </svg>
+                    <p class="center login-form-text">Urbano Express</p>
+                </div>
+            </div>
                 {% if error %}
                     <div id="card-alert" class="card cyan">
                         <div class="card-content white-text">
@@ -16,15 +25,31 @@
                         </button>
                     </div>
                 {% endif %}
-                <form action="{{ path("fos_user_security_check") }}" method="post">
+                <form class="login-form" action="{{ path("fos_user_security_check") }}" method="post">
                 <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
 
-                <div class="form-group">
+                    <div class="row margin">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix pt-5">person_outline</i>
+                            <input id="username" type="text" id="username" name="_username" value="{{ last_username }}" required="required">
+                            <label for="username" class="center-align">Usuario</label>
+                        </div>
+                    </div>
+
+                <!--<div class="form-group">
                     <label class="text-muted" for="username">{{ 'security.login.username'|trans }}</label>
                     <input class="form-control d-inline-block" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-                </div>
+                </div>-->
 
-                <div class="form-group">
+                    <div class="row margin">
+                        <div class="input-field col s12">
+                            <i class="material-icons prefix pt-5">lock_outline</i>
+                            <input id="password" type="password" id="password" name="_password" required="required">
+                            <label for="password">Contraseña</label>
+                        </div>
+                    </div>
+
+            <!--    <div class="form-group">
                     <label class="text-muted" for="password">{{ 'security.login.password'|trans }}</label>
                     <input class="form-control d-inline-block" type="password" id="password" name="_password" required="required" />
                 </div>
@@ -32,14 +57,24 @@
                 <div class="checkbox">
                     <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
                     <label class="text-muted" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                </div>
+                </div>-->
 
-                <input class="btn btn-sm btn-success" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
-                <a class="btn btn-sm btn-info" href="{{ path('fos_user_resetting_request') }}">Forgot Password</a>
+                    <div class="row">
+                        <div class="col s12 m12 l12 ml-2 mt-3">
+                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
+                            <label for="remember-me">Recuérdeme</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input class="btn waves-effect waves-light col s12" type="submit" id="_submit" name="_submit" value="{{ 'security.login.submit'|trans }}" />
+                        </div>
+                    </div>
+                    <br><br>
+             <!--   <a class="btn btn-sm btn-info" href="{{ path('fos_user_resetting_request') }}">Forgot Password</a> -->
             </form>
             </div>
-            </div>
         </div>
-    </div>
+
 
 {% endblock fos_user_content %}
