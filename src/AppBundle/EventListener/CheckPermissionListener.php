@@ -56,6 +56,10 @@ class CheckPermissionListener {
         
         $modulo = $em->getRepository('AppBundle:Menu')->findOneBy(['path' => $request->get('_route')]);
         
+        if (empty($modulo)) {
+            return;
+        }
+        
         foreach ($modulo->getRoles() as $rol) {
             if ($security->isGranted($rol->getRole())) {
                 return;
