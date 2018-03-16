@@ -20,7 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  * @ORM\Entity
  */
 class Menu {
-    
+
     /**
      * @var integer
      *
@@ -29,35 +29,35 @@ class Menu {
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      */
     private $idMenu;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="nombre", type="string", length=255, nullable=false)
      */
     private $nombre;
-    
+
     /**
      * @var integer
      *
      * @ORM\Column(name="orden", type="integer", nullable=false)
      */
     private $orden;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="path", type="string", nullable=true)
      */
     private $path;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="parametro", type="string", nullable=true)
      */
     private $parametro;
-    
+
     /**
      * @var \AppBundle\Entity\Menu
      *
@@ -67,26 +67,26 @@ class Menu {
      * })
      */
     private $idMenuPadre;
-    
+
     /**
      * @var string
      *
      * @ORM\Column(name="icono", type="string", length=255, nullable=true)
      */
     private $icono;
-    
-    
+
+
     /**
      * @ORM\OneToMany(targetEntity="Menu",mappedBy="idMenuPadre")
      * @ORM\OrderBy({"orden" = "ASC"})
      */
     protected $hijos;
-    
-    
+
+
     public function __construct() {
         $this->hijos = new ArrayCollection();
     }
-    
+
     public function getIdMenu() {
         return $this->idMenu;
     }
@@ -134,14 +134,14 @@ class Menu {
     public function setIdMenuPadre(\AppBundle\Entity\Menu $idMenuPadre) {
         $this->idMenuPadre = $idMenuPadre;
     }
-    
+
     /**
      * @return ArrayCollection|Menu[]
      */
     public function getHijos() {
         return $this->hijos;
     }
-    
+
     public function getIcono() {
         return $this->icono;
     }
@@ -153,5 +153,5 @@ class Menu {
 
 
 
-    
+
 }
