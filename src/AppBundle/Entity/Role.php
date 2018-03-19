@@ -37,6 +37,9 @@ class Role
      * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
+    
+    
+    
 
     /**
      * Bidirectional - Many Roles are owned by many Menus (INVERSE SIDE)

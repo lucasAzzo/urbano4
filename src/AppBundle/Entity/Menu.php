@@ -91,14 +91,14 @@ class Menu {
      *      )
      */
     protected $roles;
-    
+
     
     public function __construct() {
         $this->hijos = new ArrayCollection();
         $this->roles = new ArrayCollection();
 
     }
-    
+
     public function getRoles() {
         return $this->roles;
     }
