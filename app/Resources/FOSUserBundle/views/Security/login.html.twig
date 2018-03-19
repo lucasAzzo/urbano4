@@ -35,12 +35,6 @@
                             <label for="username" class="center-align">Usuario</label>
                         </div>
                     </div>
-
-                <!--<div class="form-group">
-                    <label class="text-muted" for="username">{{ 'security.login.username'|trans }}</label>
-                    <input class="form-control d-inline-block" type="text" id="username" name="_username" value="{{ last_username }}" required="required" />
-                </div>-->
-
                     <div class="row margin">
                         <div class="input-field col s12">
                             <i class="material-icons prefix pt-5">lock_outline</i>
@@ -48,21 +42,10 @@
                             <label for="password">Contraseña</label>
                         </div>
                     </div>
-
-            <!--    <div class="form-group">
-                    <label class="text-muted" for="password">{{ 'security.login.password'|trans }}</label>
-                    <input class="form-control d-inline-block" type="password" id="password" name="_password" required="required" />
-                </div>
-
-                <div class="checkbox">
-                    <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                    <label class="text-muted" for="remember_me">{{ 'security.login.remember_me'|trans }}</label>
-                </div>-->
-
                     <div class="row">
                         <div class="col s12 m12 l12 ml-2 mt-3">
-                            <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
-                            <label for="remember-me">Recuérdeme</label>
+                            <input type="checkbox" class="filled-in" id="remember_me" name="remember_me" checked="checked"/>
+                            <label for="remember_me">Recuérdeme</label>
                         </div>
                     </div>
                     <div class="row">
@@ -71,10 +54,7 @@
                         </div>
                     </div>
                     <br><br>
-             <!--   <a class="btn btn-sm btn-info" href="{{ path('fos_user_resetting_request') }}">Forgot Password</a> -->
             </form>
             </div>
         </div>
-
-
 {% endblock fos_user_content %}
