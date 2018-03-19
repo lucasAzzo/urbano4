@@ -1,0 +1,32 @@
+
+<div class="exception-summary">
+    <div class="exception-metadata">
+        <div class="container">
+            <h2 class="exception-hierarchy">
+                {% for previousException in exception.allPrevious|reverse %}
+                    {{ previousException.class|abbr_class }}
+                    <span class="icon">{{ include('@Twig/images/chevron-right.svg') }}</span>
+                {% endfor %}
+                {{ exception.class|abbr_class }}
+            </h2>
+            <h2 class="exception-http">
+                HTTP {{ status_code }} <small>{{ status_text }}</small>
+            </h2>
+        </div>
+    </div>
+
+    <div class="exception-message-wrapper">
+        <div class="container">
+            <h1 class="break-long-words exception-message">
+                NO TIENE PERMISO PARA ACCEDER A ESTA OPERACIÓN
+                <br> <a type="button" class="btn btn-sm" href="{{path('homepage')}}">VOLVER</a>
+            </h1>
+
+            <div class="exception-illustration hidden-xs-down">
+                {{ include('@Twig/images/symfony-ghost.svg') }}
+            </div>
+        </div>
+    </div>
+</div>
+            
+            

@@ -40,3 +40,11 @@ services:
         arguments: ["@service_container","@knp_menu.factory"]
         tags:
             - { name: knp_menu.menu_builder, method: createMainMenu, alias: main } # The alias is what is used to retrieve the menu
+            
+    controller_check_permission:
+        public: true
+        class: AppBundle\EventListener\CheckPermissionListener
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}
+        arguments: ["@annotation_reader","@service_container"]
+                   

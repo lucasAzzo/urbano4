@@ -3,6 +3,9 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\ManyToMany;
+use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Role
@@ -38,8 +41,20 @@ class Role
     
     
 
+    /**
+     * Bidirectional - Many Roles are owned by many Menus (INVERSE SIDE)
+     *
+     * @ManyToMany(targetEntity="Menu", mappedBy="roles")
+     */
+    private $menus;
+
     public function __construct()
     {
+        $this->menus = new ArrayCollection();
+    }
+    
+    public function getMenus() {
+        return $this->menus;
     }
 
     /**

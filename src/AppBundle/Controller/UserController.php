@@ -10,6 +10,7 @@ use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Role;
 use AppBundle\Form\UserType;
+use AppBundle\Annotation\CheckPermission;
 
 class UserController extends Controller
 {
@@ -17,7 +18,7 @@ class UserController extends Controller
     /**
     * @Route("/users", name="users_index")
     * @Method("GET")
-    * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
+    * @CheckPermission()
     */
     public function indexAction(Request $request)
     {
@@ -33,7 +34,7 @@ class UserController extends Controller
     /**
      * @Route("/users/new", name="users_new" )
      * @Method("GET")
-     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
+     * @CheckPermission()
      */
     public function newAction()
     {
@@ -59,7 +60,7 @@ class UserController extends Controller
     /**
      * @Route("/users/create", name="users_create" )
      * @Method("POST")
-     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
+     * @CheckPermission()
      */
     public function createAction(Request $request)
     {
@@ -76,6 +77,7 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid() && is_array($roles) && sizeof($roles) > 0) {
             $user->setRoles($roles);
+            $user->setEnabled(1);
             $em->persist($user);
             $em->flush();
             $users = $em->getRepository(User::class)->findAll();
@@ -98,7 +100,7 @@ class UserController extends Controller
     /**
      * @Route("/users/edit/{id}", name="users_edit" )
      * @Method("GET")
-     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
+     * @CheckPermission()
      */
     public function editAction($id)
     {
@@ -126,7 +128,7 @@ class UserController extends Controller
     /**
      * @Route("/users/update/{id}", name="users_update" )
      * @Method("PUT")
-     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
+     * @CheckPermission()
      */
     public function updateAction(Request $request, $id)
     {
@@ -174,7 +176,7 @@ class UserController extends Controller
     /**
      * @Route("/users/delete/{id}", name="users_delete" )
      * @Method("DELETE")
-     * @Security("is_authenticated() && has_role('ROLE_ADMIN')")
+     * @CheckPermission()
      */
     public function deleteAction($id)
     {
