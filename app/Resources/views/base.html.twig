@@ -66,6 +66,143 @@
         {% else %}
             {% block content %} {% endblock %}
         {% endif %}
+        <aside id="right-sidebar-nav">
+            <ul id="chat-out" class="side-nav rightside-navigation">
+                <li class="li-hover">
+                    <div class="row">
+                        <div class="col s12 border-bottom-1 mt-5">
+                            <ul class="tabs">
+                                <li class="tab col s4">
+                                    <a href="#activity" class="active">
+                                        <span class="material-icons">graphic_eq</span>
+                                    </a>
+                                </li>
+                                <li class="tab col s4">
+                                    <a href="#chatapp">
+                                        <span class="material-icons">face</span>
+                                    </a>
+                                </li>
+                                <li class="tab col s4">
+                                    <a href="#settings">
+                                        <span class="material-icons">settings</span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="settings" class="col s12">
+                            <h6 class="mt-5 mb-3 ml-3">OPCIONES</h6>
+                            <ul class="collection border-none">
+                                <li class="collection-item border-none">
+                                    <div class="m-0">
+                                        <span class="font-weight-600">Notificaciones</span>
+                                        <div class="switch right">
+                                            <label>
+                                                <input checked type="checkbox">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <p>Active o desactive las Notificaciones.</p>
+                                </li>
+                                <li class="collection-item border-none">
+                                    <div class="m-0">
+                                        <span class="font-weight-600">Mostrar menúes recientes</span>
+                                        <div class="switch right">
+                                            <label>
+                                                <input checked type="checkbox">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <p>Active o desactive el guardado de Menúes Recientes.</p>
+                                </li>
+                                <li class="collection-item border-none">
+                                    <div class="m-0">
+                                        <span class="font-weight-600">Mantener su secion iniciada</span>
+                                        <div class="switch right">
+                                            <label>
+                                                <input type="checkbox">
+                                                <span class="lever"></span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <p>Active o desactive Mantener sesion iniciada.</p>
+                                </li>
+                            </ul>
+                        </div>
+                        <div id="chatapp" class="col s12">
+                            <h6 class="mt-5 mb-3 ml-3">USUARIOS CONECTADOS</h6>
+                            <div class="collection border-none">
+                                <a href="#!" class="collection-item avatar border-none">
+                                    <img src="../../images/avatar/avatar-1.png" alt="" class="circle cyan">
+                                    <span class="line-height-0">Elizabeth Elliott </span>
+                                    <span class="medium-small right blue-grey-text text-lighten-3">5.00 AM</span>
+                                    <p class="medium-small blue-grey-text text-lighten-3">Mendoza </p>
+                                </a>
+                                <a href="#!" class="collection-item avatar border-none">
+                                    <img src="../../images/avatar/avatar-2.png" alt="" class="circle deep-orange accent-2">
+                                    <span class="line-height-0">Mary Adams </span>
+                                    <span class="medium-small right blue-grey-text text-lighten-3">4.14 AM</span>
+                                    <p class="medium-small blue-grey-text text-lighten-3">Córdoba </p>
+                                </a>
+                                <a href="#!" class="collection-item avatar border-none">
+                                    <img src="../../images/avatar/avatar-3.png" alt="" class="circle teal accent-4">
+                                    <span class="line-height-0">Caleb Richards </span>
+                                    <span class="medium-small right blue-grey-text text-lighten-3">9.00 PM</span>
+                                    <p class="medium-small blue-grey-text text-lighten-3">Hudson </p>
+                                </a>
+                                <a href="#!" class="collection-item avatar border-none">
+                                    <img src="../../images/avatar/avatar-4.png" alt="" class="circle cyan">
+                                    <span class="line-height-0">June Lane </span>
+                                    <span class="medium-small right blue-grey-text text-lighten-3">4.14 AM</span>
+                                    <p class="medium-small blue-grey-text text-lighten-3">Capital </p>
+                                </a>
+
+                            </div>
+                        </div>
+                        <div id="activity" class="col s12">
+                            <h6 class="mt-5 mb-3 ml-3">TU ACTIVIDAD</h6>
+                            <div class="activity">
+                                <div class="col s3 mt-2 center-align recent-activity-list-icon">
+                                    <i class="material-icons white-text icon-bg-color deep-purple lighten-2">add_shopping_cart</i>
+                                </div>
+                                <div class="col s9 recent-activity-list-text">
+                                    <a href="#" class="deep-purple-text medium-small">ABM - SHIPPER</a>
+                                    <p class="mt-0 mb-2 fixed-line-height font-weight-300 medium-small">&nbsp;</p>
+                                </div>
+                                <div class="recent-activity-list chat-out-list row mb-0">
+                                    <div class="col s3 mt-2 center-align recent-activity-list-icon">
+                                        <i class="material-icons white-text icon-bg-color cyan lighten-2">airplanemode_active</i>
+                                    </div>
+                                    <div class="col s9 recent-activity-list-text">
+                                        <a href="#" class="cyan-text medium-small">ABM - FLETEROS</a>
+                                        <p class="mt-0 mb-2 fixed-line-height font-weight-300 medium-small">Nuevo fletero - Actualización fletero existente.</p>
+                                    </div>
+                                </div>
+                                <div class="recent-activity-list chat-out-list row mb-0">
+                                    <div class="col s3 mt-2 center-align recent-activity-list-icon medium-small">
+                                        <i class="material-icons white-text icon-bg-color green lighten-2">settings_voice</i>
+                                    </div>
+                                    <div class="col s9 recent-activity-list-text">
+                                        <a href="#" class="green-text medium-small">ABM - PRODUCTOS</a>
+                                        <p class="mt-0 mb-2 fixed-line-height font-weight-300 medium-small">&nbsp;</p>
+                                    </div>
+                                </div>
+                                <div class="recent-activity-list chat-out-list row mb-0">
+                                    <div class="col s3 mt-2 center-align recent-activity-list-icon">
+                                        <i class="material-icons white-text icon-bg-color amber lighten-2">store</i>
+                                    </div>
+                                    <div class="col s9 recent-activity-list-text">
+                                        <a href="#" class="amber-text medium-small">ABM - ZONA</a>
+                                        <p class="mt-0 mb-2 fixed-line-height font-weight-300 medium-small">&nbsp;</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </aside>
 
         <footer class="page-footer footer-fixed gradient-45deg-urbano-black-red">
             <div class="footer-copyright">
