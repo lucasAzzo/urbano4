@@ -43,19 +43,6 @@ class Menu {
      */
     private $orden;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="path", type="string", nullable=true)
-     */
-    private $path;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="parametro", type="string", nullable=true)
-     */
-    private $parametro;
 
     /**
      * @var \AppBundle\Entity\Menu
@@ -81,27 +68,22 @@ class Menu {
      */
     protected $hijos;
 
-
-
     /**
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="menus")
-     * @JoinTable(name="menus_roles",
-     *      joinColumns={@JoinColumn(name="id_menu", referencedColumnName="id_menu")},
-     *      inverseJoinColumns={@JoinColumn(name="id_role", referencedColumnName="id")}
-     *      )
+     * @var \AppBundle\Entity\Route
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Route")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_route", referencedColumnName="id_route")
+     * })
      */
-    protected $roles;
+    private $idRoute;
 
     
     public function __construct() {
         $this->hijos = new ArrayCollection();
-        $this->roles = new ArrayCollection();
 
     }
 
-    public function getRoles() {
-        return $this->roles;
-    }
 
     public function getIdMenu() {
         return $this->idMenu;
@@ -112,15 +94,17 @@ class Menu {
     public function getOrden() {
         return $this->orden;
     }
-    public function getPath() {
-        return $this->path;
-    }
-    public function getParametro() {
-        return $this->parametro;
-    }
+
     public function getIdMenuPadre(){
         return $this->idMenuPadre;
     }
+
+    public function getIdRoute()
+    {
+        return $this->idRoute;
+    }
+
+
     public function setIdMenu($idMenu) {
         $this->idMenu = $idMenu;
     }
@@ -130,14 +114,13 @@ class Menu {
     public function setOrden($orden) {
         $this->orden = $orden;
     }
-    public function setPath($path) {
-        $this->path = $path;
-    }
-    public function setParametro($parametro) {
-        $this->parametro = $parametro;
-    }
+
     public function setIdMenuPadre(\AppBundle\Entity\Menu $idMenuPadre) {
         $this->idMenuPadre = $idMenuPadre;
+    }
+
+    public function setIdRoute(\AppBundle\Entity\Route $idRoute=null) {
+        $this->idRoute = $idRoute;
     }
 
     /**

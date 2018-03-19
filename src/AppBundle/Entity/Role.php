@@ -41,21 +41,23 @@ class Role
     
     
 
+
     /**
-     * Bidirectional - Many Roles are owned by many Menus (INVERSE SIDE)
+     * Bidirectional - Many Roles are owned by many Routes (INVERSE SIDE)
      *
-     * @ManyToMany(targetEntity="Menu", mappedBy="roles")
+     * @ManyToMany(targetEntity="Route", mappedBy="roles")
      */
-    private $menus;
+    private $routes;
+
+    public function getRoutes() {
+        return $this->routes;
+    }
 
     public function __construct()
     {
-        $this->menus = new ArrayCollection();
+        $this->routes = new ArrayCollection();
     }
     
-    public function getMenus() {
-        return $this->menus;
-    }
 
     /**
      * Get id
