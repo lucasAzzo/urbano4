@@ -77,13 +77,13 @@ class Menu {
      * })
      */
     private $idRoute;
-    
+
     
     public function __construct() {
         $this->hijos = new ArrayCollection();
 
     }
-    
+
 
     public function getIdMenu() {
         return $this->idMenu;
