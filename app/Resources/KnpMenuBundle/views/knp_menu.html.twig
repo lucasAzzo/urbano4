@@ -23,8 +23,7 @@
                         <div class="collapsible-body">
                             <ul>
                                 {% for submodulo in modulo.children %}
-                                    <li class="{% if app.request.attributes.get('_route') == submodulo.attributes['route'] and
-                                        app.request.attributes.get('_route_params') == submodulo.attributes['params']  %}active{% endif %}">
+                                    <li class="">
                                         <a href="{{submodulo.uri}}">
                                             <i class="material-icons">keyboard_arrow_right</i>
                                             <span>{{submodulo.label|upper}}</span>

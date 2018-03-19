@@ -44,6 +44,16 @@ class Param
      * })
      */
     private $idRoute;
+    
+     /**
+     * @var \AppBundle\Entity\Menu
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Menu")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_menu", referencedColumnName="id_menu")
+     * })
+     */
+    private $idMenu;
 
 
     /**
@@ -114,5 +124,15 @@ class Param
     public function setIdRoute(\AppBundle\Entity\Route $idRoute=null) {
         $this->idRoute = $idRoute;
     }
+    
+    public function getIdMenu(){
+        return $this->idMenu;
+    }
+
+    public function setIdMenu(\AppBundle\Entity\Menu $idMenu) {
+        $this->idMenu = $idMenu;
+    }
+
+
 }
 

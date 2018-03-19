@@ -32,7 +32,7 @@ use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 class PersonaController extends Controller {
 
     /**
-     * @Route("/persona_index/{categoria}", name="persona_index")
+     * @Route("/persona_index/{categoria}", name="persona_index",requirements={"categoria"="1|2|3|4"})
      * @Method("GET")
      * @CheckPermission()
      */
