@@ -77,6 +77,7 @@ class UserController extends Controller
 
         if ($form->isSubmitted() && $form->isValid() && is_array($roles) && sizeof($roles) > 0) {
             $user->setRoles($roles);
+            $user->setEnabled(1);
             $em->persist($user);
             $em->flush();
             $users = $em->getRepository(User::class)->findAll();
