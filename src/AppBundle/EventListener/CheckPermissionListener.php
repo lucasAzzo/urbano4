@@ -54,19 +54,19 @@ class CheckPermissionListener {
         $security = $this->container->get('security.authorization_checker');
         $em = $this->container->get('doctrine.orm.entity_manager');
         
-        $modulo = $em->getRepository('AppBundle:Menu')->findOneBy(['path' => $request->get('_route')]);
+        $route = $em->getRepository('AppBundle:Route')->findOneBy(['name' => $request->get('_route')]);
         
-        if (empty($modulo)) {
+        if (empty($route)) {
             return;
         }
         
-        foreach ($modulo->getRoles() as $rol) {
+        foreach ($route->getRoles() as $rol) {
             if ($security->isGranted($rol->getRole())) {
                 return;
             }
         }
         
-        throw new AccessDeniedException('');
+        throw new AccessDeniedException('NO TIENE PERMISO PARA INGRESAR A ESTA OPERACIÓN.');
         
     }
     

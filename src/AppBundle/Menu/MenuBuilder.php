@@ -17,6 +17,16 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     public function createMainMenu() {
 
+        /** @var $router \Symfony\Component\Routing\Router */
+        $router = $this->container->get('router');
+        /** @var $collection \Symfony\Component\Routing\RouteCollection */
+        $collection = $router->getRouteCollection();
+        $allRoutes = $collection->all();
+
+        dump($allRoutes);
+        die;
+
+
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         $menu = $this->factory->createItem('root');
@@ -25,15 +35,15 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
         foreach ($modulos as $modulo) {
             if ($this->tieneRol($modulo)) {
-                $menu->addChild($modulo->getNombre(), array('route' => '', 'attributes' => array('icono' => $modulo->getIcono(), 'route' => $modulo->getPath(), 'params' => eval('return ' . $modulo->getParametro() . ';'))));
+                $menu->addChild($modulo->getNombre(), array('route' => '', 'attributes' => array('icono' => $modulo->getIcono())));
 
                 foreach ($modulo->getHijos() as $submodulo) {
                     if ($this->tieneRol($submodulo)) {
-                        $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('attributes' => array('route' => $submodulo->getPath(), 'params' => eval('return ' . $submodulo->getParametro() . ';')), 'route' => $submodulo->getPath(), 'routeParameters' => eval("return " . $submodulo->getParametro() . ";")));
+                        $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($submodulo)));
 
                         foreach ($submodulo->getHijos() as $operacion) {
                             if ($this->tieneRol($operacion)) {
-                                $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('attributes' => array('route' => $operacion->getPath(), 'params' => eval('return ' . $operacion->getParametro() . ';')), 'route' => $operacion->getPath(), 'routeParameters' => eval("return " . $operacion->getParametro() . ";")));
+                                $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($operacion)));
                             }
                         }
                     }
@@ -46,13 +56,32 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     protected function tieneRol($menu) {
 
+        if (is_null($menu->getIdMenuPadre())) {
+            return true;
+        }
+
         $security = $this->container->get('security.authorization_checker');
-        foreach ($menu->getRoles() as $rol) {
+        foreach ($menu->getIdRoute()->getRoles() as $rol) {
             if ($security->isGranted($rol->getRole())) {
                 return true;
             }
         }
         return false;
+    }
+
+    protected function obtenerParametros($menu) {
+
+        $em = $this->container->get('doctrine.orm.entity_manager');
+
+        $parametros = $em->getRepository('AppBundle:Param')->findBy(['idRoute' => $menu->getIdRoute(), 'idMenu' => $menu]);
+
+        $resultado = array();
+
+        foreach ($parametros as $parametro) {
+            $resultado[$parametro->getName()] = $parametro->getValue();
+        }
+
+        return $resultado;
     }
 
 //    public function getFunctions()

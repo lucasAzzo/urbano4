@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="msapplication-tap-highlight" content="no">
+
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+        <!-- For iPhone -->
+        <meta name="msapplication-TileColor" content="#00bcd4">
+        <meta name="msapplication-TileImage" content="images/favicon/mstile-144x144.png">
+
+        <!--Import Google Icon Font-->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="{{ asset('css/materialize.css') }}" >
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+
+        <link href="{{ asset('css/custom/custom.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('css/layouts/page-center.css') }}" type="text/css" rel="stylesheet">
+        <!-- INCLUDED PLUGIN CSS ON THIS PAGE -->
+        <link href="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('vendors/jvectormap/jquery-jvectormap.css') }}" type="text/css" rel="stylesheet">
+        <link href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}" type="text/css" rel="stylesheet">
+
+    </head>
+    <body class="grey lighten-2 loaded">
+        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+
+            {% include 'barra_superior.html.twig' %}
+            <div id="main">
+                <div class="wrapper">
+                    {{ knp_menu_render('main') }}
+                    <section id="content">
+                        <div id="breadcrumbs-wrapper">
+                            <div class="header-search-wrapper grey lighten-2 hide-on-large-only">
+                                <input type="text" name="Search" class="header-search-input z-depth-2" placeholder="Explore Materialize">
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col s10 m6 l6">
+                                        <h5 class="breadcrumbs-title">   {% block titulo_operacion %}{% endblock %}</h5>
+                                       <ol class="breadcrumbs"> {% block breadcrumbs %}{% endblock %}</ol>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="card-alert" class="card green">                     
+                            {% for flash_message in app.session.flashbag.get('success') %}
+                                <div class="card-content white-text"> 
+                                    <p>{{ flash_message }}</p>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
+                            {% endfor %} 
+                        </div>    
+                        {% block body %}
+                        {% endblock %}
+                        {% block fos_user_content %}{% endblock %}
+                    </section>
+                </div>
+            </div>
+        {% else %}
+            {% block content %} {% endblock %}
+        {% endif %}
+
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}" ></script>
+        <script src="{{ asset('js/collections.js') }}"></script>
+        <script src="{{ asset('js/comun.js') }}"></script>
+        <script src="{{ asset('js/materialize.js') }}" ></script>
+        <!--prism-->
+        <script type="text/javascript" src="{{ asset('vendors/prism/prism.js') }}"></script>
+        <!--scrollbar-->
+        <script type="text/javascript" src="{{ asset('vendors/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+        <!-- chartjs-->
+        <script type="text/javascript" src="{{ asset('vendors/chartjs/chart.min.js') }}"></script>
+        <!--plugins.js - Some Specific JS codes for Plugin Settings-->
+        <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
+        <!--custom-script.js - Add your own theme custom JS-->
+        <script type="text/javascript" src="{{ asset('js/custom-script.js') }}"></script>
+        
+
+        {% block formulario_js %}<script src="{{ asset('js/formulario.js') }}"></script>{% endblock %}
+        {% block javascripts %}{% endblock %}
+        
+        <script>
+            $('.datepicker').pickadate({
+                selectMonths: true, 
+                selectYears: true, 
+                today: 'Hoy',
+                clear: 'Limpiar',
+                close: 'Ok',
+                closeOnSelect: false,
+                monthsFull: [ 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre' ],
+                monthsShort: [ 'Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic' ],
+                weekdaysFull: [ 'Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado' ],
+                weekdaysLetter: [ 'Do', 'Lu', 'Ma', 'Mi', 'Ju', 'Vi', 'Sa' ],
+                formatSubmit: 'yyyy-mm-dd',
+                format: 'yyyy-mm-dd',
+                container: undefined
+            });
+        </script>
+        
+    </body>
+</html>

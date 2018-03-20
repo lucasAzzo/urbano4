@@ -38,6 +38,13 @@ class Route
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="parametro", type="string", length=10,nullable=true)
+     */
+    private $parametro;
 
 
     /**
@@ -115,5 +122,15 @@ class Route
     {
         return $this->name;
     }
+    
+    public function getParametro() {
+        return $this->parametro;
+    }
+
+    public function setParametro($parametro) {
+        $this->parametro = $parametro;
+    }
+
+
 }
 

@@ -2,9 +2,23 @@
 <aside id="left-sidebar-nav" class="nav-expanded nav-lock nav-collapsible">
     <div class="brand-sidebar">
         <h1 class="logo-wrapper">
-            <a href="index.html" class="brand-logo darken-1">
-                <!--  <img src="../{{ asset('img/logo_urbano.png') }}"  alt="logo">-->
-                <span class="logo-text hide-on-med-and-down">Urbano</span>
+            <a href="/" class="brand-logo darken-1">
+                <svg width="31" height="31" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+
+                    <g>
+                        <title>background</title>
+                        <rect fill="none" id="canvas_background" height="33" width="33" y="-1" x="-1"/>
+                    </g>
+                    <g>
+                        <title>Layer 1</title>
+                        <g stroke="null" id="svg_2">
+                            <path stroke="null" id="e3_polygon" d="m25.01384,6.11757l-2.05522,5.3436l-7.80995,5.03539l0,10.5845l-1.54144,1.84977l-2.64616,1.034l-7.06491,0.10921l-2.35068,-1.07579l-1.2203,-2.20621l0.16699,-5.12847l-0.0835,-5.4448l3.47948,0.0052l-0.11722,9.04833l1.52698,1.90631l4.41157,-0.07448l1.84247,-0.66531l-0.10276,-2.44065l0.20551,-8.5293" stroke-opacity="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="0.4px" fill-opacity="null" fill="red"/>
+                            <path stroke="null" id="e4_polygon" d="m25.07094,0.56652l-2.26078,5.44639l-11.30385,7.80995l0.10275,-3.80222" stroke-opacity="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="1px" fill-opacity="null" fill="black"/>
+                            <path stroke="null" id="e5_polygon" d="m16.69012,18.59558l-0.10276,11.30385l3.08282,0.20557l-0.10276,-10.99559l7.39893,0.02571l0.53547,1.18697l-0.18387,1.13562l-1.24113,1.19217l-6.6876,0.06187l0.12439,2.21458l4.33776,0.15936l1.76901,2.31876l1.98921,2.67515l3.31051,-0.19888l-3.5086,-5.1348l2.12874,-1.12379l0.94248,-1.60809l0.13808,-2.23986l-0.83811,-1.64903l-2.32821,-1.34071l-3.87933,-0.08996l1.59284,-3.85356" stroke-opacity="null" stroke-linecap="null" stroke-linejoin="null" stroke-width="1px" fill-opacity="null" fill="black"/>
+                        </g>
+                    </g>
+                </svg>
+                <span class="logo-text">URBANO EXPRESS</span>
             </a>
             <a href="#" class="navbar-toggler">
                 <i class="material-icons">radio_button_checked</i>
@@ -23,8 +37,7 @@
                         <div class="collapsible-body">
                             <ul>
                                 {% for submodulo in modulo.children %}
-                                    <li class="{% if app.request.attributes.get('_route') == submodulo.attributes['route'] and
-                                        app.request.attributes.get('_route_params') == submodulo.attributes['params']  %}active{% endif %}">
+                                    <li class="">
                                         <a href="{{submodulo.uri}}">
                                             <i class="material-icons">keyboard_arrow_right</i>
                                             <span>{{submodulo.label|upper}}</span>
