@@ -17,16 +17,6 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     public function createMainMenu() {
 
-        /** @var $router \Symfony\Component\Routing\Router */
-        $router = $this->container->get('router');
-        /** @var $collection \Symfony\Component\Routing\RouteCollection */
-        $collection = $router->getRouteCollection();
-        $allRoutes = $collection->all();
-
-        dump($allRoutes);
-        die;
-
-
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         $menu = $this->factory->createItem('root');
@@ -71,14 +61,12 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     protected function obtenerParametros($menu) {
 
-        $em = $this->container->get('doctrine.orm.entity_manager');
-
-        $parametros = $em->getRepository('AppBundle:Param')->findBy(['idRoute' => $menu->getIdRoute(), 'idMenu' => $menu]);
-
+        $parametros = $menu->getIdRoute()->getParametro();
+        
         $resultado = array();
 
-        foreach ($parametros as $parametro) {
-            $resultado[$parametro->getName()] = $parametro->getValue();
+        foreach ($parametros as $key => $parametro) {
+            $resultado[$key] = $parametro;
         }
 
         return $resultado;
