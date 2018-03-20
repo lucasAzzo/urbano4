@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class ProductoController extends Controller {
     
     /**
-     * @Route("/producto_index", name="producto_index")
+     * @Route("/productos", name="producto_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class ProductoController extends Controller {
     }
     
     /**
-     * @Route("/producto_new", name="producto_new")
+     * @Route("/productos/new", name="producto_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -58,7 +58,7 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_create", name="producto_create")
+     * @Route("/productos/create", name="producto_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -86,7 +86,7 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_edit/{id_producto}", name="producto_edit")
+     * @Route("/productos/edit/{id_producto}", name="producto_edit")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -106,7 +106,7 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_update/{id_producto}", name="producto_update")
+     * @Route("/productos/update/{id_producto}", name="producto_update")
      * @Method("PUT")
      * @CheckPermission()
      */
@@ -132,7 +132,7 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_delete/{id_producto}", name="producto_delete")
+     * @Route("/productos/delete/{id_producto}", name="producto_delete")
      * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_producto) {
