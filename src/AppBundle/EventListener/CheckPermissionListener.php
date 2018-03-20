@@ -54,10 +54,26 @@ class CheckPermissionListener {
         $security = $this->container->get('security.authorization_checker');
         $em = $this->container->get('doctrine.orm.entity_manager');
         
-        $parametro = $request->get('_route_params');
-//        dump($parametro);
-//        $parametro = '{categoria:1}';
-        $route = $em->getRepository('AppBundle:Route')->findOneBy(['name' => $request->get('_route')/*,'parametro' => $parametro*/]);
+        $parametros = $request->get('_route_params');
+      
+        foreach ($parametros as $key => $parametro) {
+            if (substr($key, 0,1) == '_') {
+                unset($parametro);
+            }
+        }
+        
+        if (empty($parametros)) {
+            $route = $em->getRepository('AppBundle:Route')->findOneBy(['name' => $request->get('_route')]);
+        } else {
+            $routes = $em->getRepository('AppBundle:Route')->findBy(['name' => $request->get('_route')]);
+            $route;
+            
+            foreach ($routes as $ruta) {
+                if ($ruta->getParametro() == $parametros) {
+                    $route = $ruta;
+                }
+            }
+        }
         
         if (empty($route)) {
             return;

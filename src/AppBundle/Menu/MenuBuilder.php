@@ -64,11 +64,12 @@ class MenuBuilder /* extends \Twig_Extension */ {
         $parametros = $menu->getIdRoute()->getParametro();
         
         $resultado = array();
-
-        foreach ($parametros as $key => $parametro) {
-            $resultado[$key] = $parametro;
+        
+        if ($parametros) {
+            foreach ($parametros as $key => $parametro) {
+                $resultado[$key] = $parametro;
+            }
         }
-
         return $resultado;
     }
 
