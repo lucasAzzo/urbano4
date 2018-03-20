@@ -42,10 +42,10 @@ class Route
     /**
      * @var string
      *
-     * @ORM\Column(name="parametro", type="string", length=10,nullable=true)
+     * @ORM\Column(name="parametro", type="json_array",nullable=true)
      */
     private $parametro;
-
+    
 
     /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="routes")
@@ -130,6 +130,11 @@ class Route
     public function setParametro($parametro) {
         $this->parametro = $parametro;
     }
+
+
+    
+    
+
 
 
 }
