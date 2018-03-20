@@ -94,19 +94,19 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estados/edit/{id_estado}", name="estado_edit")
+     * @Route("/estados/edit/{_id_estado}", name="estado_edit")
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id_estado) {
+    public function editAction(Request $request, $_id_estado) {
         $em = $this->getDoctrine()->getManager();
 
         $estados = $em->getRepository(Estado::class)->findBy([], ['estado' => 'ASC']);
-        $estado = $em->getRepository(Estado::class)->find($id_estado);
+        $estado = $em->getRepository(Estado::class)->find($_id_estado);
 
 
         $formulario = $this->createForm(
-                EstadoType::class, $estado, array('action' => $this->generateUrl('estado_update', array('id_estado' => $id_estado)),
+                EstadoType::class, $estado, array('action' => $this->generateUrl('estado_update', array('_id_estado' => $_id_estado)),
             'method' => 'PUT')
         );
 
@@ -117,19 +117,19 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estados/update/{id_estado}", name="estado_update")
+     * @Route("/estados/update/{_id_estado}", name="estado_update")
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id_estado) {
+    public function updateAction(Request $request, $_id_estado) {
 
         $em = $this->getDoctrine()->getManager();
 
         $estados = $em->getRepository(Estado::class)->findBy([], ['estado' => 'ASC']);
-        $estado = $em->getRepository(Estado::class)->find($id_estado);
+        $estado = $em->getRepository(Estado::class)->find($_id_estado);
 
         $formulario = $this->createForm(
-                EstadoType::class, $estado, array('action' => $this->generateUrl('estado_update', array('id_estado' => $id_estado)),
+                EstadoType::class, $estado, array('action' => $this->generateUrl('estado_update', array('_id_estado' => $_id_estado)),
             'method' => 'PUT'));
 
         $formulario->handleRequest($request);
@@ -149,13 +149,13 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estados/delete/{id_estado}", name="estado_delete")
+     * @Route("/estados/delete/{_id_estado}", name="estado_delete")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id_estado) {
+    public function deleteAction(Request $request, $_id_estado) {
 
         $em = $this->getDoctrine()->getManager();
-        $estado = $em->getRepository(Estado::class)->find($id_estado);
+        $estado = $em->getRepository(Estado::class)->find($_id_estado);
 
         $em->remove($estado);
         $em->flush();

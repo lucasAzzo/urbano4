@@ -18,8 +18,8 @@
                     {% for sucursal in sucursales %}
                         <tr>
                             <td>{{sucursal.sucursal}}</td>
-                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('sucursal_edit',{'id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">mode_edit</i></a>
-                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('sucursal_delete',{'id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">clear</i></a></td>
+                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('sucursal_edit',{'_id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">mode_edit</i></a>
+                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('sucursal_delete',{'_id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">clear</i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

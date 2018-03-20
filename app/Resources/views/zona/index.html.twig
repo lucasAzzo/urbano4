@@ -25,8 +25,8 @@
                                     {{subzona.subzona}}<br>
                                 {% endfor %}    
                             </td>
-                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('zona_edit',{'id_zona':zona.idZona})}}"><i class="material-icons">mode_edit</i></a>
-                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('zona_delete',{'id_zona':zona.idZona})}}"><i class="material-icons">clear</i></a></td>
+                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('zona_edit',{'_id_zona':zona.idZona})}}"><i class="material-icons">mode_edit</i></a>
+                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('zona_delete',{'_id_zona':zona.idZona})}}"><i class="material-icons">clear</i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>
