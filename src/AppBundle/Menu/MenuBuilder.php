@@ -17,6 +17,15 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     public function createMainMenu() {
 
+        /** @var $router \Symfony\Component\Routing\Router */
+        $router = $this->container->get('router');
+        /** @var $collection \Symfony\Component\Routing\RouteCollection */
+        $collection = $router->getRouteCollection();
+        $allRoutes = $collection->all();
+
+        dump($allRoutes);
+        die;
+
 
         $em = $this->container->get('doctrine.orm.entity_manager');
 
@@ -50,7 +59,7 @@ class MenuBuilder /* extends \Twig_Extension */ {
         if (is_null($menu->getIdMenuPadre())) {
             return true;
         }
-        
+
         $security = $this->container->get('security.authorization_checker');
         foreach ($menu->getIdRoute()->getRoles() as $rol) {
             if ($security->isGranted($rol->getRole())) {
@@ -71,7 +80,7 @@ class MenuBuilder /* extends \Twig_Extension */ {
         foreach ($parametros as $parametro) {
             $resultado[$parametro->getName()] = $parametro->getValue();
         }
-        
+
         return $resultado;
     }
 
