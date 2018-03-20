@@ -78,7 +78,7 @@ class ZonaController extends Controller {
             $em->persist($zona);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success','Se ha creado la zona : "'. $zona->getZona() . '" satisfactoriamente.');
-            return $this->redirectToRoute('zona_edit', array('id_zona' => $zona->getIdZona()));
+            return $this->redirectToRoute('zona_edit', array('_id_zona' => $zona->getIdZona()));
         }
 
         return $this->render('zona/new_edit.html.twig', [
@@ -87,17 +87,17 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zonas/edit/{id_zona}", name="zona_edit")
+     * @Route("/zonas/edit/{_id_zona}", name="zona_edit")
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id_zona) {
+    public function editAction(Request $request, $_id_zona) {
         $em = $this->getDoctrine()->getManager();
 
-        $zona = $em->getRepository(Zona::class)->find($id_zona);
+        $zona = $em->getRepository(Zona::class)->find($_id_zona);
 
         $formulario = $this->createForm(
-                ZonaType::class, $zona, array('action' => $this->generateUrl('zona_update', array('id_zona' => $id_zona)),
+                ZonaType::class, $zona, array('action' => $this->generateUrl('zona_update', array('_id_zona' => $_id_zona)),
             'method' => 'PUT')
         );
 
@@ -107,17 +107,17 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zonas/update/{id_zona}", name="zona_update")
+     * @Route("/zonas/update/{_id_zona}", name="zona_update")
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id_zona) {
+    public function updateAction(Request $request, $_id_zona) {
         
         $em = $this->getDoctrine()->getManager();
-        $zona = $em->getRepository(Zona::class)->find($id_zona);
+        $zona = $em->getRepository(Zona::class)->find($_id_zona);
 
         $formulario = $this->createForm(
-                ZonaType::class, $zona, array('action' => $this->generateUrl('zona_update', array('id_zona' => $id_zona)),
+                ZonaType::class, $zona, array('action' => $this->generateUrl('zona_update', array('_id_zona' => $_id_zona)),
             'method' => 'PUT'));
         
         $formulario->handleRequest($request);
@@ -127,7 +127,7 @@ class ZonaController extends Controller {
             $em->persist($zona);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success','Se ha editado la zona : "'. $zona->getZona() . '" satisfactoriamente.');
-            return $this->redirectToRoute('zona_edit', array('id_zona' => $id_zona));
+            return $this->redirectToRoute('zona_edit', array('_id_zona' => $_id_zona));
         }
 
         return $this->render('zona/new_edit.html.twig', [
@@ -136,12 +136,12 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zonas/delete/{id_zona}", name="zona_delete")
+     * @Route("/zonas/delete/{_id_zona}", name="zona_delete")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id_zona) {
+    public function deleteAction(Request $request, $_id_zona) {
         $em = $this->getDoctrine()->getManager();
-        $zona = $em->getRepository(Zona::class)->find($id_zona);
+        $zona = $em->getRepository(Zona::class)->find($_id_zona);
         $em->remove($zona);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success','Se ha eliminado la zona : "'. $zona->getZona() . '" satisfactoriamente.');

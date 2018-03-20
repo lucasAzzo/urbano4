@@ -20,8 +20,8 @@
                     <tr>
                         <td>{{ role.role }}</td>
                         <td>{{ role.description }}</td>
-                        <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('roles_edit',{'id':role.id})}}"><i class="material-icons">mode_edit</i></a>
-                            <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('roles_delete',{'id':role.id})}}"><i class="material-icons">clear</i></a></td>
+                        <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('roles_edit',{'_id':role.id})}}"><i class="material-icons">mode_edit</i></a>
+                            <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('roles_delete',{'_id':role.id})}}"><i class="material-icons">clear</i></a></td>
                     </tr>
                 {% endfor %}
             </table>
