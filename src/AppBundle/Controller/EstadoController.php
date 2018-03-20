@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class EstadoController extends Controller {
 
     /**
-     * @Route("/estado_index", name="estado_index")
+     * @Route("/estados", name="estado_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estado_new", name="estado_new")
+     * @Route("/estados/new", name="estado_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -62,7 +62,7 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estado_create", name="estado_create")
+     * @Route("/estados/create", name="estado_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -94,7 +94,7 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estado_edit/{id_estado}", name="estado_edit")
+     * @Route("/estados/edit/{id_estado}", name="estado_edit")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -117,7 +117,7 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estado_update/{id_estado}", name="estado_update")
+     * @Route("/estados/update/{id_estado}", name="estado_update")
      * @Method("PUT")
      * @CheckPermission()
      */
@@ -149,7 +149,7 @@ class EstadoController extends Controller {
     }
 
     /**
-     * @Route("/estado_delete/{id_estado}", name="estado_delete")
+     * @Route("/estados/delete/{id_estado}", name="estado_delete")
      * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_estado) {

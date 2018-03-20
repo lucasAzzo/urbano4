@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class ZonaController extends Controller {
     
     /**
-     * @Route("/zona_index", name="zona_index")
+     * @Route("/zonas", name="zona_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class ZonaController extends Controller {
     }
     
     /**
-     * @Route("/zona_new", name="zona_new")
+     * @Route("/zonas/new", name="zona_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -58,7 +58,7 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zona_create", name="zona_create")
+     * @Route("/zonas/create", name="zona_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -87,7 +87,7 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zona_edit/{id_zona}", name="zona_edit")
+     * @Route("/zonas/edit/{id_zona}", name="zona_edit")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -107,7 +107,7 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zona_update/{id_zona}", name="zona_update")
+     * @Route("/zonas/update/{id_zona}", name="zona_update")
      * @Method("PUT")
      * @CheckPermission()
      */
@@ -136,7 +136,7 @@ class ZonaController extends Controller {
     }
 
     /**
-     * @Route("/zona_delete/{id_zona}", name="zona_delete")
+     * @Route("/zonas/delete/{id_zona}", name="zona_delete")
      * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_zona) {

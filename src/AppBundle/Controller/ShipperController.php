@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class ShipperController extends Controller {
     
     /**
-     * @Route("/shipper_index", name="shipper_index")
+     * @Route("/shippers", name="shipper_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class ShipperController extends Controller {
     }
     
     /**
-     * @Route("/shipper_new", name="shipper_new")
+     * @Route("/shippers/new", name="shipper_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -58,7 +58,7 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_create", name="shipper_create")
+     * @Route("/shippers/create", name="shipper_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -93,7 +93,7 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_edit/{id_shipper}", name="shipper_edit")
+     * @Route("/shippers/edit/{id_shipper}", name="shipper_edit")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -113,7 +113,7 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_update/{id_shipper}", name="shipper_update")
+     * @Route("/shippers/update/{id_shipper}", name="shipper_update")
      * @Method("PUT")
      * @CheckPermission()
      */
@@ -146,7 +146,7 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_delete/{id_shipper}", name="shipper_delete")
+     * @Route("/shippers/delete/{id_shipper}", name="shipper_delete")
      * @CheckPermission()
      */
     public function deleteAction(Request $request, $id_shipper) {
