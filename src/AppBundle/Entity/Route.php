@@ -42,7 +42,7 @@ class Route
     /**
      * @var string
      *
-     * @ORM\Column(name="parametro", type="json_array",nullable=true)
+     * @ORM\Column(name="parametro", type="array",nullable=true)
      */
     private $parametro;
     
