@@ -1,12 +1,4 @@
-.form-control:valid {
-  border-color: grey !important;
-}
-
-.table_head{
-    background-color: whitesmoke;
-}
-
-.row{
-    margin-right: 0px !important;
+.invalid-field {
+  border-color: red;
 }
 

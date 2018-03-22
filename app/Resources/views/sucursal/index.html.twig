@@ -11,15 +11,21 @@
                 <thead>
                     <tr>
                         <th>Sucursal</th>
-                        <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('sucursal_new')}}"><i class="material-icons">add</i></a></th>
+                        <th>
+                            {% if has_permission('sucursal_new') %}
+                                <a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('sucursal_new')}}"><i class="material-icons">add</i></a>
+                            {% endif %}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for sucursal in sucursales %}
                         <tr>
                             <td>{{sucursal.sucursal}}</td>
-                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('sucursal_edit',{'_id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">mode_edit</i></a>
-                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('sucursal_delete',{'_id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">clear</i></a></td>
+                            <td>
+                                {% if has_permission('sucursal_edit') %}<a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('sucursal_edit',{'_id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">mode_edit</i></a>{% endif %}
+                                {% if has_permission('sucursal_delete') %}<a type="button" class="btn-floating waves-effect waves-light red" href="{{path('sucursal_delete',{'_id_sucursal':sucursal.idSucursal})}}"><i class="material-icons" aria-hidden="true">clear</i></a>{% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

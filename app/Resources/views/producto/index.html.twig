@@ -12,15 +12,21 @@
                 <thead>
                     <tr>
                         <th>Producto</th>
-                        <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('producto_new')}}"><i class="material-icons">add</i></a></th>
+                        <th>
+                            {% if has_permission('producto_new') %}
+                                <a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('producto_new')}}"><i class="material-icons">add</i></a>
+                            {% endif %}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for producto in productos %}
                         <tr>
                             <td>{{producto.producto}}</td>
-                            <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('producto_edit',{'_id_producto':producto.idProducto})}}"><i class="material-icons">mode_edit</i></a>
-                            <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('producto_delete',{'_id_producto':producto.idProducto})}}"><i class="material-icons">clear</i></a></td>
+                            <td>
+                                {% if has_permission('producto_edit') %}<a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('producto_edit',{'_id_producto':producto.idProducto})}}"><i class="material-icons">mode_edit</i></a>{% endif %}
+                                {% if has_permission('producto_delete') %}<a class="btn-floating waves-effect waves-light red" type="button" href="{{path('producto_delete',{'_id_producto':producto.idProducto})}}"><i class="material-icons">clear</i></a>{% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

@@ -24,7 +24,7 @@ class MenuBuilder /* extends \Twig_Extension */ {
         $modulos = $em->getRepository('AppBundle:Menu')->findBy(['idMenuPadre' => null], ['orden' => 'ASC']);
 
         foreach ($modulos as $modulo) {
-            if ($this->tieneRol($modulo)) {
+            if ($this->tieneHijoConRol($modulo)) {
                 $menu->addChild($modulo->getNombre(), array('route' => '', 'attributes' => array('icono' => $modulo->getIcono())));
 
                 foreach ($modulo->getHijos() as $submodulo) {
@@ -46,10 +46,6 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     protected function tieneRol($menu) {
 
-        if (is_null($menu->getIdMenuPadre())) {
-            return true;
-        }
-
         $security = $this->container->get('security.authorization_checker');
         foreach ($menu->getIdRoute()->getRoles() as $rol) {
             if ($security->isGranted($rol->getRole())) {
@@ -62,15 +58,26 @@ class MenuBuilder /* extends \Twig_Extension */ {
     protected function obtenerParametros($menu) {
 
         $parametros = $menu->getIdRoute()->getParametro();
-        
+
         $resultado = array();
-        
+
         if ($parametros) {
             foreach ($parametros as $key => $parametro) {
                 $resultado[$key] = $parametro;
             }
         }
         return $resultado;
+    }
+
+    protected function tieneHijoConRol($menu) {
+
+        foreach ($menu->getHijos() as $hijo) {
+            if ($this->tieneRol($hijo)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 //    public function getFunctions()
