@@ -29,11 +29,18 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
                 foreach ($modulo->getHijos() as $submodulo) {
                     if ($this->tieneRol($submodulo)) {
-                        $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($submodulo)));
-
+                        if (empty($submodulo->getIdRoute())) {
+                            $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => '', 'routeParameters' => array()));
+                        } else {
+                            $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($submodulo)));
+                        }
                         foreach ($submodulo->getHijos() as $operacion) {
                             if ($this->tieneRol($operacion)) {
-                                $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($operacion)));
+                                if (empty($operacion->getIdRoute())) {
+                                    $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => '', 'routeParameters' => array()));
+                                } else {
+                                    $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($operacion)));
+                                }
                             }
                         }
                     }
@@ -45,6 +52,10 @@ class MenuBuilder /* extends \Twig_Extension */ {
     }
 
     protected function tieneRol($menu) {
+
+        if (empty($menu->getIdRoute())) {
+            return true;
+        }
 
         $security = $this->container->get('security.authorization_checker');
         foreach ($menu->getIdRoute()->getRoles() as $rol) {

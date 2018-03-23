@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class MenuController extends Controller {
     
     /**
-     * @Route("/menu_index", name="menu_index")
+     * @Route("/menus", name="menu_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class MenuController extends Controller {
     }
     
     /**
-     * @Route("/menu_new", name="menu_new")
+     * @Route("/menus/new", name="menu_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -62,7 +62,7 @@ class MenuController extends Controller {
     }
     
     /**
-     * @Route("/menu_create", name="menu_create")
+     * @Route("/menus/create", name="menu_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -83,7 +83,7 @@ class MenuController extends Controller {
 
             $em->persist($menu);
             $em->flush();
-            return $this->redirectToRoute('menu_edit', array('id_menu' => $menu->getIdMenu()));
+            return $this->redirectToRoute('menu_index');
         }
 
         return $this->render('menu/new_edit.html.twig', [
@@ -93,19 +93,19 @@ class MenuController extends Controller {
     }
     
     /**
-     * @Route("/menu_edit/{id_menu}", name="menu_edit")
+     * @Route("/menus/edit/{_id_menu}", name="menu_edit")
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id_menu) {
+    public function editAction(Request $request, $_id_menu) {
         $em = $this->getDoctrine()->getManager();
         
         $modulos = $em->getRepository('AppBundle:Menu')->findBy(['idMenuPadre' => null],['orden' => 'ASC']);
-        $menu = $em->getRepository(Menu::class)->find($id_menu);
+        $menu = $em->getRepository(Menu::class)->find($_id_menu);
         
 
         $formulario = $this->createForm(
-                MenuType::class, $menu, array('action' => $this->generateUrl('menu_update', array('id_menu' => $id_menu)),
+                MenuType::class, $menu, array('action' => $this->generateUrl('menu_update', array('_id_menu' => $_id_menu)),
             'method' => 'PUT')
         );
 
@@ -116,19 +116,19 @@ class MenuController extends Controller {
     }
 
     /**
-     * @Route("/menu_update/{id_menu}", name="menu_update")
+     * @Route("/menus/update/{_id_menu}", name="menu_update")
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id_menu) {
+    public function updateAction(Request $request, $_id_menu) {
         
         $em = $this->getDoctrine()->getManager();
         
         $modulos = $em->getRepository('AppBundle:Menu')->findBy(['idMenuPadre' => null],['orden' => 'ASC']);
-        $menu = $em->getRepository('AppBundle:Menu')->find($id_menu);
+        $menu = $em->getRepository('AppBundle:Menu')->find($_id_menu);
 
         $formulario = $this->createForm(
-                MenuType::class, $menu, array('action' => $this->generateUrl('menu_update', array('id_menu' => $id_menu)),
+                MenuType::class, $menu, array('action' => $this->generateUrl('menu_update', array('_id_menu' => $_id_menu)),
             'method' => 'PUT'));
         
         $formulario->handleRequest($request);
@@ -137,7 +137,7 @@ class MenuController extends Controller {
 
             $em->persist($menu);
             $em->flush();
-            return $this->redirectToRoute('menu_edit', array('id_menu' => $id_menu));
+            return $this->redirectToRoute('menu_index');
         }
 
         return $this->render('menu/new_edit.html.twig', [
@@ -147,13 +147,13 @@ class MenuController extends Controller {
     }
 
     /**
-     * @Route("/menu_delete/{id_menu}", name="menu_delete")
+     * @Route("/menus/delete/{_id_menu}", name="menu_delete")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id_menu) {
+    public function deleteAction(Request $request, $_id_menu) {
         
         $em = $this->getDoctrine()->getManager();
-        $menu = $em->getRepository('AppBundle:Menu')->find($id_menu);
+        $menu = $em->getRepository('AppBundle:Menu')->find($_id_menu);
 
         if (empty($menu->getHijos()->first())) {
             $em->remove($menu);
