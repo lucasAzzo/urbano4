@@ -3,79 +3,62 @@
 {% block body %}
     {{parent()}}
 
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">KNP Menú</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    {{ form_start(formulario) }}
+    <!-- Modal Structure -->
+    <div id="modal1" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            {{ form_start(formulario) }}
 
-                    {{ form_errors(formulario) }}
+            {{ form_errors(formulario) }}
 
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{ form_label(formulario.nombre) }}
-                            {{ form_widget(formulario.nombre) }}
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{ form_label(formulario.idMenuPadre) }}
-                            {{ form_widget(formulario.idMenuPadre) }}
-                        </div>
-                    </div>    
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{ form_label(formulario.orden) }}
-                            {{ form_widget(formulario.orden,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{ form_label(formulario.path) }}
-                            {{ form_widget(formulario.path) }}
-                        </div>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group col-md-12">
-                            {{ form_label(formulario.parametro) }}
-                            {{ form_widget(formulario.parametro) }}
-                        </div>
-                    </div>     
-
-                    <hr>          
-
-                    <div class="">
-                        <a type="button" href="{{path('menu_index')}}" class="btn btn-sm btn-danger">Volver</a>
-                        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
-                    </div>
-                    {{ form_end(formulario) }}
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_label(formulario.nombre) }}
+                    {{ form_widget(formulario.nombre) }}
                 </div>
             </div>
-        </div>
-    </div>
 
+            <div class="row">
+                <div class="col s12">
+                    {{ form_label(formulario.idMenuPadre) }}
+                    {{ form_widget(formulario.idMenuPadre) }}
+                </div>
+            </div>    
+
+            <div class="row">
+                <div class="input-field col s12">
+                    {{ form_label(formulario.orden) }}
+                    {{ form_widget(formulario.orden,{'attr':{'onkeypress':'return campo_numerico(event)'}}) }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12">
+                    {{ form_label(formulario.idRoute) }}
+                    {{ form_widget(formulario.idRoute) }}
+                </div>
+            </div>
+
+            <div class="">
+                <a type="button" href="{{path('menu_index')}}" class="btn waves-effect waves-light red">Volver</a>
+                <input type="submit" value="Guardar" class="btn" />
+            </div>
+            {{ form_end(formulario) }}
+        </div>
+        {#<div class="modal-footer">
+            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
+        </div>#}
+    </div>
 {% endblock %}
 
 {% block javascripts %}
     <script>
         $(document).ready(function () {
-            $('#myModal').modal('toggle')
+            $('#modal1').modal('open');
         });
-        
-        $('#myModal').modal({
-            backdrop: 'static',
-            keyboard: false
+
+        $('.modal').modal({
+            dismissible: false,
         });
-        
+
     </script>    
 {% endblock %}

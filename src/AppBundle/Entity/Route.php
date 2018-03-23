@@ -130,6 +130,10 @@ class Route
     public function setParametro($parametro) {
         $this->parametro = $parametro;
     }
+    
+    public function __toString() {
+        return $this->path;
+    }
 
 
     

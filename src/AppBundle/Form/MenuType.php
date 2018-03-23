@@ -31,13 +31,18 @@ class MenuType extends AbstractType {
         $builder
                 ->add('nombre', TextType::class)
                 ->add('orden', TextType::class)
-                ->add('path', TextType::class, array('required' => false))
-                ->add('parametro', TextType::class, array('required' => false, 'attr' => array('placeholder' => 'Ejemplo: array("param1" => "valor1", "param2" => "valor2")')))
+                ->add('idRoute', EntityType::class, array(
+                    'placeholder' => 'No tiene',
+                    'class' => 'AppBundle:Route',
+                    'required' => false,
+                    'attr' => array('class' => 'browser-default'),   
+                    'label' => 'Ruta'))
                 ->add('idMenuPadre', EntityType::class, array(
-                    'placeholder' => 'Seleccione una opción',
+                    'placeholder' => 'No tiene',
                     'required' => false,
                     'class' => 'AppBundle:Menu',
                     'choice_label' => 'nombre',
+                    'attr' => array('class' => 'browser-default'),   
                     'label' => 'Menú Padre'))
 
         ;
