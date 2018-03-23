@@ -26,40 +26,70 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        /*
-        $argument = $input->getArgument('argument');
-
-        if ($input->getOption('option')) {
-            // ...
-        }
-        */
-
         /** @var $router \Symfony\Component\Routing\Router */
         $router = $this->getContainer()->get('router');
         $em = $this->getContainer()->get('doctrine')->getManager();
         /** @var $collection \Symfony\Component\Routing\RouteCollection */
+
         $collection = $router->getRouteCollection();
         $routes = $collection->all();
         dump($routes);
         die;
+        $db_routes = $em->getRepository(Route::class)->findAll();
 
-        foreach ($routes as $key => $route) {
-            
-            // new ReflectionParameter(array('Some_Class', 'someMethod'), 4)
-            // $reflectionFunc = new \ReflectionFunction($route->getDefaults()["_controller"]);
+        foreach ($routes as $route_name => $route) {
+            $paths = [];
+            $paths[] = $route->getPath();
+
             if (strpos($route->getDefaults()["_controller"], ".") === false) {
                 $controller = explode("::", $route->getDefaults()["_controller"]);
                 $controller_class = $controller[0];
                 $controller_method = $controller[1];
                 $reflection = new \ReflectionClass($controller_class);
                 $params = $reflection->getMethod($controller_method)->getParameters();
-                dump($params);
+                $param_data = [];
+
+                foreach ($params as $param) {
+
+                    if ($param->getType() !== null 
+                        && ($entity = $param->getType()->getName())
+                        && ($param_name = $param->getName())
+                        && ($entity !== "Symfony\Component\HttpFoundation\Request") 
+                        && ($param_name[0] !== "_")
+                    ) {
+                        $param_data[$param_name] = [];
+                        $registros = $em->getRepository($entity)->findAll();
+
+                        foreach ($registros as $registro) {
+                            $metodo = "get".implode("", array_map("ucfirst", explode("_", $param_name)));
+                            $param_data[$param_name][] = $registro->$metodo();
+                        }
+                    }
+                }
+                foreach ($param_data as $parametro => $array_val) {
+                    $path_aux = [];
+                    foreach ($array_val as $value) {
+                        foreach ($paths as $key => $path) {
+                            $route["parametro"] = str_replace("{".$parametro."}", $value, $path);
+                            $route["path"] = str_replace("{".$parametro."}", $value, $path);
+                            $route["path"] = str_replace("{".$parametro."}", $value, $path);
+                            $path_aux[] = str_replace("{".$parametro."}", $value, $path);
+                        }
+                    }
+                    $paths = $path_aux;
+                }
+                
+                foreach ($paths as $key => $path) {
+                    
+                }
+                dump($paths);
+            }
+            
+            foreach ($paths as $key => $path) {
                 
             }
 
-
-
-            /*$search = $em->getRepository(Route::class)->findBy(array("path" => $route->getPath()));
+            $search = $em->getRepository(Route::class)->findBy(array("paths" => $route->getPath()));
             if (sizeof($search) == 0) {
                 $new_route = new Route();
                 $new_route->setPath($route->getPath());
@@ -68,12 +98,9 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
                 $em->flush();
             }
             dump($search);
-            die;*/
+            die;
         }
         
-
-        
-        //dump($routes);
         die;
         
 

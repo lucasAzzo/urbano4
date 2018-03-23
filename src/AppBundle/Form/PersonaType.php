@@ -94,10 +94,9 @@ class PersonaType extends AbstractType {
      */
     public function configureOptions(OptionsResolver $resolver) {
         $resolver->setDefaults(array(
-            'categoria' => null,
             'data_class' => Persona::class,
             'attr' => array('novalidate' => ''),
-                //'validation_groups' => array('registration'),
+            //'validation_groups' => array('registration'),
         ));
     }
 
