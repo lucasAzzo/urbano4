@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class ProductoController extends Controller {
     
     /**
-     * @Route("/producto_index", name="producto_index")
+     * @Route("/productos", name="producto_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class ProductoController extends Controller {
     }
     
     /**
-     * @Route("/producto_new", name="producto_new")
+     * @Route("/productos/new", name="producto_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -58,7 +58,7 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_create", name="producto_create")
+     * @Route("/productos/create", name="producto_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -77,7 +77,7 @@ class ProductoController extends Controller {
 
             $em->persist($producto);
             $em->flush();
-            return $this->redirectToRoute('producto_edit', array('id_producto' => $producto->getIdProducto()));
+            return $this->redirectToRoute('producto_edit', array('_id_producto' => $producto->getIdProducto()));
         }
 
         return $this->render('producto/new_edit.html.twig', [
@@ -86,17 +86,17 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_edit/{id_producto}", name="producto_edit")
+     * @Route("/productos/edit/{_id_producto}", name="producto_edit")
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id_producto) {
+    public function editAction(Request $request, $_id_producto) {
         $em = $this->getDoctrine()->getManager();
 
-        $producto = $em->getRepository(Producto::class)->find($id_producto);
+        $producto = $em->getRepository(Producto::class)->find($_id_producto);
 
         $formulario = $this->createForm(
-                ProductoType::class, $producto, array('action' => $this->generateUrl('producto_update', array('id_producto' => $id_producto)),
+                ProductoType::class, $producto, array('action' => $this->generateUrl('producto_update', array('_id_producto' => $_id_producto)),
             'method' => 'PUT')
         );
 
@@ -106,16 +106,16 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_update/{id_producto}", name="producto_update")
+     * @Route("/productos/update/{_id_producto}", name="producto_update")
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id_producto) {
+    public function updateAction(Request $request, $_id_producto) {
         $em = $this->getDoctrine()->getManager();
-        $producto = $em->getRepository(Producto::class)->find($id_producto);
+        $producto = $em->getRepository(Producto::class)->find($_id_producto);
 
         $formulario = $this->createForm(
-                ProductoType::class, $producto, array('action' => $this->generateUrl('producto_update', array('id_producto' => $id_producto)),
+                ProductoType::class, $producto, array('action' => $this->generateUrl('producto_update', array('_id_producto' => $_id_producto)),
             'method' => 'PUT'));
         $formulario->handleRequest($request);
 
@@ -123,7 +123,7 @@ class ProductoController extends Controller {
 
             $em->persist($producto);
             $em->flush();
-            return $this->redirectToRoute('producto_edit', array('id_producto' => $id_producto));
+            return $this->redirectToRoute('producto_edit', array('_id_producto' => $_id_producto));
         }
 
         return $this->render('producto/new_edit.html.twig', [
@@ -132,12 +132,12 @@ class ProductoController extends Controller {
     }
 
     /**
-     * @Route("/producto_delete/{id_producto}", name="producto_delete")
+     * @Route("/productos/delete/{_id_producto}", name="producto_delete")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id_producto) {
+    public function deleteAction(Request $request, $_id_producto) {
         $em = $this->getDoctrine()->getManager();
-        $producto = $em->getRepository(Producto::class)->find($id_producto);
+        $producto = $em->getRepository(Producto::class)->find($_id_producto);
         $em->remove($producto);
         $em->flush();
         return $this->redirectToRoute('producto_index');

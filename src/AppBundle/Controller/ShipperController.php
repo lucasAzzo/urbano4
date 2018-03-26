@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class ShipperController extends Controller {
     
     /**
-     * @Route("/shipper_index", name="shipper_index")
+     * @Route("/shippers", name="shipper_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class ShipperController extends Controller {
     }
     
     /**
-     * @Route("/shipper_new", name="shipper_new")
+     * @Route("/shippers/new", name="shipper_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -58,7 +58,7 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_create", name="shipper_create")
+     * @Route("/shippers/create", name="shipper_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -84,7 +84,7 @@ class ShipperController extends Controller {
             $em->persist($shipper);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success','Se ha creado el shipper: "'. $shipper->getShiRazonSocial() . '" satisfactoriamente.');
-            return $this->redirectToRoute('shipper_edit', array('id_shipper' => $shipper->getIdShipper()));
+            return $this->redirectToRoute('shipper_edit', array('_id_shipper' => $shipper->getIdShipper()));
         }
 
         return $this->render('shipper/new_edit.html.twig', [
@@ -93,17 +93,17 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_edit/{id_shipper}", name="shipper_edit")
+     * @Route("/shippers/edit/{_id_shipper}", name="shipper_edit")
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id_shipper) {
+    public function editAction(Request $request, $_id_shipper) {
         $em = $this->getDoctrine()->getManager();
 
-        $shipper = $em->getRepository(Shipper::class)->find($id_shipper);
+        $shipper = $em->getRepository(Shipper::class)->find($_id_shipper);
 
         $formulario = $this->createForm(
-                ShipperType::class, $shipper, array('action' => $this->generateUrl('shipper_update', array('id_shipper' => $id_shipper)),
+                ShipperType::class, $shipper, array('action' => $this->generateUrl('shipper_update', array('_id_shipper' => $_id_shipper)),
             'method' => 'PUT')
         );
 
@@ -113,16 +113,16 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_update/{id_shipper}", name="shipper_update")
+     * @Route("/shippers/update/{_id_shipper}", name="shipper_update")
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id_shipper) {
+    public function updateAction(Request $request, $_id_shipper) {
         $em = $this->getDoctrine()->getManager();
-        $shipper = $em->getRepository(Shipper::class)->find($id_shipper);
+        $shipper = $em->getRepository(Shipper::class)->find($_id_shipper);
 
         $formulario = $this->createForm(
-                ShipperType::class, $shipper, array('action' => $this->generateUrl('shipper_update', array('id_shipper' => $id_shipper)),
+                ShipperType::class, $shipper, array('action' => $this->generateUrl('shipper_update', array('_id_shipper' => $_id_shipper)),
             'method' => 'PUT'));
         $formulario->handleRequest($request);
 
@@ -137,7 +137,7 @@ class ShipperController extends Controller {
             $em->persist($shipper);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success','Se ha editado el shipper: "'. $shipper->getShiRazonSocial() . '" satisfactoriamente.');
-            return $this->redirectToRoute('shipper_edit', array('id_shipper' => $id_shipper));
+            return $this->redirectToRoute('shipper_edit', array('_id_shipper' => $_id_shipper));
         }
         
         return $this->render('shipper/new_edit.html.twig', [
@@ -146,12 +146,12 @@ class ShipperController extends Controller {
     }
 
     /**
-     * @Route("/shipper_delete/{id_shipper}", name="shipper_delete")
+     * @Route("/shippers/delete/{_id_shipper}", name="shipper_delete")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id_shipper) {
+    public function deleteAction(Request $request, $_id_shipper) {
         $em = $this->getDoctrine()->getManager();
-        $shipper = $em->getRepository(Shipper::class)->find($id_shipper);
+        $shipper = $em->getRepository(Shipper::class)->find($_id_shipper);
         $em->remove($shipper);
         $em->flush();
         return $this->redirectToRoute('shipper_index');

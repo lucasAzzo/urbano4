@@ -15,7 +15,9 @@
                                 <th>Email</th>
                                 <th>Roles</th>
                                 <th colspan="2">
-                                    <a class="btn-floating waves-effect waves-light green" href="{{ path('users_new') }}"><i class="material-icons left">add</i>Nuevo</a>
+                                    {% if has_permission('users_new') %}
+                                        <a class="btn-floating waves-effect waves-light green" href="{{ path('users_new') }}"><i class="material-icons left">add</i>Nuevo</a>
+                                    {% endif %}    
                                 </th>
                             </tr>
                         </thead>
@@ -25,13 +27,17 @@
                                 <td>{{ user.email }}</td>
                                 <td>{{ user.roles|join(' | ') }}</td>
                                 <td>
-                                    <a href="{{ path('users_edit', { 'id' : user.id }) }}" class="btn-floating waves-effect waves-light"><i class="material-icons">create</i></a>
+                                    {% if has_permission('users_edit') %}
+                                        <a href="{{ path('users_edit', { '_id' : user.id }) }}" class="btn-floating waves-effect waves-light"><i class="material-icons">create</i></a>
+                                    {% endif %}
                                 </td>
                                 <td>
-                                    <form method="POST" action="{{ path('users_delete', { 'id' : user.id }) }}">
-                                        <input type="hidden" name="_method" value="DELETE">
-                                        <button type="submit" class="btn-floating waves-effect waves-light red"><i class="material-icons">clear</i></button>
-                                    </form>
+                                    {% if has_permission('users_delete') %}
+                                        <form method="POST" action="{{ path('users_delete', { '_id' : user.id }) }}">
+                                            <input type="hidden" name="_method" value="DELETE">
+                                            <button type="submit" class="btn-floating waves-effect waves-light red"><i class="material-icons">clear</i></button>
+                                        </form>
+                                    {% endif %}    
                                 </td>
                             </tr>
                         {% endfor %}

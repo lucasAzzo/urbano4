@@ -14,14 +14,20 @@
                 <thead>
                     <th>Nombre</th>
                     <th>Descripción</th>
-                    <th><a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('roles_new')}}"><i class="material-icons">add</i></a></th>
+                    <th>
+                        {% if has_permission('roles_new') %}
+                            <a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('roles_new')}}"><i class="material-icons">add</i></a>
+                        {% endif %}
+                    </th>
                 </thead>
                 {% for role in roles %}
                     <tr>
                         <td>{{ role.role }}</td>
                         <td>{{ role.description }}</td>
-                        <td><a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('roles_edit',{'id':role.id})}}"><i class="material-icons">mode_edit</i></a>
-                            <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('roles_delete',{'id':role.id})}}"><i class="material-icons">clear</i></a></td>
+                        <td>
+                            {% if has_permission('roles_edit') %}<a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('roles_edit',{'_id':role.id})}}"><i class="material-icons">mode_edit</i></a>{% endif %}
+                            {% if has_permission('roles_delete') %}<a class="btn-floating waves-effect waves-light red" type="button" href="{{path('roles_delete',{'_id':role.id})}}"><i class="material-icons">clear</i></a>{% endif %}
+                        </td>
                     </tr>
                 {% endfor %}
             </table>

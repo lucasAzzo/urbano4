@@ -1,69 +1,80 @@
 {% extends 'base.html.twig' %}
 
 {% block titulo_operacion %}KNP menú{% endblock %}
+{% block breadcrumbs %}
+        <li><a href="#">Inicio</a></li>
+        <li class="active">Menus</li>
+{% endblock %}
+
 {% block body %}
-    <table class="table table-bordered table-hover">
-        <tbody>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>
-                    <a type="button" class="btn btn-sm btn-success" href="{{path('menu_new')}}"><i class="fa fa-plus" aria-hidden="true"></i></a>
-                </td>
-            </tr>    
-        {% for modulo in modulos %}
-            {% if item_modulo is not defined or item_modulo != modulo.idMenu %}
-                <tr>
-                    <td>{{modulo.nombre}}{% set item_modulo = modulo.idMenu %}</td>
-                    <td>{{modulo.orden}}</td>
-                    <td>{{modulo.path}}</td>
-                    <td>{{modulo.parametro}}</td>
-                    <td>
-                        <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':modulo.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                        <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':modulo.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                    </td>
-                </tr>
-            {% endif %}
-            {% for submodulo in modulo.getHijos() %}
-                <tr>
-                    {% if submodulo.getHijos().first() is empty %}
-                        <td>-> {{submodulo.nombre}}</td>
-                        <td>{{submodulo.orden}}</td>
-                        <td>{{submodulo.path}}</td>
-                        <td>{{submodulo.parametro}}</td>
+    <div class="container">
+        <div class="card-panel">
+            <table class="striped bordered">
+                <tbody>
+                    <tr class="red lighten-3">
+                        <td>Nombre</td>
+                        <td>Orden</td>
+                        <td>Ruta</td>
+                        <td>Parámetros</td>
                         <td>
-                            <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            {#{% if has_permission('menu_new') %}#}
+                                <a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('menu_new')}}"><i class="material-icons">add</i></a>
+                            {#{% endif %}#}
                         </td>
-                    {% else %}
-                        {% if item_submodulo is not defined or item_submodulo != submodulo.idMenu %}
-                        <tr>
-                            <td>-> {{submodulo.nombre}}{% set item_submodulo = submodulo.idMenu %}</td>
-                            <td>{{submodulo.orden}}</td>
-                            <td>{{submodulo.path}}</td>
-                            <td>{{submodulo.parametro}}</td>
+                    </tr>    
+                {% for modulo in modulos %}
+                    {% if item_modulo is not defined or item_modulo != modulo.idMenu %}
+                        <tr class="red lighten-4">
+                            <td>{{modulo.nombre}}{% set item_modulo = modulo.idMenu %}</td>
+                            <td>{{modulo.orden}}</td>
+                            <td></td>
+                            <td></td>
                             <td>
-                                <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                                <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':submodulo.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':modulo.idMenu})}}"><i class="material-icons">mode_edit</i></a>
+                                <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':modulo.idMenu})}}"><i class="material-icons">clear</i></a>
                             </td>
                         </tr>
                     {% endif %}
-                    {% for operacion in submodulo.getHijos() %}
-                        <td>--> {{operacion.nombre}}</td>
-                        <td>{{operacion.orden}}</td>
-                        <td>{{operacion.path}}</td>
-                        <td>{{operacion.parametro}}</td>
-                        <td>
-                            <a type="button" class="btn btn-sm btn-secondary" href="{{path('menu_edit',{'id_menu':operacion.idMenu})}}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a type="button" class="btn btn-sm btn-danger" href="{{path('menu_delete',{'id_menu':operacion.idMenu})}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                        </td>
-                    {% endfor %}    
-                {% endif %}    
-            </tr>
-        {% endfor %}    
-    {% endfor %}
-</tbody>
+                    {% for submodulo in modulo.getHijos() %}
+                        <tr>
+                            {% if submodulo.getHijos().first() is empty %}
+                                <td>-> {{submodulo.nombre}}</td>
+                                <td>{{submodulo.orden}}</td>
+                                <td>{{submodulo.idRoute}}</td>
+                                <td>{% if submodulo.idRoute is not empty %}{% for key,parametro in submodulo.idRoute.parametro %}{{key}}:{{parametro}}<br>{% endfor %}{% endif %}</td>
+                                <td>
+                                    <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">mode_edit</i></a>
+                                    <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">clear</i></a>
+                                </td>
+                            {% else %}
+                                {% if item_submodulo is not defined or item_submodulo != submodulo.idMenu %}
+                                <tr class="red lighten-5">
+                                    <td>-> {{submodulo.nombre}}{% set item_submodulo = submodulo.idMenu %}</td>
+                                    <td>{{submodulo.orden}}</td>
+                                    <td>{{submodulo.idRoute}}</td>
+                                    <td>{% if submodulo.idRoute is not empty %}{% for key,parametro in submodulo.idRoute.parametro %}{{key}}:{{parametro}}<br>{% endfor %}{% endif %}</td>
+                                    <td>
+                                        <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">mode_edit</i></a>
+                                        <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">clear</i></a>
+                                    </td>
+                                </tr>
+                            {% endif %}
+                            {% for operacion in submodulo.getHijos() %}
+                                <td>--> {{operacion.nombre}}</td>
+                                <td>{{operacion.orden}}</td>
+                                <td>{{operacion.idRoute}}</td>
+                                <td>{% if operacion.idRoute is not empty %}{% for key,parametro in operacion.idRoute.parametro %}{{key}}:{{parametro}}<br>{% endfor %}{% endif %}</td>
+                                <td>
+                                    <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':operacion.idMenu})}}"><i class="material-icons">mode_edit</i></a>
+                                    <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':operacion.idMenu})}}"><i class="material-icons">clear</i></a>
+                                </td>
+                            {% endfor %}    
+                        {% endif %}    
+                    </tr>
+                {% endfor %}    
+            {% endfor %}
+        </tbody>
 </table>
+        </div>
+    </div>            
 {% endblock %}

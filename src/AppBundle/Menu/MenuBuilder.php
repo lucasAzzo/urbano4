@@ -24,16 +24,23 @@ class MenuBuilder /* extends \Twig_Extension */ {
         $modulos = $em->getRepository('AppBundle:Menu')->findBy(['idMenuPadre' => null], ['orden' => 'ASC']);
 
         foreach ($modulos as $modulo) {
-            if ($this->tieneRol($modulo)) {
+            if ($this->tieneHijoConRol($modulo)) {
                 $menu->addChild($modulo->getNombre(), array('route' => '', 'attributes' => array('icono' => $modulo->getIcono())));
 
                 foreach ($modulo->getHijos() as $submodulo) {
                     if ($this->tieneRol($submodulo)) {
-                        $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($submodulo)));
-
+                        if (empty($submodulo->getIdRoute())) {
+                            $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => '', 'routeParameters' => array()));
+                        } else {
+                            $menu[$modulo->getNombre()]->addChild($submodulo->getNombre(), array('route' => $submodulo->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($submodulo)));
+                        }
                         foreach ($submodulo->getHijos() as $operacion) {
                             if ($this->tieneRol($operacion)) {
-                                $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($operacion)));
+                                if (empty($operacion->getIdRoute())) {
+                                    $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => '', 'routeParameters' => array()));
+                                } else {
+                                    $menu[$modulo->getNombre()][$submodulo->getNombre()]->addChild($operacion->getNombre(), array('route' => $operacion->getIdRoute()->getName(), 'routeParameters' => $this->obtenerParametros($operacion)));
+                                }
                             }
                         }
                     }
@@ -46,7 +53,7 @@ class MenuBuilder /* extends \Twig_Extension */ {
 
     protected function tieneRol($menu) {
 
-        if (is_null($menu->getIdMenuPadre())) {
+        if (empty($menu->getIdRoute())) {
             return true;
         }
 
@@ -62,15 +69,26 @@ class MenuBuilder /* extends \Twig_Extension */ {
     protected function obtenerParametros($menu) {
 
         $parametros = $menu->getIdRoute()->getParametro();
-        
+
         $resultado = array();
-        
+
         if ($parametros) {
             foreach ($parametros as $key => $parametro) {
                 $resultado[$key] = $parametro;
             }
         }
         return $resultado;
+    }
+
+    protected function tieneHijoConRol($menu) {
+
+        foreach ($menu->getHijos() as $hijo) {
+            if ($this->tieneRol($hijo)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 //    public function getFunctions()

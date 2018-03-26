@@ -98,20 +98,20 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/edit/{id}", name="users_edit" )
+     * @Route("/users/edit/{_id}", name="users_edit" )
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction($id)
+    public function editAction($_id)
     {
         $pw_required = false;
         $em    = $this->getDoctrine()->getManager();
-        $user  = $em->getRepository(User::class)->find($id);
+        $user  = $em->getRepository(User::class)->find($_id);
         $roles = $em->getRepository(Role::class)->findAll();
 
         $form  = $this->createForm(UserType::class, $user, array(
             'action' => $this->generateUrl('users_update', array(
-                'id' => $id,
+                '_id' => $_id,
             )),
             'method' => 'PUT',
             'pw_required' => $pw_required,
@@ -126,14 +126,14 @@ class UserController extends Controller
     }
 
     /**
-     * @Route("/users/update/{id}", name="users_update" )
+     * @Route("/users/update/{_id}", name="users_update" )
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $_id)
     {
         $em   = $this->getDoctrine()->getManager();
-        $user  = $em->getRepository(User::class)->find($id);
+        $user  = $em->getRepository(User::class)->find($_id);
 
         $form = $this->createForm(UserType::class, $user, array(
             'action' => $this->generateUrl('users_update', array(
@@ -169,20 +169,20 @@ class UserController extends Controller
         }
 
         return $this->redirectToRoute('users_edit', array(
-            'id' => $id,
+            '_id' => $_id,
         )); 
     }
 
     /**
-     * @Route("/users/delete/{id}", name="users_delete" )
+     * @Route("/users/delete/{_id}", name="users_delete" )
      * @Method("DELETE")
      * @CheckPermission()
      */
-    public function deleteAction($id)
+    public function deleteAction($_id)
     {
         $user = new User();
         $em   = $this->getDoctrine()->getManager();
-        $user  = $em->getRepository(User::class)->find($id);
+        $user  = $em->getRepository(User::class)->find($_id);
 
         if ($user) {
             $em->remove($user);

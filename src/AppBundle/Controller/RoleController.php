@@ -79,18 +79,18 @@ class RoleController extends Controller
     }
 
     /**
-     * @Route("/roles/edit/{id}", name="roles_edit" )
+     * @Route("/roles/edit/{_id}", name="roles_edit" )
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, $_id)
     {
         $em = $this->getDoctrine();
-        $role = $em->getRepository(Role::class)->find($id);
+        $role = $em->getRepository(Role::class)->find($_id);
         if ($role) {
             $form = $this->createForm(RoleType::class, $role, array(
                 'action' => $this->generateUrl('roles_update', array(
-                    'id' => $id,
+                    '_id' => $_id,
                 )),
                 'method' => 'PUT',
             ));
@@ -108,17 +108,17 @@ class RoleController extends Controller
     }
 
     /**
-     * @Route("/roles/update/{id}", name="roles_update" )
+     * @Route("/roles/update/{_id}", name="roles_update" )
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, $_id)
     {
         $em = $this->getDoctrine()->getManager();
-        $role = $em->getRepository(Role::class)->find($id);
+        $role = $em->getRepository(Role::class)->find($_id);
         $form = $this->createForm(RoleType::class, $role, array(
             'action' => $this->generateUrl('roles_update', array(
-                    'id' => $id,
+                    '_id' => $_id,
                 )),
             'method' => 'PUT',
         ));
@@ -141,14 +141,14 @@ class RoleController extends Controller
     }
 
     /**
-     * @Route("/roles/delete/{id}", name="roles_delete" )
+     * @Route("/roles/delete/{_id}", name="roles_delete" )
      * @Method("DELETE")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, $_id)
     {
         $em = $this->getDoctrine()->getManager();
-        $role = $em->getRepository(Role::class)->find($id);
+        $role = $em->getRepository(Role::class)->find($_id);
 
         if ($role) {
             $em->remove($role);

@@ -47,4 +47,11 @@ services:
         tags:
             - { name: kernel.event_listener, event: kernel.controller, method: onKernelController}
         arguments: ["@annotation_reader","@service_container"]
+        
+    my.twig.extension:
+        public: true
+        class: AppBundle\Extensions\Twig\PermissionHelper
+        tags:
+           - { name: twig.extension }
+        arguments: ["@service_container"]   
                    

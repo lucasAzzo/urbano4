@@ -26,7 +26,7 @@ use AppBundle\Annotation\CheckPermission;
 class SucursalController extends Controller {
     
     /**
-     * @Route("/sucursal_index", name="sucursal_index")
+     * @Route("/sucursales", name="sucursal_index")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -41,7 +41,7 @@ class SucursalController extends Controller {
     }
     
     /**
-     * @Route("/sucursal_new", name="sucursal_new")
+     * @Route("/sucursales/new", name="sucursal_new")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -58,7 +58,7 @@ class SucursalController extends Controller {
     }
 
     /**
-     * @Route("/sucursal_create", name="sucursal_create")
+     * @Route("/sucursales/create", name="sucursal_create")
      * @Method("POST")
      * @CheckPermission()
      */
@@ -78,7 +78,7 @@ class SucursalController extends Controller {
             $em->persist($sucursal);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success','Se ha creado la sucursal : "'. $sucursal->getSucursal() . '" satisfactoriamente.');
-            return $this->redirectToRoute('sucursal_edit', array('id_sucursal' => $sucursal->getIdSucursal()));
+            return $this->redirectToRoute('sucursal_edit', array('_id_sucursal' => $sucursal->getIdSucursal()));
         }
 
         return $this->render('sucursal/new_edit.html.twig', [
@@ -87,17 +87,17 @@ class SucursalController extends Controller {
     }
 
     /**
-     * @Route("/sucursal_edit/{id_sucursal}", name="sucursal_edit")
+     * @Route("/sucursales/edit/{_id_sucursal}", name="sucursal_edit")
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, $id_sucursal) {
+    public function editAction(Request $request, $_id_sucursal) {
         $em = $this->getDoctrine()->getManager();
 
-        $sucursal = $em->getRepository(Sucursal::class)->find($id_sucursal);
+        $sucursal = $em->getRepository(Sucursal::class)->find($_id_sucursal);
 
         $formulario = $this->createForm(
-                SucursalType::class, $sucursal, array('action' => $this->generateUrl('sucursal_update', array('id_sucursal' => $id_sucursal)),
+                SucursalType::class, $sucursal, array('action' => $this->generateUrl('sucursal_update', array('_id_sucursal' => $_id_sucursal)),
             'method' => 'PUT')
         );
 
@@ -107,16 +107,16 @@ class SucursalController extends Controller {
     }
 
     /**
-     * @Route("/sucursal_update/{id_sucursal}", name="sucursal_update")
+     * @Route("/sucursales/update/{_id_sucursal}", name="sucursal_update")
      * @Method("PUT")
      * @CheckPermission()
      */
-    public function updateAction(Request $request, $id_sucursal) {
+    public function updateAction(Request $request, $_id_sucursal) {
         $em = $this->getDoctrine()->getManager();
-        $sucursal = $em->getRepository(Sucursal::class)->find($id_sucursal);
+        $sucursal = $em->getRepository(Sucursal::class)->find($_id_sucursal);
 
         $formulario = $this->createForm(
-                SucursalType::class, $sucursal, array('action' => $this->generateUrl('sucursal_update', array('id_sucursal' => $id_sucursal)),
+                SucursalType::class, $sucursal, array('action' => $this->generateUrl('sucursal_update', array('_id_sucursal' => $_id_sucursal)),
             'method' => 'PUT'));
         $formulario->handleRequest($request);
 
@@ -125,7 +125,7 @@ class SucursalController extends Controller {
             $em->persist($sucursal);
             $em->flush();
             $request->getSession()->getFlashBag()->add('success','Se ha editado la sucursal : "'. $sucursal->getSucursal() . '" satisfactoriamente.');
-            return $this->redirectToRoute('sucursal_edit', array('id_sucursal' => $id_sucursal));
+            return $this->redirectToRoute('sucursal_edit', array('_id_sucursal' => $_id_sucursal));
         }
 
         return $this->render('sucursal/new_edit.html.twig', [
@@ -134,12 +134,12 @@ class SucursalController extends Controller {
     }
 
     /**
-     * @Route("/sucursal_delete/{id_sucursal}", name="sucursal_delete")
+     * @Route("/sucursales/delete/{_id_sucursal}", name="sucursal_delete")
      * @CheckPermission()
      */
-    public function deleteAction(Request $request, $id_sucursal) {
+    public function deleteAction(Request $request, $_id_sucursal) {
         $em = $this->getDoctrine()->getManager();
-        $sucursal = $em->getRepository(Sucursal::class)->find($id_sucursal);
+        $sucursal = $em->getRepository(Sucursal::class)->find($_id_sucursal);
         $em->remove($sucursal);
         $em->flush();
         $request->getSession()->getFlashBag()->add('success','Se ha eliminado la sucursal : "'. $sucursal->getSucursal() . '" satisfactoriamente.');

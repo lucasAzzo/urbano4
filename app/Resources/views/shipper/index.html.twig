@@ -12,15 +12,21 @@
                 <thead>
                     <tr>
                         <th>Shipper</th>
-                        <th><a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('shipper_new')}}"><i class="material-icons">add</i></a></th>
+                        <th>
+                            {% if has_permission('shipper_new') %}
+                                <a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('shipper_new')}}"><i class="material-icons">add</i></a>
+                            {% endif %}    
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for shipper in shippers %}
                         <tr>
                             <td>{{shipper.shiRepresentante}}</td>
-                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('shipper_edit',{'id_shipper':shipper.idShipper})}}"><i class="material-icons">mode_edit</i></a>
-                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('shipper_delete',{'id_shipper':shipper.idShipper})}}"><i class="material-icons">clear</i></a></td>
+                            <td>
+                                {% if has_permission('shipper_edit') %}<a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('shipper_edit',{'_id_shipper':shipper.idShipper})}}"><i class="material-icons">mode_edit</i></a>{% endif %}
+                                {% if has_permission('shipper_delete') %}<a type="button" class="btn-floating waves-effect waves-light red" href="{{path('shipper_delete',{'_id_shipper':shipper.idShipper})}}"><i class="material-icons">clear</i></a>{% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>

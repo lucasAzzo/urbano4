@@ -13,7 +13,11 @@
                     <tr>
                         <th>Zona</th>
                         <th>SubZonas</th>
-                        <th><a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('zona_new')}}"><i class="material-icons">add</i></a></th>
+                        <th>
+                            {% if has_permission('zona_new') %}
+                                <a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('zona_new')}}"><i class="material-icons">add</i></a>
+                            {% endif %}
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -25,8 +29,10 @@
                                     {{subzona.subzona}}<br>
                                 {% endfor %}    
                             </td>
-                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('zona_edit',{'id_zona':zona.idZona})}}"><i class="material-icons">mode_edit</i></a>
-                            <a type="button" class="btn-floating waves-effect waves-light red" href="{{path('zona_delete',{'id_zona':zona.idZona})}}"><i class="material-icons">clear</i></a></td>
+                            <td>
+                                {% if has_permission('zona_edit') %}<a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('zona_edit',{'_id_zona':zona.idZona})}}"><i class="material-icons">mode_edit</i></a>{% endif %}
+                                {% if has_permission('zona_delete') %}<a type="button" class="btn-floating waves-effect waves-light red" href="{{path('zona_delete',{'_id_zona':zona.idZona})}}"><i class="material-icons">clear</i></a>{% endif %}
+                            </td>
                         </tr>
                     {% endfor %}
                 </tbody>
