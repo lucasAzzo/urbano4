@@ -143,14 +143,14 @@ class PersonaController extends Controller {
     }
 
     /**
-     * @Route("/persona/{categoria}/edit/{_id_persona}/{idCategoria}", name="persona_edit")
+     * @Route("/persona/{categoria}/edit/{_id_persona}", name="persona_edit")
      * @ParamConverter("categoria", options={
             "repository_method" = "findByNombreCategoria"
         })
      * @Method("GET")
      * @CheckPermission()
      */
-    public function editAction(Request $request, Categoria $categoria, $_id_persona, Categoria $idCategoria) {
+    public function editAction(Request $request, Categoria $categoria, $_id_persona) {
         $em = $this->getDoctrine()->getManager();
 
         $persona = $em->getRepository(Persona::class)->find($_id_persona);

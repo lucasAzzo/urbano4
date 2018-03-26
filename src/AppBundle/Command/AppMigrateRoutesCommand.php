@@ -32,14 +32,19 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
         /** @var $collection \Symfony\Component\Routing\RouteCollection */
 
         $collection = $router->getRouteCollection();
-        $routes = $collection->all();
-        dump($routes);
-        die;
-        $db_routes = $em->getRepository(Route::class)->findAll();
+        $system_routes = $collection->all();
 
-        foreach ($routes as $route_name => $route) {
+        $db_routes = $em->getRepository(Route::class)->findAll();
+        /*dump($db_routes);
+        die;*/
+        $to_keep = [];
+
+        foreach ($system_routes as $route_name => $route) {
             $paths = [];
-            $paths[] = $route->getPath();
+            $val["path"] = $route->getPath();
+            $val["name"] = $route_name;
+            $val["parametro"] = [];
+            $paths[] = $val;
 
             if (strpos($route->getDefaults()["_controller"], ".") === false) {
                 $controller = explode("::", $route->getDefaults()["_controller"]);
@@ -69,44 +74,54 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
                 foreach ($param_data as $parametro => $array_val) {
                     $path_aux = [];
                     foreach ($array_val as $value) {
-                        foreach ($paths as $key => $path) {
-                            $route["parametro"] = str_replace("{".$parametro."}", $value, $path);
-                            $route["path"] = str_replace("{".$parametro."}", $value, $path);
-                            $route["path"] = str_replace("{".$parametro."}", $value, $path);
-                            $path_aux[] = str_replace("{".$parametro."}", $value, $path);
+                        foreach ($paths as $key => $obj) {
+                            $obj["path"] = str_replace("{".$parametro."}", $value, $obj["path"]);
+                            $obj["name"] = $route_name;
+                            $obj["parametro"][$parametro] = $value;
+                            $path_aux[] = $obj;
                         }
                     }
                     $paths = $path_aux;
                 }
                 
-                foreach ($paths as $key => $path) {
-                    
-                }
-                dump($paths);
             }
             
-            foreach ($paths as $key => $path) {
-                
+            foreach ($paths as $obj) {
+                $encontrado = false;
+                foreach ($db_routes as $db_route) {
+                    if ($obj["name"] == $db_route->getName() 
+                        && (sizeof(array_diff_assoc($obj["parametro"], $db_route->getParametro())) == 0) 
+                        && (sizeof(array_diff_assoc($db_route->getParametro(), $obj["parametro"])) == 0)
+                    ) {
+                        $encontrado = true;
+                        $to_keep[] = $db_route->getIdRoute();
+                        if ($obj["path"] != $db_route->getPath()) {
+                            $db_route->setPath($obj["path"]);
+                            $em->persist($db_route);
+                            $em->flush();
+                        }
+                    }
+                }
+                if (!$encontrado) {
+                    $new_route = new Route();
+                    $new_route->setPath($obj["path"]);
+                    $new_route->setName($obj["name"]);
+                    $new_route->setParametro($obj["parametro"]);
+                    $em->persist($new_route);
+                    $em->flush();
+                }
             }
 
-            $search = $em->getRepository(Route::class)->findBy(array("paths" => $route->getPath()));
-            if (sizeof($search) == 0) {
-                $new_route = new Route();
-                $new_route->setPath($route->getPath());
-                $new_route->setName($key);
-                $em->persist($new_route);
+        }
+
+        foreach ($db_routes as $key => $db_route) {
+            if (!in_array($db_route->getIdRoute(), $to_keep)){
+                $em->remove($db_route);
                 $em->flush();
             }
-            dump($search);
-            die;
         }
         
-        die;
-        
-
-        $output->writeln('PATH: '. $route->getPath());
-
-        $output->writeln('Command result.');
+        $output->writeln('Done.');
         
     }
 
