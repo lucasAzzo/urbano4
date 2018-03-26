@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}Rutas{% endblock %}
+{% block breadcrumbs %}
+    <li><a class="active">Inicio</a></li>
+    <li href="#">Nueva ruta</li>
+    {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card-panel">
+
+            <form action="{{path('route_update',{'_id_role':rol.id})}}" method="POST">
+                <div class="row">
+                    <h5>Rutas para el rol: {{rol.role}}</h5>
+                </div>    
+                <br>
+                
+                {% for ruta in routes %}
+                    <input type="checkbox" class="filled-in" name="rutas[]" id="{{ rol.id }}_{{ ruta.idRoute }}" value="{{ ruta.idRoute }}" {{ (ruta.idRoute in id_checks) ? 'checked' : '' }} />
+                    <label for="{{ rol.id }}_{{ ruta.idRoute }}">{{ ruta.path }} {% for key,parametro in ruta.parametro %}{{key}}:{{parametro}} {% endfor %}</label>
+                    <br>
+                {% endfor %}
+                <br>
+
+                <div class="row">
+                    <a type="button" href="{{path('route_index')}}" class="btn waves-effect waves-light red accent-2">Volver</a>
+                    <input type="submit" value="Guardar" class="btn"/>
+                </div>
+            </form>    
+
+
+        </div>
+    </div>
+
+{% endblock %}
+
