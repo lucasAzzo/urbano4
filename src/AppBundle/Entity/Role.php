@@ -5,6 +5,10 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\ManyToMany;
 use Doctrine\Common\Collections\ArrayCollection;
+use AppBundle\Entity\Route;
+use Doctrine\ORM\Mapping\JoinTable;
+use Doctrine\ORM\Mapping\JoinColumn;
+use Doctrine\ORM\Mapping\JoinColumns;
 
 
 /**
@@ -38,27 +42,36 @@ class Role
      */
     private $description;
     
-    
-    
-
 
     /**
      * Bidirectional - Many Roles are owned by many Routes (INVERSE SIDE)
      *
-     * @ManyToMany(targetEntity="Route", mappedBy="roles")
+     * @ManyToMany(targetEntity="Route", inversedBy="roles")
+     * @JoinTable(name="routes_roles",
+     *      joinColumns={@JoinColumn(name="id_role", referencedColumnName="id")},
+     *      inverseJoinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")}
+     *      )
      */
     private $routes;
-
-    public function getRoutes() {
-        return $this->routes;
-    }
+    
 
     public function __construct()
     {
         $this->routes = new ArrayCollection();
     }
     
-
+     public function getRoutes() {
+        return $this->routes;
+    }
+    
+    public function addRoute(Route $route) {
+        $this->routes[] = $route;
+    }
+    
+    public function removeRoute(Route $route) {
+        $this->routes->removeElement($route);
+    }
+    
     /**
      * Get id
      *

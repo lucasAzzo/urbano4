@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinTable;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\JoinColumns;
-
+use AppBundle\Entity\Role;
 
 /**
  * Route
@@ -48,7 +48,7 @@ class Route
     
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", inversedBy="routes")
+     * @ORM\ManyToMany(targetEntity="Role", mappedBy="routes")
      * @JoinTable(name="routes_roles",
      *      joinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")},
      *      inverseJoinColumns={@JoinColumn(name="id_role", referencedColumnName="id")}
@@ -62,6 +62,14 @@ class Route
     
     public function getRoles() {
         return $this->roles;
+    }
+    
+     public function addRole(Role $role) {
+        $this->roles[] = $role;
+    }
+    
+    public function removeRole(Role $role) {
+        $this->roles->removeElement($role);
     }
 
 
