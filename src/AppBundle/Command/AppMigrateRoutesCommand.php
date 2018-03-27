@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouteCollection;
 use AppBundle\Entity\Route;
 use AppBundle\Entity\Role;
+use AppBundle\Entity\Menu;
 
 class AppMigrateRoutesCommand extends ContainerAwareCommand
 {
@@ -137,7 +138,6 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
 
         $menus = $em->getRepository(Menu::class)->findAll();
 
-        
         $output->writeln('Done.');
         
     }
