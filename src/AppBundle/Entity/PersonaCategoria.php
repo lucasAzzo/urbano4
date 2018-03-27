@@ -123,7 +123,7 @@ class PersonaCategoria
      *
      * @return PersonaCategoria
      */
-    public function setIdCategoria(\AppBundle\Entity\Categoria $idCategoria = null)
+    public function setIdCategoria($idCategoria)
     {
         $this->idCategoria = $idCategoria;
 
