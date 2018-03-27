@@ -49,7 +49,7 @@ class Route
     
 
     /**
-     * @ORM\ManyToMany(targetEntity="Role", mappedBy="routes")
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="routes")
      * @JoinTable(name="routes_roles",
      *      joinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")},
      *      inverseJoinColumns={@JoinColumn(name="id_role", referencedColumnName="id")}

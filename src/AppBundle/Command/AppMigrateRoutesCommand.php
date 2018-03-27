@@ -11,6 +11,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\Routing\Router;
 use Symfony\Component\Routing\RouteCollection;
 use AppBundle\Entity\Route;
+use AppBundle\Entity\Role;
 
 class AppMigrateRoutesCommand extends ContainerAwareCommand
 {
@@ -107,6 +108,12 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
                     $new_route->setPath($obj["path"]);
                     $new_route->setName($obj["name"]);
                     $new_route->setParametro($obj["parametro"]);
+                    $role = $em->getRepository(Role::class)->findOneBy(array("role" => "ROLE_ADMIN"));
+                    
+                    if ($role) {
+                        $new_route->addRole($role);
+                    }
+
                     $em->persist($new_route);
                     $em->flush();
                 }
@@ -116,10 +123,20 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
 
         foreach ($db_routes as $key => $db_route) {
             if (!in_array($db_route->getIdRoute(), $to_keep)){
+                $menus = $em->getRepository(Menu::class)->findBy(array("id_route" => $db_route->getIdRoute()));
+                foreach ($menus as $key => $menu) {
+                    $menu->setIdRoute();
+                    $em->persist($menu);
+                    $em->flush();
+                }
                 $em->remove($db_route);
                 $em->flush();
+
             }
         }
+
+        $menus = $em->getRepository(Menu::class)->findAll();
+
         
         $output->writeln('Done.');
         
