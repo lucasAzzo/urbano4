@@ -26,6 +26,22 @@
         <link href="{{ asset('vendors/flag-icon/css/flag-icon.min.css') }}" type="text/css" rel="stylesheet">
         <link href="{{ asset('css/comun.css') }}" type="text/css" rel="stylesheet">
 
+        <!-- BEGIN: Firebase code -->
+        <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+        <script>
+            // Initialize Firebase
+            var config = {
+                apiKey: "AIzaSyCpTv-wSDXviwn_ZCc-HHrUb1Ir1auDVOQ",
+                authDomain: "mirulet-ba98b.firebaseapp.com",
+                databaseURL: "https://mirulet-ba98b.firebaseio.com",
+                projectId: "mirulet-ba98b",
+                storageBucket: "mirulet-ba98b.appspot.com",
+                messagingSenderId: "185859049245"
+            };
+            firebase.initializeApp(config);
+        </script>
+        <!-- END: Firebase code -->
+
     </head>
     <body>
         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
@@ -230,8 +246,7 @@
         <script type="text/javascript" src="{{ asset('js/plugins.js') }}"></script>
         <!--custom-script.js - Add your own theme custom JS-->
         <script type="text/javascript" src="{{ asset('js/custom-script.js') }}"></script>
-        
-
+        <script src="js/app.js"></script>
         {% block formulario_js %}<script src="{{ asset('js/formulario.js') }}"></script>{% endblock %}
         {% block javascripts %}{% endblock %}
         
