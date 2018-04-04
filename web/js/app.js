@@ -1,15 +1,17 @@
 // Database service reference
-var db = firebase.database().ref('player/');
+//var db = firebase.database().ref('player/');
 var db_notif = firebase.database().ref('notifications/');
 
 db_notif.on('value', function (snapshot) {
     var notifications = snapshot.val();
-    var tot_notif = notifications.len();
+    var tot_notif = snapshot.numChildren();
+    result = '<small class="notification-badge">'+tot_notif+'</small>';
+    $("#notif-no-read").append(result);
 
 },function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 })
-
+/*
 db.on('value', function (snapshot) {
     var players = snapshot.val();
     $("#playersTable tbody").empty();
@@ -32,7 +34,8 @@ db.on('value', function (snapshot) {
 }, function (errorObject) {
     console.log("The read failed: " + errorObject.code);
 })
-
+*/
+/*
 //Get players
 var savePlayer = function () {
     var player_number = $("#number").val();
@@ -47,7 +50,7 @@ var savePlayer = function () {
 }
 
 $("#btnSend").click(savePlayer);
-
+*/
 var saveNotification = function (from, to, type, read, icon, title, content) {
     var notification = {
         from: from,
@@ -60,5 +63,3 @@ var saveNotification = function (from, to, type, read, icon, title, content) {
     }
     db_notif.push().set(notification)
 }
-
-//Add player
