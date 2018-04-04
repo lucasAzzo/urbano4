@@ -2814,6 +2814,12 @@ a {
   -webkit-tap-highlight-color: transparent;
 }
 
+.link-recover{
+  color: #757575;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
 .valign-wrapper {
   display: flex;
   align-items: center;
