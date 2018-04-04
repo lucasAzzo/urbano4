@@ -24,8 +24,8 @@
                             <td>{{persona.apellido}}</td>
                             <td>{{persona.nombre}}</td>
                             <td>{{persona.fechaNacimiento|date('d/m/Y')}}</td>
-                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{ path('persona_edit',{ 'categoria':categoria, 'id_persona':persona.idPersona }) }}"><i class="material-icons">mode_edit</i></a>
-                                <a type="button" class="btn-floating waves-effect waves-light red" href="{{ path('persona_delete',{ 'categoria':categoria, 'id_persona':persona.idPersona }) }}"><i class="material-icons">clear</i></a></td>
+                            <td><a type="button" class="btn-floating waves-effect waves-light cyan" href="{{ path('persona_edit',{ 'categoria':categoria, '_id_persona':persona.idPersona }) }}"><i class="material-icons">mode_edit</i></a>
+                                <a type="button" class="btn-floating waves-effect waves-light red" href="{{ path('persona_delete',{ 'categoria':categoria, '_id_persona':persona.idPersona }) }}"><i class="material-icons">clear</i></a></td>
                         </tr>
                     {% endfor %}
                 </tbody>

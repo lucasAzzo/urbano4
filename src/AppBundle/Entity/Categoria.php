@@ -58,7 +58,7 @@ class Categoria
      */
     public function getCategoria()
     {
-        return $this->categoria;
+        return strtolower($this->categoria);
     }
 
     /**
