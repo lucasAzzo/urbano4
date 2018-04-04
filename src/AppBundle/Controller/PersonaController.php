@@ -72,7 +72,7 @@ class PersonaController extends Controller {
         
         $persona = new Persona();
         $persona_categoria = new PersonaCategoria();
-        $persona_categoria->setIdCategoria($categoria->getIdCategoria());
+        $persona_categoria->setIdCategoria($categoria);
 
         $persona->addCategoria($persona_categoria);
         $persona->addContacto(new PersonaContacto());
@@ -120,7 +120,7 @@ class PersonaController extends Controller {
 
         if ($formulario->isSubmitted() && $formulario->isValid()) {
             $persona_categoria = new PersonaCategoria();
-            $persona_categoria->setIdCategoria($categoria->getIdCategoria());
+            $persona_categoria->setIdCategoria($categoria);
 
             $persona_categoria->setPuesto($formulario->get('puesto')->getData());
             $persona_categoria->setDescripcionPuesto($formulario->get('descripcionPuesto')->getData());
@@ -202,7 +202,7 @@ class PersonaController extends Controller {
             
             $persona_categoria = $em->getRepository('AppBundle:PersonaCategoria')->findOneBy([
                 'idPersona' => $persona,
-                'idCategoria' =>$categoria->getCategoria(),
+                'idCategoria' =>$categoria->getIdCategoria(),
             ]);
             $persona_categoria->setPuesto($formulario->get('puesto')->getData());
             $persona_categoria->setDescripcionPuesto($formulario->get('descripcionPuesto')->getData());

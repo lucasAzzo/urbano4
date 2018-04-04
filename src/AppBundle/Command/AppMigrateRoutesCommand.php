@@ -77,7 +77,7 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
                     $path_aux = [];
                     foreach ($array_val as $value) {
                         foreach ($paths as $key => $obj) {
-                            $obj["path"] = str_replace("{".$parametro."}", $value, $obj["path"]);
+                            $obj["path"] = str_replace("{".$parametro."}", (is_numeric($value) ? $value : strtolower($value)), $obj["path"]);
                             $obj["name"] = $route_name;
                             $obj["parametro"][$parametro] = $value;
                             $path_aux[] = $obj;
@@ -124,7 +124,7 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
 
         foreach ($db_routes as $key => $db_route) {
             if (!in_array($db_route->getIdRoute(), $to_keep)){
-                $menus = $em->getRepository(Menu::class)->findBy(array("id_route" => $db_route->getIdRoute()));
+                $menus = $em->getRepository(Menu::class)->findBy(array("idRoute" => $db_route->getIdRoute()));
                 foreach ($menus as $key => $menu) {
                     $menu->setIdRoute();
                     $em->persist($menu);
@@ -136,9 +136,32 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
             }
         }
 
-        $menus = $em->getRepository(Menu::class)->findAll();
+        $qb = $em->createQueryBuilder();
+        $qb->select('m');
+        $qb->from('AppBundle:Menu', 'm');
+        $qb->leftJoin('AppBundle:Route', 'r', 'WITH','m.idRoute = r.idRoute');
+        $qb->where($qb->expr()->andX(
+            $qb->expr()->isNull('r.idRoute'),
+            $qb->expr()->isNotNull('m.idRoute')
+        ));
+        $menus = $qb->getQuery()->getResult();
 
-        $output->writeln('Done.');
+        foreach ($menus as $key => $menu) {
+            $menu->setIdRoute();
+            $em->persist($menu);
+            $em->flush();
+        }
+
+        $qb->select('m2');
+        $qb->from('AppBundle:Menu', 'm2');
+        $qb->where($qb->expr()->isNull('m2.idRoute'));
+        $menus = $qb->getQuery()->getResult();
+
+        if (sizeof($menus) > 0) {
+            $output->writeln('Done but there are menus left without route asigned, please check.');
+        } else {
+            $output->writeln('Done..');
+        }
         
     }
 
