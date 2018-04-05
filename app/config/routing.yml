@@ -9,4 +9,9 @@ fos_user:
 # app/config/routing.yml    
 fos_user_group:
     resource: "@FOSUserBundle/Resources/config/routing/group.xml"
-    prefix: /group       
+    prefix: /group
+    
+consultas:
+    resource: '@AppBundle/Ajax/'
+    type: annotation
+    

@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Lucas
  * @ORM\Table(name="sucursal")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\SucursalRepository")
  */
 class Sucursal {
     

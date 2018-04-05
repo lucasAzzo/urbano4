@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @author Lucas
  * @ORM\Table(name="producto")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ProductoRepository")
  */
 class Producto {
     

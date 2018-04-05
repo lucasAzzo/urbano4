@@ -7,31 +7,77 @@
 {% endblock %}
 {% block body %}
     <div class="container">
-        <div class="card-panel">
-            <table class="striped">
-                <thead>
+        <div class="container">
+            <div class="card-panel">
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
                     <tr>
                         <th>Producto</th>
-                        <th>
-                            {% if has_permission('producto_new') %}
-                                <a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('producto_new')}}"><i class="material-icons">add</i></a>
-                            {% endif %}
-                        </th>
+                        <th>{% if has_permission('producto_new') %}<a href="{{path('producto_new')}}" type="button"><i class="material-icons small">add</i></a>{% endif %}</th>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for producto in productos %}
-                        <tr>
-                            <td>{{producto.producto}}</td>
-                            <td>
-                                {% if has_permission('producto_edit') %}<a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('producto_edit',{'_id_producto':producto.idProducto})}}"><i class="material-icons">mode_edit</i></a>{% endif %}
-                                {% if has_permission('producto_delete') %}<a class="btn-floating waves-effect waves-light red" type="button" href="{{path('producto_delete',{'_id_producto':producto.idProducto})}}"><i class="material-icons">clear</i></a>{% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>    
-    </div>            
+                    </thead>
+                </table>
+            </div>
+        </div>            
+    </div>              
 {% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" language="javascript" class="init">
+            var editor; // use a global for the submit and return data rendering in the examples
+            $(document).ready(function() {
+                
+                $('#example').DataTable( {
+                    ajax: "{{path('consulta_productos')}}",
+                    language:{
+                        select: {
+                            rows: {
+                                _: "%d Registros seleccionados",
+                                0: "Haga clic en la fila para seleccionar",
+                                1: "1 Registro seleccionado"
+                                }
+                            },
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                        "sInfo":           "_START_ al _END_ de _TOTAL_ registros",
+                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    },
+                    dom: "Bfrtip",
+                    columns: [
+                        { data: "producto" },
+                        { 
+                            data: null,
+                            orderable: false,
+                            className: "center",
+                            defaultContent: '',
+                            render: function (val, type, row) {
+                                return {% if has_permission('producto_edit') %}'<a href="/productos/edit/' + row.id + '" type="button"><i class="material-icons tiny">mode_edit</i></a>'{% else %}''{%endif%}
+                                        + {% if has_permission('producto_delete') %}'<a href="/productos/delete/' + row.id + '"type="button"><i class="material-icons tiny">clear</i></a>'{% else %}''{%endif%};
+                            }                
+                        }
+                        
+                    ],
+                    select: true,
+                } );
+            } );
+    </script>
+{% endblock %}    
  
