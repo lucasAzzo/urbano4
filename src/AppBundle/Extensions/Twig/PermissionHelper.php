@@ -46,7 +46,7 @@ class PermissionHelper extends \Twig_Extension {
                 }
             }
         }
-
+        
         foreach ($route->getRoles() as $rol) {
             if ($security->isGranted($rol->getRole())) {
                 return true;

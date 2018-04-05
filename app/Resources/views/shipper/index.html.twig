@@ -7,30 +7,76 @@
 {% endblock %}
 {% block body %}
 <div class="container">
-        <div class="card-panel">
-            <table class="striped">
-                <thead>
+        <div class="container">
+            <div class="card-panel">
+                <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
                     <tr>
                         <th>Shipper</th>
-                        <th>
-                            {% if has_permission('shipper_new') %}
-                                <a type="button" class="btn-floating waves-effect waves-light green darken-1" href="{{path('shipper_new')}}"><i class="material-icons">add</i></a>
-                            {% endif %}    
-                        </th>
+                        <th>{% if has_permission('shipper_new') %}<a href="{{path('shipper_new')}}" type="button"><i class="material-icons small">add</i></a>{% endif %}</th>
                     </tr>
-                </thead>
-                <tbody>
-                    {% for shipper in shippers %}
-                        <tr>
-                            <td>{{shipper.shiRepresentante}}</td>
-                            <td>
-                                {% if has_permission('shipper_edit') %}<a type="button" class="btn-floating waves-effect waves-light cyan" href="{{path('shipper_edit',{'_id_shipper':shipper.idShipper})}}"><i class="material-icons">mode_edit</i></a>{% endif %}
-                                {% if has_permission('shipper_delete') %}<a type="button" class="btn-floating waves-effect waves-light red" href="{{path('shipper_delete',{'_id_shipper':shipper.idShipper})}}"><i class="material-icons">clear</i></a>{% endif %}
-                            </td>
-                        </tr>
-                    {% endfor %}
-                </tbody>
-            </table>
-        </div>
+                    </thead>
+                </table>
+            </div>
+        </div>            
 </div>                    
 {% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" language="javascript" class="init">
+            var editor; // use a global for the submit and return data rendering in the examples
+            $(document).ready(function() {
+                
+                $('#example').DataTable( {
+                    ajax: "{{path('consulta_shippers')}}",
+                    language:{
+                        select: {
+                            rows: {
+                                _: "%d Registros seleccionados",
+                                0: "Haga clic en la fila para seleccionar",
+                                1: "1 Registro seleccionado"
+                                }
+                            },
+                        "sProcessing":     "Procesando...",
+                        "sLengthMenu":     "Mostrar _MENU_ registros",
+                        "sZeroRecords":    "No se encontraron resultados",
+                        "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                        "sInfo":           "_START_ al _END_ de _TOTAL_ registros",
+                        "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                        "sInfoPostFix":    "",
+                        "sSearch":         "Buscar:",
+                        "sUrl":            "",
+                        "sInfoThousands":  ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst":    "Primero",
+                            "sLast":     "Último",
+                            "sNext":     "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        }
+                    },
+                    dom: "Bfrtip",
+                    columns: [
+                        { data: "shiRepresentante" },
+                        { 
+                            data: null,
+                            orderable: false,
+                            className: "center",
+                            defaultContent: '',
+                            render: function (val, type, row) {
+                                return {% if has_permission('shipper_edit') %}'<a href="/shippers/edit/' + row.id + '" type="button"><i class="material-icons tiny">mode_edit</i></a>'{% else %}''{%endif%}
+                                        + {% if has_permission('shipper_delete') %}'<a href="/shippers/delete/' + row.id + '"type="button"><i class="material-icons tiny">clear</i></a>'{% else %}''{%endif%};
+                            }                
+                        }
+                        
+                    ],
+                    select: true,
+                } );
+            } );
+    </script>
+{% endblock %}    

@@ -41,6 +41,24 @@
             firebase.initializeApp(config);
         </script>
         <!-- END: Firebase code -->
+        
+        <!-- DATATABLE CSS -->
+        <link rel="stylesheet" type="text/css" href="{{ asset('datatable/datatables.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('datatable/Buttons-1.5.1/css/buttons.dataTables.min.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('datatable/Select-1.2.5/css/select.dataTables.min.css') }}">
+        {#<link rel="stylesheet" type="text/css" href="{{ asset('datatable/Editor-1.7.2/editor.dataTables.min.css') }}">#}
+        {#<link rel="stylesheet" type="text/css" href="{{ asset('resources/syntax/shCore.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('resources/demo.css') }}">#}
+        
+        <!--DATATABLES JS-->
+        <script src="{{ asset('js/jquery-3.2.1.min.js') }}" ></script>
+        <script type="text/javascript" src="{{ asset('datatable/datatables.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('datatable/Buttons-1.5.1/js/dataTables.buttons.min.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('datatable/Select-1.2.5/js/dataTables.select.min.js') }}"></script>
+        {#<script type="text/javascript" src="{{ asset('datatable/Editor-1.7.2/dataTables.editor.min.js') }}"></script>#}
+        {#<script type="text/javascript" src="{{ asset('datatable/resources/syntax/shCore.js') }}"> </script>
+        <script type="text/javascript"  src="{{ asset('datatable/resources/demo.js') }}"></script>
+        <script type="text/javascript"  src="{{ asset('datatable/resources/editor-demo.js') }}"></script>#}
 
     </head>
     <body>
@@ -232,7 +250,7 @@
             </div>
         </footer>
 
-        <script src="{{ asset('js/jquery-3.2.1.min.js') }}" ></script>
+        {#<script src="{{ asset('js/jquery-3.2.1.min.js') }}" ></script>#}
         <script src="{{ asset('js/collections.js') }}"></script>
         <script src="{{ asset('js/comun.js') }}"></script>
         <script src="{{ asset('js/materialize.js') }}" ></script>
