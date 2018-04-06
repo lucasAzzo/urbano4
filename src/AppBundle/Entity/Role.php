@@ -46,7 +46,7 @@ class Role
     /**
      * Bidirectional - Many Roles are owned by many Routes (INVERSE SIDE)
      *
-     * @ManyToMany(targetEntity="Route", inversedBy="roles")
+     * @ManyToMany(targetEntity="Route", mappedBy="roles")
      * @JoinTable(name="routes_roles",
      *      joinColumns={@JoinColumn(name="id_role", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")}
