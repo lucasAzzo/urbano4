@@ -62,11 +62,11 @@ class MenuBuilder /* extends \Twig_Extension */ {
             if ($security->isGranted($rol->getRole())) {
                 return true;
             }
-            while (!empty($rol->getIdRolePadre())) {
-                if ($security->isGranted($rol->getIdRolePadre()->getRole())) {
-                    return true;
-                }
-            }
+//            while (!empty($rol->getIdRolePadre())) {
+//                if ($security->isGranted($rol->getIdRolePadre()->getRole())) {
+//                    return true;
+//                }
+//            }
         }
         return false;
     }

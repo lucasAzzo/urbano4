@@ -83,11 +83,11 @@ class CheckPermissionListener {
             if ($security->isGranted($rol->getRole())) {
                 return;
             }
-            while (!empty($rol->getIdRolePadre())) {
-                if ($security->isGranted($rol->getIdRolePadre()->getRole())) {
-                    return;
-                }
-            }
+//            while (!empty($rol->getIdRolePadre())) {
+//                if ($security->isGranted($rol->getIdRolePadre()->getRole())) {
+//                    return;
+//                }
+//            }
         }
         
         throw new AccessDeniedException('NO TIENE PERMISO PARA INGRESAR A ESTA OPERACIÓN.');
