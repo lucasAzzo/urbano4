@@ -29,6 +29,22 @@ class Role
     private $id;
 
     /**
+     * @var \AppBundle\Entity\Role
+     *
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Role",inversedBy="hijos")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="id_role_padre", referencedColumnName="id")
+     * })
+     */
+    private $idRolePadre;
+
+
+    /**
+     * @ORM\OneToMany(targetEntity="Role",mappedBy="idRolePadre")
+     */
+    protected $hijos;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="role", type="string", length=255, unique=true)
@@ -58,6 +74,7 @@ class Role
     public function __construct()
     {
         $this->routes = new ArrayCollection();
+        $this->hijos = new ArrayCollection();
     }
     
      public function getRoutes() {
@@ -128,5 +145,28 @@ class Role
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * @return Role
+     */
+    public function getIdRolePadre()
+    {
+        return $this->idRolePadre;
+    }
+
+    /**
+     * @return ArrayCollection|Role[]
+     */
+    public function getHijos() {
+        return $this->hijos;
+    }
+
+    /**
+     * @param Role $idRolePadre
+     */
+    public function setIdRolePadre($idRolePadre)
+    {
+        $this->idRolePadre = $idRolePadre;
     }
 }
