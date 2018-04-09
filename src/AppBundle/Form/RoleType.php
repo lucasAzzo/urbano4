@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,7 +16,15 @@ class RoleType extends AbstractType
     {
         $builder
             ->add('role')
-            ->add('description');
+            ->add('description')
+            ->add('idRolePadre', EntityType::class, array(
+                'placeholder' => 'No tiene',
+                'required' => false,
+                'class' => 'AppBundle:Role',
+                'choice_label' => 'role',
+                'attr' => array('class' => 'browser-default'),
+                'label' => 'Rol Padre'))
+        ;
     }/**
      * {@inheritdoc}
      */

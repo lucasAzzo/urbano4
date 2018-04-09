@@ -15,11 +15,17 @@
             {{ form_errors(form) }}
 
             <div class="row">
-                <div class="input-field col s6">
+                <div class="input-field col s4">
                     {{ form_label(form.role) }}
                     {{ form_widget(form.role) }}
                 </div>
-                <div class="input-field col s6">
+
+                    <div class="col s4">
+                        {{ form_label(form.idRolePadre) }}
+                        {{ form_widget(form.idRolePadre) }}
+                    </div>
+
+                <div class="input-field col s4">
                     {{ form_label(form.description) }}
                     {{ form_widget(form.description) }}
                 </div>
