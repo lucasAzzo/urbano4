@@ -24,6 +24,7 @@ class RoleType extends AbstractType
                 'choice_label' => 'role',
                 'attr' => array('class' => 'browser-default'),
                 'label' => 'Rol Padre'))
+
         ;
     }/**
      * {@inheritdoc}
