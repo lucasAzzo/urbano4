@@ -15,7 +15,7 @@ class Version20180319141627 extends AbstractMigration
      */
     public function up(Schema $schema)
     {
-        $this->addSql("INSERT INTO route(id_route, path, name) VALUES (1, '/estado_index', 'estado_index');");
+        /*$this->addSql("INSERT INTO route(id_route, path, name) VALUES (1, '/estado_index', 'estado_index');");
         $this->addSql("INSERT INTO route(id_route, path, name) VALUES (2, '/estado_new', 'estado_new');");
         $this->addSql("INSERT INTO route(id_route, path, name) VALUES (3, '/estado_create', 'estado_create');");
         $this->addSql("INSERT INTO route(id_route, path, name) VALUES (4, '/estado_edit', 'estado_edit');");
@@ -132,7 +132,7 @@ class Version20180319141627 extends AbstractMigration
         $this->addSql("INSERT INTO routes_roles(id_route, id_role) VALUES (45, 2);");
         $this->addSql("INSERT INTO routes_roles(id_route, id_role) VALUES (46, 2);");
         $this->addSql("INSERT INTO routes_roles(id_route, id_role) VALUES (47, 2);");
-        $this->addSql("INSERT INTO routes_roles(id_route, id_role) VALUES (48, 2);");
+        $this->addSql("INSERT INTO routes_roles(id_route, id_role) VALUES (48, 2);");*/
 
     }
 
