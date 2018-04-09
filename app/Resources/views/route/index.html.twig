@@ -8,11 +8,10 @@
 {% block body %}
     <div class="container">
             <div class="card-panel">
-            <table class="striped">
+            <table class="Highlight responsive-table bordered">
                     <thead>
                     <tr>
                         <th>Rol</th>
-                        <th>Rutas</th>
                         <th></th>
                     </tr>
                     </thead>
@@ -20,9 +19,8 @@
                     {% for rol in roles %}
                         <tr>
                             <td>{{rol.role}}</td>
-                            <td>{% for ruta in rol.routes %}{{ruta.path}} {% for key,parametro in ruta.parametro %}{{key}}:{{parametro}} {% endfor %} <br>{% endfor %}</td>
                             <td>
-                                {#{% if has_permission('producto_edit') %}#}<a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('route_edit',{'_id_role':rol.id})}}"><i class="material-icons">mode_edit</i></a>{#{% endif %}#}
+                                {% if has_permission('producto_edit') %}<a type="button" href="{{path('route_edit',{'_id_role':rol.id})}}">Configurar Rutas</a>{% endif %}
                             </td>
                         </tr>
                     {% endfor %}

@@ -9,7 +9,7 @@
 {% block body %}
     <div class="container">
         <div class="card-panel">
-            <table class="striped bordered">
+            <table class="Highlight responsive-table bordered">
                 <tbody>
                     <tr class="red lighten-3">
                         <td>Nombre</td>
@@ -17,9 +17,9 @@
                         <td>Ruta</td>
                         <td>Parámetros</td>
                         <td>
-                            {#{% if has_permission('menu_new') %}#}
-                                <a class="btn-floating waves-effect waves-light green darken-1" type="button" href="{{path('menu_new')}}"><i class="material-icons">add</i></a>
-                            {#{% endif %}#}
+                            {% if has_permission('menu_new') %}
+                                <a type="button" href="{{path('menu_new')}}"><i class="material-icons small">add</i>Agregar</a>
+                            {% endif %}
                         </td>
                     </tr>    
                 {% for modulo in modulos %}
@@ -30,8 +30,8 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':modulo.idMenu})}}"><i class="material-icons">mode_edit</i></a>
-                                <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':modulo.idMenu})}}"><i class="material-icons">clear</i></a>
+                                <a type="button" href="{{path('menu_edit',{'_id_menu':modulo.idMenu})}}"><i class="material-icons small">mode_edit</i></a>
+                                <a type="button" href="{{path('menu_delete',{'_id_menu':modulo.idMenu})}}"><i class="material-icons small">clear</i></a>
                             </td>
                         </tr>
                     {% endif %}
@@ -43,8 +43,8 @@
                                 <td>{{submodulo.idRoute}}</td>
                                 <td>{% if submodulo.idRoute is not empty %}{% for key,parametro in submodulo.idRoute.parametro %}{{key}}:{{parametro}}<br>{% endfor %}{% endif %}</td>
                                 <td>
-                                    <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">mode_edit</i></a>
-                                    <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">clear</i></a>
+                                    <a type="button" href="{{path('menu_edit',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons small">mode_edit</i></a>
+                                    <a type="button" href="{{path('menu_delete',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons small">clear</i></a>
                                 </td>
                             {% else %}
                                 {% if item_submodulo is not defined or item_submodulo != submodulo.idMenu %}
@@ -54,8 +54,8 @@
                                     <td>{{submodulo.idRoute}}</td>
                                     <td>{% if submodulo.idRoute is not empty %}{% for key,parametro in submodulo.idRoute.parametro %}{{key}}:{{parametro}}<br>{% endfor %}{% endif %}</td>
                                     <td>
-                                        <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">mode_edit</i></a>
-                                        <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons">clear</i></a>
+                                        <a type="button" href="{{path('menu_edit',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons small">mode_edit</i></a>
+                                        <a type="button" href="{{path('menu_delete',{'_id_menu':submodulo.idMenu})}}"><i class="material-icons small">clear</i></a>
                                     </td>
                                 </tr>
                             {% endif %}
@@ -65,8 +65,8 @@
                                 <td>{{operacion.idRoute}}</td>
                                 <td>{% if operacion.idRoute is not empty %}{% for key,parametro in operacion.idRoute.parametro %}{{key}}:{{parametro}}<br>{% endfor %}{% endif %}</td>
                                 <td>
-                                    <a class="btn-floating waves-effect waves-light cyan" type="button" href="{{path('menu_edit',{'_id_menu':operacion.idMenu})}}"><i class="material-icons">mode_edit</i></a>
-                                    <a class="btn-floating waves-effect waves-light red" type="button" href="{{path('menu_delete',{'_id_menu':operacion.idMenu})}}"><i class="material-icons">clear</i></a>
+                                    <a type="button" href="{{path('menu_edit',{'_id_menu':operacion.idMenu})}}"><i class="material-icons small">mode_edit</i></a>
+                                    <a type="button" href="{{path('menu_delete',{'_id_menu':operacion.idMenu})}}"><i class="material-icons small">clear</i></a>
                                 </td>
                             {% endfor %}    
                         {% endif %}    
