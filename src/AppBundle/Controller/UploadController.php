@@ -21,9 +21,6 @@ class UploadController extends Controller
     {
      //   $form = $this->formFactory->Createform();
 
-
-
-
         return $this->render('default/upload.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
         ]);

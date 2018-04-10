@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Lucas
  */
-class Api extends Controller {
+class ApiShipperController extends Controller {
 
     /**
      * @Route("/api", name="api")
