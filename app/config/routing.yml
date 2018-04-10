@@ -14,4 +14,8 @@ fos_user_group:
 consultas:
     resource: '@AppBundle/Ajax/'
     type: annotation
-    
+
+api:
+    resource: '@AppBundle/Api/'
+    type: annotation
+    prefix: /api
