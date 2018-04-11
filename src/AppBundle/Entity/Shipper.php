@@ -33,7 +33,7 @@ class Shipper {
     /**
      * @var \AppBundle\Entity\Pais
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pais")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pais", cascade={"persist"})
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id_pais")
      * })
