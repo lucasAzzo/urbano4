@@ -10,34 +10,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Upload;
+use AppBundle\Service\FileUploader;
+use AppBundle\Entity\ShipperOriginal;
+use AppBundle\Entity\Shipper;
+use AppBundle\Entity\OriginalFile;
+
 
 class UploadController extends Controller
 {
-    /**
-     * @Route("/upload", name="Upload")
-     * @Security("is_authenticated()")
-     */
-    public function indexAction(Request $request)
-    {
-     //   $form = $this->formFactory->Createform();
-
-
-
-
-        return $this->render('default/upload.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-        ]);
-    }
 
     /**
-     * @Route("/upload_new", name="upload_new")
+     * @Route("/upload", name="upload")
      * @Method("GET")
      * @Security("is_authenticated()")
      */
     public function newAction(Request $request) {
-        $upload = new Upload();
         $formulario = $this->createForm(
-            UploadFormType::class, $upload, array('action' => $this->generateUrl('upload_create'), 'method' => 'POST')
+            UploadFormType::class, null, array('action' => $this->generateUrl('upload_create'), 'method' => 'POST')
         );
         return $this->render('upload/new_upload.html.twig', [
             'formulario' => $formulario->createView(),
@@ -45,16 +34,15 @@ class UploadController extends Controller
     }
 
     /**
-     * @Route("/upload_create", name="upload_create")
+     * @Route("/upload/create", name="upload_create")
      * @Method("POST")
      * @Security("is_authenticated()")
      */
-    public function createAction(Request $request) {
+    public function createAction(Request $request, FileUploader $fileUploader) {
 
         $em = $this->getDoctrine()->getManager();
-        $upload = new Upload();
         $formulario = $this->createForm(
-            UploadFormType::class, $upload, array('action' => $this->generateUrl('upload_create'),
+            UploadFormType::class, null, array('action' => $this->generateUrl('upload_create'),
                 'method' => 'POST')
         );
 
@@ -62,14 +50,69 @@ class UploadController extends Controller
 
         if ($formulario->isSubmitted() && $formulario->isValid()) {
 
-            $em->persist($upload);
+            $shipper = $em->getRepository(Shipper::class)->find($formulario->get('shipper')->getData());
+            
+            $file = $fileUploader->upload($formulario->get('upload_file')->getData(), $shipper->getIdShipper());
+            
+            $data = $fileUploader->lecturaArchivo($file);
+            $usuario = $this->get('security.token_storage')->getToken()->getUser();
+            
+            
+            /* me fijo si el archivo existe (en tal caso retorno error), caso contrario, guardo la info del archivo en bd */
+                $archivo = $em->getRepository('AppBundle:OriginalFile')->findOneBy(['nombreArchivo' => $formulario->get('upload_file')->getData()->getClientOriginalName(), 'idShipper' => $shipper]);
+                if (empty($archivo)) {
+                    $original_file = new OriginalFile();
+                    $original_file->setFecha(new \DateTime());
+                    $original_file->setIdShipper($shipper);
+                    $original_file->setIdUsuario($usuario);
+                    $original_file->setNombreArchivo($formulario->get('upload_file')->getData()->getClientOriginalName());
+                    $em->persist($original_file);
+                } else{
+                    $request->getSession()->getFlashBag()->add('error','El archivo: "'. $formulario->get('upload_file')->getData()->getClientOriginalName() . '" ya existe para el shipper:"' . $shipper->getShiRepresentante());
+                    return $this->render('upload/new_upload.html.twig', [
+                        'formulario' => $formulario->createView(),
+                    ]);
+                }
+            /* -------- */
+                
+            /* persisto la data del archivo */
+            foreach ($data as $key => $fila) {
+                if ($formulario->get('cabezera')->getData() && $key == 0) {
+                    continue;
+                } else{
+                    $shipper_original = new ShipperOriginal();
+                    $shipper_original->setIdUsuario($usuario);
+                    $shipper_original->setDescripcion($fila);
+                    $shipper_original->setIdShipper($shipper);
+                    $shipper_original->setFecha(new \DateTime());
+                    $shipper_original->setIdOriginalFile($original_file);
+                    $em->persist($shipper_original);
+                }
+            }
+            /* ----------- */
+            
             $em->flush();
-            return $this->redirectToRoute('upload', array('id_upload' => $upload->getId()));
+            
+            return $this->redirectToRoute('upload_structure_confirmation', array(
+                '_id_original_file' => $original_file->getId(),
+            ));
         }
 
         return $this->render('upload/new_upload.html.twig', [
             'formulario' => $formulario->createView(),
         ]);
+    }
+    
+    /**
+     * @Route("/upload/structure/confirmation/{_id_original_file}", name="upload_structure_confirmation")
+     * @Method("GET")
+     * @Security("is_authenticated()")
+     */
+    public function confirmationAction(Request $request, $_id_original_file) {
+        $em = $this->getDoctrine()->getManager();
+        
+        $original_file = $em->getRepository(OriginalFile::class)->find($_id_original_file);
+        $data_archive = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
     }
 
 

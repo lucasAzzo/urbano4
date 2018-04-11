@@ -13,7 +13,6 @@ use AppBundle\Entity\Upload;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\HiddenType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -29,16 +28,18 @@ class UploadFormType extends AbstractType
     {
         $builder
             ->add('upload_file', FileType::class)
-            ->add('upload_shippers', EntityType::class, array(
+            ->add('shipper', ChoiceType::class, array(
                 'placeholder' => 'Seleccione una opción',
-                'class' => 'AppBundle:Shipper',
-                'choice_label' => 'shiRazonSocial',
-                'label' => 'Shipper',
-                 'multiple'=>true,))
-            /*->add('upload_user', HiddenType::class, array(
-                'data'=>
-            ))*/
-        ;
+                'choices'  => array(
+                    'Shipper 1' => 1,
+                ),
+                'label' => 'Shipper',))
+            ->add('cabezera', ChoiceType::class, array(
+                'choices'  => array(
+                    'Si' => true,
+                    'No' => false,
+                ),
+        ));
     }
 
     /**
@@ -47,7 +48,7 @@ class UploadFormType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => Upload::class,
+            //'data_class' => Upload::class,
             'csrf_token_id' => 'Upload',
         ));
     }

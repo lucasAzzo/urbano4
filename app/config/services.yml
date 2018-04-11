@@ -53,5 +53,11 @@ services:
         class: AppBundle\Extensions\Twig\PermissionHelper
         tags:
            - { name: twig.extension }
-        arguments: ["@service_container"]   
+        arguments: ["@service_container"]
+        
+    
+    AppBundle\Service\FileUploader:
+        arguments:
+            $targetDirectory: '%brochures_directory%'
+            $service_container: "@service_container"
                    
