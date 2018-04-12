@@ -61,3 +61,8 @@ services:
             $targetDirectory: '%brochures_directory%'
             $service_container: "@service_container"
                    
+
+    app.jwt_manager:
+        public: true
+        class: AppBundle\Services\JWTManager
+        arguments: ["@service_container"]
