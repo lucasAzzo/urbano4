@@ -26,7 +26,7 @@ class Shipper {
      *
      * @ORM\Column(name="id_shipper", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idShipper;
     

@@ -24,7 +24,7 @@ class Sucursal {
      *
      * @ORM\Column(name="id_sucursal", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
     private $idSucursal;
     

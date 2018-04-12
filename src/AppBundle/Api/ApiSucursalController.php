@@ -11,7 +11,7 @@ namespace AppBundle\Api;
 use AppBundle\Entity\Ciudad;
 use AppBundle\Entity\Pais;
 use AppBundle\Entity\Provincia;
-use AppBundle\Entity\Region;
+use AppBundle\Entity\Zona;
 use AppBundle\Entity\Sucursal;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -26,45 +26,35 @@ use AppBundle\Form\ShipperType;
 use AppBundle\Annotation\CheckPermission;
 
 /**
- * Description of ApiShipperController
+ * Description of ApiSucursalController
  *
  * @author Lucas
  *
  */
-class ApiShipperController extends Controller {
+class ApiSucursalController extends Controller {
 
     /**
-     * @Route("/shippers", name="api_shipper_index")
+         * @Route("/sucursales", name="api_sucursal_index")
      * @Method("GET")
      * @CheckPermission()
      */
     public function indexAction(Request $request) {
         $em = $this->getDoctrine()->getManager();
-        $shippers = $em->getRepository(Shipper::class)->findByArrayResult();
+        $shippers = $em->getRepository(Sucursal::class)->findByArrayResult();
         return new JsonResponse($shippers);
     }
 
     /**
-     * @Route("/shippers/create", name="api_shipper_create")
+     * @Route("/sucursal/create", name="api_sucursal_create")
      * @Method("POST")
      * @CheckPermission()
      */
     public function createAction(Request $request) {
         $requestData = json_decode($request->getContent(),true);
         $requiredParams = [
-        //    "idShipper" => $requestData["idShipper"],
-            "idPais" => $requestData["idPais"],
-            "idProvincia" => $requestData["idProvincia"],
-            "idRegion" => $requestData["idRegion"],
-            "idCiudad" => $requestData["idCiudad"],
-            "idSucursalDefecto" => $requestData["idSucursalDefecto"],
-            "shiRepresentante" => $requestData["shiRepresentante"],
-            "shiRazonSocial" => $requestData["shiRazonSocial"],
-            "shiDireccion" => $requestData["shiDireccion"],
-            "shiTelefono" => $requestData["shiTelefono"],
-            "shiCuit" => $requestData["shiCuit"],
-            "idEstado" => $requestData["idEstado"],
-            "idUsuario" => $requestData["idUsuario"]
+            "idsucursal" => $requestData["idsucursal"],
+            "sucursal" => $requestData["sucursal"],
+            "id_zona" => $requestData["id_zona"]
         ];
         foreach ($requiredParams as $key => $value) {
             if(empty($value)){
@@ -73,44 +63,31 @@ class ApiShipperController extends Controller {
         }
         try{
             $em = $this->getDoctrine()->getManager();
-            $shipper = new Shipper();
-            //preparing the objects to be assigned to $shipper
+            $sucursal = new Sucursal();
+
             $date = new \DateTime();
-            $countryId = $em->getRepository("AppBundle:Pais")->find($requestData["idPais"]);
-            $provinceId = $em->getRepository("AppBundle:Provincia")->find($requestData["idProvincia"]);
-            $regionId = $em->getRepository("AppBundle:Region")->find($requestData["idRegion"]);
-            $stateId = $em->getRepository("AppBundle:Ciudad")->find($requestData["idCiudad"]);
-            $defaultBranchOfficeId = $em->getRepository("AppBundle:Sucursal")->find($requestData["idSucursalDefecto"]);
-            $statusId = $em->getRepository("AppBundle:Estado")->find($requestData["idEstado"]);
+            $zonaId = $em->getRepository("AppBundle:Zona")->find($requestData["id_zona"]);
+
             //populating $server object
-        //    $shipper->setIdShipper($requestData["idShipper"]);
-            $shipper->setIdPais($countryId);
-            $shipper->setIdProvincia($provinceId);
-            $shipper->setIdRegion($regionId);
-            $shipper->setIdCiudad($stateId);
-            $shipper->setIdSucursalDefecto($defaultBranchOfficeId);
-            $shipper->setShiRepresentante($requestData["shiRepresentante"]);
-            $shipper->setShiRazonSocial($requestData["shiRazonSocial"]);
-            $shipper->setShiDireccion($requestData["shiDireccion"]);
-            $shipper->setShiTelefono($requestData["shiTelefono"]);
-            $shipper->setShiCuit($requestData["shiCuit"]);
-            $shipper->setIdEstado($statusId);
-//            $shipper->setIdUsuario($userId);
-            $shipper->setAudFechaCreacion($date);
-            $shipper->setAudFechaProc($date);
-            $shipper->setAudHoraProc($date->format('H:i'));
-            $em->persist($shipper);
+            $sucursal->setIdSucursal($requestData["idsucursal"]);
+            $sucursal->setSucursal($sucursal);
+            $sucursal->setIdZona($zonaId);
+
+            $em->persist($sucursal);
             $em->flush();
         } catch(\Doctrine\DBAL\DBALException $e){
             return new JsonResponse(["status" => "400", "message" => $e->getMessage()]);
         } catch(\Doctrine\ORM\ORMException $e){
             return new JsonResponse(["status" => "400", "message" => $e->getMessage()]);
         }
+
+
+//        $request->getSession()->getFlashBag()->add('success','Se ha creado la sucursal: "'. $sucursal->getsucursal() . '" satisfactoriamente.');
         return new JsonResponse(["status" => "200", "message" => "OK"]);
     }
 
     /**
-     * @Route("/shippers/edit/{_id_shipper}", name="shipper_edit")
+     * @Route("/sucursal/edit/{_id_sucursal}", name="sucursal_edit")
      * @Method("GET")
      * @CheckPermission()
      */
@@ -130,7 +107,7 @@ class ApiShipperController extends Controller {
     }
 
     /**
-     * @Route("/shippers/update/{_id_shipper}", name="shipper_update")
+     * @Route("/sucursal/update/{_id_sucursal}", name="sucursal_update")
      * @Method("PUT")
      * @CheckPermission()
      */
