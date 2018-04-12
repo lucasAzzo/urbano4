@@ -52,7 +52,7 @@ class ApiShipperController extends Controller {
     public function createAction(Request $request) {
         $requestData = json_decode($request->getContent(),true);
         $requiredParams = [
-            "idShipper" => $requestData["idShipper"],
+//            "idShipper" => $requestData["idShipper"],
             "idPais" => $requestData["idPais"],
             "idProvincia" => $requestData["idProvincia"],
             "idRegion" => $requestData["idRegion"],
@@ -82,8 +82,8 @@ class ApiShipperController extends Controller {
             $stateId = $em->getRepository("AppBundle:Ciudad")->find($requestData["idCiudad"]);
             $defaultBranchOfficeId = $em->getRepository("AppBundle:Sucursal")->find($requestData["idSucursalDefecto"]);
             $statusId = $em->getRepository("AppBundle:Estado")->find($requestData["idEstado"]);
+            $userId = $em->getRepository("AppBundle:User")->find($requestData["idUsuario"]);
             //populating $server object
-            $shipper->setIdShipper($requestData["idShipper"]);
             $shipper->setIdPais($countryId);
             $shipper->setIdProvincia($provinceId);
             $shipper->setIdRegion($regionId);
@@ -95,8 +95,7 @@ class ApiShipperController extends Controller {
             $shipper->setShiTelefono($requestData["shiTelefono"]);
             $shipper->setShiCuit($requestData["shiCuit"]);
             $shipper->setIdEstado($statusId);
-//        $shipper->setIdUsuario($this->getUser());
-//        $this->get('security.token_storage')->getToken()->getUser();
+//            $shipper->setIdUsuario($userId);
             $shipper->setAudFechaCreacion($date);
             $shipper->setAudFechaProc($date);
             $shipper->setAudHoraProc($date->format('H:i'));
@@ -107,9 +106,6 @@ class ApiShipperController extends Controller {
         } catch(\Doctrine\ORM\ORMException $e){
             return new JsonResponse(["status" => "400", "message" => $e->getMessage()]);
         }
-
-
-//        $request->getSession()->getFlashBag()->add('success','Se ha creado el shipper: "'. $shipper->getShiRazonSocial() . '" satisfactoriamente.');
         return new JsonResponse(["status" => "200", "message" => "OK"]);
     }
 
