@@ -10,7 +10,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\Upload;
-use AppBundle\Service\FileUploader;
+use AppBundle\Services\FileUploader;
 use AppBundle\Entity\ShipperOriginal;
 use AppBundle\Entity\Shipper;
 use AppBundle\Entity\OriginalFile;
@@ -38,7 +38,7 @@ class UploadController extends Controller
      * @Method("POST")
      * @Security("is_authenticated()")
      */
-    public function createAction(Request $request, FileUploader $fileUploader) {
+    public function createAction(Request $request, FileUploader $_fileUploader) {
 
         $em = $this->getDoctrine()->getManager();
         $formulario = $this->createForm(
@@ -52,9 +52,9 @@ class UploadController extends Controller
 
             $shipper = $em->getRepository(Shipper::class)->find($formulario->get('shipper')->getData());
             
-            $file = $fileUploader->upload($formulario->get('upload_file')->getData(), $shipper->getIdShipper());
+            $file = $_fileUploader->upload($formulario->get('upload_file')->getData(), $shipper->getIdShipper());
             
-            $data = $fileUploader->lecturaArchivo($file);
+            $data = $_fileUploader->lecturaArchivo($file);
             $usuario = $this->get('security.token_storage')->getToken()->getUser();
             
             

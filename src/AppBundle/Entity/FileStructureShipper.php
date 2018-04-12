@@ -159,7 +159,7 @@ class FileStructureShipper {
         $this->idEstado = $idEstado;
     }
 
-    public function setIdUsuario(\AppBundle\Entity\Usuario $idUsuario) {
+    public function setIdUsuario(\AppBundle\Entity\User $idUsuario) {
         $this->idUsuario = $idUsuario;
     }
 
