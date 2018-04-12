@@ -26,9 +26,9 @@ class JWTManager
     DO NOT MODIFY the "secret keys" when the app is running in production
     unless you know what you are doing because it will cause that every 
     api-client get lost their current api-session */
-    private CONST SECRET_KEY = "syMfony1sStR0ngGg!";
-    private CONST PARAMS_SECRET_KEY = "Surf4c1ngSl!pkn0t#";
-    private CONST EXPIRATION_TIME = 3600;
+    CONST SECRET_KEY = "syMfony1sStR0ngGg!";
+    CONST PARAMS_SECRET_KEY = "Surf4c1ngSl!pkn0t#";
+    CONST EXPIRATION_TIME = 3600;
     private $signer;
 
     public function __construct() 
