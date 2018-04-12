@@ -1,32 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nuevo Upload{% endblock %}
+{% block titulo_operacion %}Nueva subida{% endblock %}
 
-{% block titulo_operacion %}Upload{% endblock %}
+{% block breadcrumbs %}
+        <li><a class="active">Inicio</a></li>
+        <li href="#">Archivos</li>
+{% endblock %}
 
 {% block body %}
 
     {{ form_start(formulario) }}
 
     {{ form_errors(formulario) }}
+    
+    <div class="container">
+        <div class="card-panel">
 
-    <div class="form-row">
-        <div class="form-group col-md-12">
-            {{ form_label(formulario.upload_file) }}
-            {{ form_widget(formulario.upload_file) }}
-        </div>
-        <div class="form-group col-md-12">
-            {{ form_label(formulario.upload_shippers) }}
-            {{ form_widget(formulario.upload_shippers) }}
+            {{ form_start(formulario) }}
+
+            {{ form_errors(formulario) }}
+
+            <div class="row">
+                <div class="input-field col s5">
+                    {{ form_widget(formulario.upload_file) }}
+                </div>
+                <div class="input-field col s5">
+                    {{ form_widget(formulario.shipper) }}
+                    {{ form_label(formulario.shipper) }}
+                </div>
+                <div class="input-field col s2">
+                    {{ form_widget(formulario.cabezera) }}
+                    {{ form_label(formulario.cabezera) }}
+                </div>
+            </div>
+                
+            <div class="row">
+                <input type="submit" value="Guardar" class="btn"/>
+            </div>
+
+            {{ form_end(formulario) }}
         </div>
     </div>
-
-    <hr>
-
-    <div class="">
-        <a type="button" href="{{path('upload_create')}}" class="btn btn-sm btn-danger">Volver</a>
-        <input type="submit" value="Guardar" class="btn btn-sm btn-success" />
-    </div>
-    {{ form_end(formulario) }}
 
 {% endblock %}
