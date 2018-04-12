@@ -1,6 +1,6 @@
 <?php
 
-namespace AppBundle\Service;
+namespace AppBundle\Services;
 
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -10,7 +10,7 @@ class FileUploader
     private $targetDirectory;
     private $container;
 
-    public function __construct($targetDirectory, ContainerInterface $service_container = null)
+    public function __construct($targetDirectory = null, ContainerInterface $service_container = null)
     {
         $this->targetDirectory = $targetDirectory;
         $this->container = $service_container;
