@@ -45,10 +45,10 @@ class PersonaDomicilio {
      *
      * @ORM\Column(name="id_persona_domicilio", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_domicilio_id_persona_domicilio_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersonaDomicilio;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\DomicilioTipo
@@ -87,7 +87,7 @@ class PersonaDomicilio {
     }
 
     public function getIdPersonaDomicilio() {
-        return $this->idPersonaDomicilio;
+        return $this->id;
     }
 
     public function getIdDomicilioTipo() {
@@ -119,7 +119,7 @@ class PersonaDomicilio {
     }
 
     public function setIdPersonaDomicilio($idPersonaDomicilio) {
-        $this->idPersonaDomicilio = $idPersonaDomicilio;
+        $this->id = $idPersonaDomicilio;
         return $this;
     }
 

@@ -24,10 +24,10 @@ class PersonaDocumento
      *
      * @ORM\Column(name="id_persona_documento", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_documento_id_persona_documento_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersonaDocumento;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Persona
@@ -54,7 +54,7 @@ class PersonaDocumento
     }
 
     public function getIdPersonaDocumento() {
-        return $this->idPersonaDocumento;
+        return $this->id;
     }
 
     public function getIdPersona() {
@@ -70,7 +70,7 @@ class PersonaDocumento
     }
 
     public function setIdPersonaDocumento($idPersonaDocumento) {
-        $this->idPersonaDocumento = $idPersonaDocumento;
+        $this->id = $idPersonaDocumento;
     }
 
     public function setIdPersona(\AppBundle\Entity\Persona $idPersona=null) {

@@ -31,10 +31,10 @@ class PersonaCategoria
      *
      * @ORM\Column(name="id_persona_categoria", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_categoria_id_persona_categoria_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersonaCategoria;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Categoria
@@ -113,7 +113,7 @@ class PersonaCategoria
      */
     public function getIdPersonaCategoria()
     {
-        return $this->idPersonaCategoria;
+        return $this->id;
     }
 
     /**

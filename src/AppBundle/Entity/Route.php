@@ -22,9 +22,9 @@ class Route
      *
      * @ORM\Column(name="id_route", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idRoute;
+    private $id;
 
     /**
      * @var string
@@ -81,7 +81,7 @@ class Route
      */
     public function getIdRoute()
     {
-        return $this->idRoute;
+        return $this->id;
     }
 
     /**

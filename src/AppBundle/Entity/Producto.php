@@ -24,9 +24,9 @@ class Producto {
      *
      * @ORM\Column(name="id_producto", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idProducto;
+    private $id;
     
     /**
      * @var string
@@ -36,7 +36,7 @@ class Producto {
     private $producto;
     
     public function getIdProducto() {
-        return $this->idProducto;
+        return $this->id;
     }
 
     public function getProducto() {
@@ -44,7 +44,7 @@ class Producto {
     }
 
     public function setIdProducto($idProducto) {
-        $this->idProducto = $idProducto;
+        $this->id = $idProducto;
     }
 
     public function setProducto($producto) {

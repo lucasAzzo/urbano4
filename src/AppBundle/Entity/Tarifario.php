@@ -22,11 +22,11 @@ class Tarifario {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tarifario", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idTarifario;
+    private $id;
     
     /**
      * @var \AppBundle\Entity\Producto
@@ -59,7 +59,7 @@ class Tarifario {
     protected $idSucursal;
     
     public function getIdTarifario() {
-        return $this->idTarifario;
+        return $this->id;
     }
 
     public function getIdProducto() {
@@ -75,7 +75,7 @@ class Tarifario {
     }
 
     public function setIdTarifario($idTarifario) {
-        $this->idTarifario = $idTarifario;
+        $this->id = $idTarifario;
     }
 
     public function setIdProducto(\AppBundle\Entity\Producto $idProducto) {

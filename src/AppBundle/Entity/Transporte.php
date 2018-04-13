@@ -24,9 +24,9 @@ class Transporte {
      *
      * @ORM\Column(name="id_transporte", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idTransporte;
+    private $id;
     
     /**
      * @var string
@@ -36,7 +36,7 @@ class Transporte {
     private $transporte;
     
     public function getIdTransporte() {
-        return $this->idTransporte;
+        return $this->id;
     }
 
     public function getTransporte() {
@@ -44,7 +44,7 @@ class Transporte {
     }
 
     public function setIdTransporte($idTransporte) {
-        $this->idTransporte = $idTransporte;
+        $this->id = $idTransporte;
     }
 
     public function setTransporte($transporte) {

@@ -52,7 +52,6 @@ class ApiShipperController extends Controller {
     public function createAction(Request $request) {
         $requestData = json_decode($request->getContent(),true);
         $requiredParams = [
-        //    "idShipper" => $requestData["idShipper"],
             "idPais" => $requestData["idPais"],
             "idProvincia" => $requestData["idProvincia"],
             "idRegion" => $requestData["idRegion"],

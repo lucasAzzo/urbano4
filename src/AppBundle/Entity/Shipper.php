@@ -24,11 +24,11 @@ class Shipper {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_shipper", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idShipper;
+    private $id;
     
     /**
      * @var \AppBundle\Entity\Pais
@@ -164,7 +164,7 @@ class Shipper {
     private $audHoraProc;
     
     public function getIdShipper() {
-        return $this->idShipper;
+        return $this->id;
     }
 
     public function getIdPais(){
@@ -226,10 +226,6 @@ class Shipper {
 
     public function getAudHoraProc() {
         return $this->audHoraProc;
-    }
-
-    public function setIdShipper($idShipper) {
-        $this->idShipper = $idShipper;
     }
 
     public function setIdPais(\AppBundle\Entity\Pais $idPais) {
