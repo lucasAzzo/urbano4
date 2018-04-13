@@ -65,7 +65,7 @@ class Role
      * @ManyToMany(targetEntity="Route", mappedBy="roles")
      * @JoinTable(name="routes_roles",
      *      joinColumns={@JoinColumn(name="id_role", referencedColumnName="id")},
-     *      inverseJoinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")}
+     *      inverseJoinColumns={@JoinColumn(name="id_route", referencedColumnName="id")}
      *      )
      */
     private $routes;

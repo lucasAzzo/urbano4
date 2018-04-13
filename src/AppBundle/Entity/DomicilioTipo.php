@@ -24,12 +24,12 @@ class DomicilioTipo
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_domicilio_tipo", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="SEQUENCE")
      * @ORM\SequenceGenerator(sequenceName="domicilio_tipo_id_domicilio_tipo_seq", allocationSize=1, initialValue=1)
      */
-    private $idDomicilioTipo;
+    private $id;
     
     public function __toString() {
         return $this->domicilioTipo;
@@ -40,7 +40,7 @@ class DomicilioTipo
     }
 
     public function getIdDomicilioTipo() {
-        return $this->idDomicilioTipo;
+        return $this->id;
     }
 
     public function setDomicilioTipo($domicilioTipo) {
@@ -48,7 +48,7 @@ class DomicilioTipo
     }
 
     public function setIdDomicilioTipo($idDomicilioTipo) {
-        $this->idDomicilioTipo = $idDomicilioTipo;
+        $this->id= $idDomicilioTipo;
     }
 
 

@@ -43,7 +43,7 @@ class PersonaDomicilio {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_domicilio", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_domicilio_id_persona_domicilio_seq", allocationSize=1, initialValue=1)
@@ -55,7 +55,7 @@ class PersonaDomicilio {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DomicilioTipo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_domicilio_tipo", referencedColumnName="id_domicilio_tipo")
+     *   @ORM\JoinColumn(name="id_domicilio_tipo", referencedColumnName="id")
      * })
      */
     private $idDomicilioTipo;
@@ -65,7 +65,7 @@ class PersonaDomicilio {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="domicilios")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     protected $idPersona;

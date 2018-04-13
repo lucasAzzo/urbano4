@@ -49,7 +49,7 @@ class Menu {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Menu",inversedBy="hijos")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_menu_padre", referencedColumnName="id_menu")
+     *   @ORM\JoinColumn(name="id_menu_padre", referencedColumnName="id")
      * })
      */
     private $idMenuPadre;
@@ -73,7 +73,7 @@ class Menu {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Route")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_route", referencedColumnName="id_route")
+     *   @ORM\JoinColumn(name="id_route", referencedColumnName="id")
      * })
      */
     private $idRoute;

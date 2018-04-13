@@ -40,7 +40,7 @@ class Sucursal {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id_zona")
+     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id")
      * })
      */
     private $idZona;

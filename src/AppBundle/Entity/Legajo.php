@@ -33,7 +33,7 @@ class Legajo {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -43,7 +43,7 @@ class Legajo {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
      */
     private $idEstado;

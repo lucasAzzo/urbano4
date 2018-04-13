@@ -30,7 +30,7 @@ class PersonaIdioma
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_idioma", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_idioma_id_persona_idioma_seq", allocationSize=1, initialValue=1)
@@ -42,7 +42,7 @@ class PersonaIdioma
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="idiomas")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -52,7 +52,7 @@ class PersonaIdioma
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Idioma")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_idioma", referencedColumnName="id_idioma")
+     *   @ORM\JoinColumn(name="id_idioma", referencedColumnName="id")
      * })
      */
     private $idIdioma;

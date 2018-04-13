@@ -41,7 +41,7 @@ class PersonaCategoria
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categoria")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_categoria", referencedColumnName="id")
      * })
      */
     private $idCategoria;
@@ -51,7 +51,7 @@ class PersonaCategoria
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="categorias")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;

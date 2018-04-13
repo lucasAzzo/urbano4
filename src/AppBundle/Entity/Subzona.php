@@ -40,7 +40,7 @@ class Subzona {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zona",inversedBy="subzonas")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id_zona")
+     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id")
      * })
      */
     private $idZona;

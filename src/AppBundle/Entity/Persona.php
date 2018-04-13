@@ -79,7 +79,7 @@ class Persona {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_id_persona_seq", allocationSize=1, initialValue=1)
@@ -120,7 +120,7 @@ class Persona {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
      * })
      */
     private $idEstado;

@@ -22,7 +22,7 @@ class PersonaContacto
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_contacto", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_contacto_id_persona_contacto_seq", allocationSize=1, initialValue=1)
@@ -34,7 +34,7 @@ class PersonaContacto
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="contactos")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -44,7 +44,7 @@ class PersonaContacto
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\ContactoTipo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_contacto_tipo", referencedColumnName="id_contacto_tipo")
+     *   @ORM\JoinColumn(name="id_contacto_tipo", referencedColumnName="id")
      * })
      */
     private $idContactoTipo;

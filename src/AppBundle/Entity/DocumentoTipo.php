@@ -50,7 +50,7 @@ class DocumentoTipo
     }
 
     public function setIdDocumentoTipo($idDocumentoTipo) {
-        $this->idDocumentoTipo = $idDocumentoTipo;
+        $this->id= $idDocumentoTipo;
     }
 
 

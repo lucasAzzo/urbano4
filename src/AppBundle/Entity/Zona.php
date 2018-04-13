@@ -24,7 +24,7 @@ class Zona {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_zona", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -38,7 +38,7 @@ class Zona {
     private $zona;
     
     /**
-     * @ORM\OneToMany(targetEntity="Subzona",mappedBy="idZona",cascade={"persist","remove"},orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Subzona",mappedBy="id",cascade={"persist","remove"},orphanRemoval=true)
      */
     private $subzonas;
     

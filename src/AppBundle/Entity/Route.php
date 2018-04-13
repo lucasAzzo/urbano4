@@ -20,7 +20,7 @@ class Route
     /**
      * @var int
      *
-     * @ORM\Column(name="id_route", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      */
@@ -51,7 +51,7 @@ class Route
     /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="routes")
      * @JoinTable(name="routes_roles",
-     *      joinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")},
+     *      joinColumns={@JoinColumn(name="id_route", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="id_role", referencedColumnName="id")}
      *      )
      */

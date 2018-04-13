@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PersonaDocumento
  *
- * @ORM\Table(name="persona_documento", indexes={@ORM\Index(name="IX_Relationship2", columns={"id_documento_tipo"}), @ORM\Index(name="IX_Relationship3", columns={"id_persona"})})
+ * @ORM\Table(name="persona_documento", indexes={@ORM\Index(name="IX_Relationship2", columns={"id"}), @ORM\Index(name="IX_Relationship3", columns={"id"})})
  * @ORM\Entity
  */
 class PersonaDocumento
@@ -22,7 +22,7 @@ class PersonaDocumento
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_documento", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_documento_id_persona_documento_seq", allocationSize=1, initialValue=1)
@@ -34,7 +34,7 @@ class PersonaDocumento
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="documentos")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -44,7 +44,7 @@ class PersonaDocumento
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DocumentoTipo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_documento_tipo", referencedColumnName="id_documento_tipo")
+     *   @ORM\JoinColumn(name="id_documento_tipo", referencedColumnName="id")
      * })
      */
     private $idDocumentoTipo;
