@@ -143,12 +143,5 @@ class Route
     public function __toString() {
         return $this->path;
     }
-
-
-    
-    
-
-
-
 }
 
