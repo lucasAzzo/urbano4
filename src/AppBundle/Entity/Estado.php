@@ -27,11 +27,11 @@ class Estado {
         /**
      * @var integer
      *
-     * @ORM\Column(name="id_estado", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idEstado;
+    private $id;
     
      /**
      * @var string
@@ -53,7 +53,7 @@ class Estado {
     }
     
     public function getIdEstado() {
-        return $this->idEstado;
+        return $this->id;
     }
 
     public function getEstado() {
@@ -64,8 +64,8 @@ class Estado {
         return $this->abreviado;
     }
 
-    public function setIdEstado($idEstado) {
-        $this->idEstado = $idEstado;
+    public function setIdEstado($id) {
+        $this->idEstado = $id;
     }
 
     public function setEstado($estado) {

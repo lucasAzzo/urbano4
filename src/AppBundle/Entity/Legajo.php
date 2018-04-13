@@ -22,11 +22,11 @@ class Legajo {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_legajo", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idLegajo;
+    private $id;
     
     /**
      * @var \AppBundle\Entity\Persona
@@ -63,7 +63,7 @@ class Legajo {
     private $empresa;
     
     public function getIdLegajo() {
-        return $this->idLegajo;
+        return $this->id;
     }
 
     public function getIdPersona(){

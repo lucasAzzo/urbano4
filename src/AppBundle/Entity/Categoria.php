@@ -28,12 +28,12 @@ class Categoria
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_categoria", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="categoria_id_categoria_seq", allocationSize=1, initialValue=1)
      */
-    private $idCategoria;
+    private $id;
 
 
 
@@ -68,6 +68,6 @@ class Categoria
      */
     public function getIdCategoria()
     {
-        return $this->idCategoria;
+        return $this->id;
     }
 }

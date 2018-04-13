@@ -22,12 +22,12 @@ class ContactoTipo
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_contacto_tipo", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="contacto_tipo_id_contacto_tipo_seq", allocationSize=1, initialValue=1)
      */
-    private $idContactoTipo;
+    private $id;
     
     public function __toString() {
         return $this->contactoTipo;
@@ -38,15 +38,15 @@ class ContactoTipo
     }
 
     public function getIdContactoTipo() {
-        return $this->idContactoTipo;
+        return $this->id;
     }
 
     public function setContactoTipo($contactoTipo) {
         $this->contactoTipo = $contactoTipo;
     }
 
-    public function setIdContactoTipo($idContactoTipo) {
-        $this->idContactoTipo = $idContactoTipo;
+    public function setIdContactoTipo($id) {
+        $this->idContactoTipo = $id;
     }
 
 
