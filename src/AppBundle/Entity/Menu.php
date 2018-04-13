@@ -23,11 +23,11 @@ class Menu {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_menu", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idMenu;
+    private $id;
 
     /**
      * @var string
@@ -86,7 +86,7 @@ class Menu {
 
 
     public function getIdMenu() {
-        return $this->idMenu;
+        return $this->id;
     }
     public function getNombre() {
         return $this->nombre;
