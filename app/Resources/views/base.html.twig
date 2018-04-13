@@ -90,6 +90,14 @@
                                         <span aria-hidden="true">×</span>
                                     </button>
                                 </div>
+                            {% endfor %}
+                            {% for flash_message in app.session.flashbag.get('error') %}
+                                <div class="card-content white-text red"> 
+                                    <p>{{ flash_message }}</p>
+                                    <button type="button" class="close white-text" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">×</span>
+                                    </button>
+                                </div>
                             {% endfor %} 
                         </div>    
                         {% block body %}

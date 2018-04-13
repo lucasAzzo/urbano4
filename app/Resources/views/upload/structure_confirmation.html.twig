@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block titulo_operacion %}Nueva subida{% endblock %}
+
+{% block breadcrumbs %}
+        <li><a class="active">Inicio</a></li>
+        <li href="#">Estructura</li>
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div class="card-panel">
+            <form class="col s12">
+                {% for campo in cabezera %}
+                    <div class="input-field col s12">
+                        <select>
+                            <option value="" selected>Seleccione una opción</option>
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                            <option value="3">Option 3</option>
+                        </select>
+                        <label>{{campo|upper}}</label>
+                    </div>
+                {% endfor %}
+            </form>    
+        </div>
+    </div>    
+{% endblock %}    
