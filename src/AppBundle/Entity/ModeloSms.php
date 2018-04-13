@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Description of Pais
+ * Description of ModeloSms
  *
  * @author Aledaas
  * @ORM\Table(name="ModeloSms")
