@@ -139,9 +139,9 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
         $qb = $em->createQueryBuilder();
         $qb->select('m');
         $qb->from('AppBundle:Menu', 'm');
-        $qb->leftJoin('AppBundle:Route', 'r', 'WITH','m.idRoute = r.idRoute');
+        $qb->leftJoin('AppBundle:Route', 'r', 'WITH','m.idRoute = r.id');
         $qb->where($qb->expr()->andX(
-            $qb->expr()->isNull('r.idRoute'),
+            $qb->expr()->isNull('r.id'),
             $qb->expr()->isNotNull('m.idRoute')
         ));
         $menus = $qb->getQuery()->getResult();
