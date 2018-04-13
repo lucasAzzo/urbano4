@@ -5,11 +5,11 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Servicio
+ * CHK
  *
- * @ORM\Table(name="servicio")
+ * @ORM\Table(name="chk")
  */
-class Servicio
+class CHK
 {
     /**
      * @var int
@@ -39,27 +39,27 @@ class Servicio
     }
 
     /**
-     * Set name
+     * Set nombre
      *
-     * @param string $name
+     * @param string $nombre
      *
-     * @return Servicio
+     * @return CHK
      */
-    public function setName($name)
+    public function setNombre($nombre)
     {
-        $this->name = $name;
+        $this->nombre = $nombre;
 
         return $this;
     }
 
     /**
-     * Get name
+     * Get nombre
      *
      * @return string
      */
-    public function getName()
+    public function getNombre()
     {
-        return $this->name;
+        return $this->nombre;
     }
 }
 
