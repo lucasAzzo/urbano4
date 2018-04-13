@@ -25,12 +25,12 @@ class DocumentoTipo
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_documento_tipo", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="documento_tipo_id_documento_tipo_seq", allocationSize=1, initialValue=1)
      */
-    private $idDocumentoTipo;
+    private $id;
     
     
     public function __toString() {
@@ -42,7 +42,7 @@ class DocumentoTipo
     }
 
     public function getIdDocumentoTipo() {
-        return $this->idDocumentoTipo;
+        return $this->id;
     }
 
     public function setDocumentoTipo($documentoTipo) {
@@ -50,7 +50,7 @@ class DocumentoTipo
     }
 
     public function setIdDocumentoTipo($idDocumentoTipo) {
-        $this->idDocumentoTipo = $idDocumentoTipo;
+        $this->id= $idDocumentoTipo;
     }
 
 

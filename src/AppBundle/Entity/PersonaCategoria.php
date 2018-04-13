@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PersonaCategoria
  *
- * @ORM\Table(name="persona_categoria", indexes={@ORM\Index(name="IX_Relationship7", columns={"id_persona"}), @ORM\Index(name="IX_Relationship8", columns={"id_categoria"})})
+ * @ORM\Table(name="persona_categoria", indexes={@ORM\Index(name="IX_Relationship7", columns={"id"}), @ORM\Index(name="IX_Relationship8", columns={"id"})})
  * @ORM\Entity
  */
 class PersonaCategoria
@@ -29,19 +29,19 @@ class PersonaCategoria
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_categoria", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_categoria_id_persona_categoria_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersonaCategoria;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Categoria
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Categoria")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_categoria", referencedColumnName="id_categoria")
+     *   @ORM\JoinColumn(name="id_categoria", referencedColumnName="id")
      * })
      */
     private $idCategoria;
@@ -51,7 +51,7 @@ class PersonaCategoria
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="categorias")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -113,7 +113,7 @@ class PersonaCategoria
      */
     public function getIdPersonaCategoria()
     {
-        return $this->idPersonaCategoria;
+        return $this->id;
     }
 
     /**

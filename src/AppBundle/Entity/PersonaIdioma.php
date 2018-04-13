@@ -30,19 +30,19 @@ class PersonaIdioma
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_idioma", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_idioma_id_persona_idioma_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersonaIdioma;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Persona
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="idiomas")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -52,7 +52,7 @@ class PersonaIdioma
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Idioma")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_idioma", referencedColumnName="id_idioma")
+     *   @ORM\JoinColumn(name="id_idioma", referencedColumnName="id")
      * })
      */
     private $idIdioma;
@@ -62,7 +62,7 @@ class PersonaIdioma
     }
 
     public function getIdPersonaIdioma() {
-        return $this->idPersonaIdioma;
+        return $this->id;
     }
 
     public function getIdPersona() {
@@ -78,7 +78,7 @@ class PersonaIdioma
     }
 
     public function setIdPersonaIdioma($idPersonaIdioma) {
-        $this->idPersonaIdioma = $idPersonaIdioma;
+        $this->id = $idPersonaIdioma;
     }
 
     public function setIdPersona(\AppBundle\Entity\Persona $idPersona=null) {

@@ -22,18 +22,18 @@ class Tarifario {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_tarifario", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idTarifario;
+    private $id;
     
     /**
      * @var \AppBundle\Entity\Producto
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Producto")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_producto", referencedColumnName="id_producto")
+     *   @ORM\JoinColumn(name="id_producto", referencedColumnName="id")
      * })
      */
     protected $idProducto;
@@ -43,7 +43,7 @@ class Tarifario {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shipper")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_shipper", referencedColumnName="id_shipper")
+     *   @ORM\JoinColumn(name="id_shipper", referencedColumnName="id")
      * })
      */
     protected $idShipper;
@@ -53,13 +53,13 @@ class Tarifario {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Sucursal")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_sucursal", referencedColumnName="id_sucursal")
+     *   @ORM\JoinColumn(name="id_sucursal", referencedColumnName="id")
      * })
      */
     protected $idSucursal;
     
     public function getIdTarifario() {
-        return $this->idTarifario;
+        return $this->id;
     }
 
     public function getIdProducto() {
@@ -75,7 +75,7 @@ class Tarifario {
     }
 
     public function setIdTarifario($idTarifario) {
-        $this->idTarifario = $idTarifario;
+        $this->id = $idTarifario;
     }
 
     public function setIdProducto(\AppBundle\Entity\Producto $idProducto) {

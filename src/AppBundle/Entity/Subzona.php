@@ -22,11 +22,11 @@ class Subzona {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_subzona", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idSubzona;
+    private $id;
     
     /**
      * @var string
@@ -40,13 +40,13 @@ class Subzona {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zona",inversedBy="subzonas")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id_zona")
+     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id")
      * })
      */
     private $idZona;
     
     public function getIdSubzona() {
-        return $this->idSubzona;
+        return $this->id;
     }
 
     public function getSubzona() {

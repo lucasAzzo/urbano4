@@ -23,11 +23,11 @@ class Provincia {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_provincia", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idProvincia;
+    private $id;
     
     /**
      * @var string
@@ -37,7 +37,7 @@ class Provincia {
     private $provincia;
     
     public function getIdProvincia() {
-        return $this->idProvincia;
+        return $this->id;
     }
 
     public function getProvincia() {
@@ -45,7 +45,7 @@ class Provincia {
     }
 
     public function setIdProvincia($idProvincia) {
-        $this->idProvincia = $idProvincia;
+        $this->id = $idProvincia;
     }
 
     public function setProvincia($provincia) {

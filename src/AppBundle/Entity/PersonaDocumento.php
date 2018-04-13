@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PersonaDocumento
  *
- * @ORM\Table(name="persona_documento", indexes={@ORM\Index(name="IX_Relationship2", columns={"id_documento_tipo"}), @ORM\Index(name="IX_Relationship3", columns={"id_persona"})})
+ * @ORM\Table(name="persona_documento", indexes={@ORM\Index(name="IX_Relationship2", columns={"id"}), @ORM\Index(name="IX_Relationship3", columns={"id"})})
  * @ORM\Entity
  */
 class PersonaDocumento
@@ -22,19 +22,19 @@ class PersonaDocumento
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona_documento", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_documento_id_persona_documento_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersonaDocumento;
+    private $id;
 
     /**
      * @var \AppBundle\Entity\Persona
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona",inversedBy="documentos")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -44,7 +44,7 @@ class PersonaDocumento
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\DocumentoTipo")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_documento_tipo", referencedColumnName="id_documento_tipo")
+     *   @ORM\JoinColumn(name="id_documento_tipo", referencedColumnName="id")
      * })
      */
     private $idDocumentoTipo;
@@ -54,7 +54,7 @@ class PersonaDocumento
     }
 
     public function getIdPersonaDocumento() {
-        return $this->idPersonaDocumento;
+        return $this->id;
     }
 
     public function getIdPersona() {
@@ -70,7 +70,7 @@ class PersonaDocumento
     }
 
     public function setIdPersonaDocumento($idPersonaDocumento) {
-        $this->idPersonaDocumento = $idPersonaDocumento;
+        $this->id = $idPersonaDocumento;
     }
 
     public function setIdPersona(\AppBundle\Entity\Persona $idPersona=null) {
