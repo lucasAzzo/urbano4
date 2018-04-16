@@ -33,7 +33,7 @@ class FileStructureShipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\FileStructureStd")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_file_structure", referencedColumnName="id")
      * })
      */
     private $idFileStructureStd;
@@ -43,7 +43,7 @@ class FileStructureShipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shipper")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_shipper", referencedColumnName="id")
      * })
      */
     private $idShipper;
@@ -53,7 +53,7 @@ class FileStructureShipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Producto")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_producto", referencedColumnName="id")
      * })
      */
     private $idProducto;
@@ -77,7 +77,7 @@ class FileStructureShipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id")
      * })
      */
     private $idEstado;
@@ -87,7 +87,7 @@ class FileStructureShipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id")
      * })
      */
     private $idUsuario;
