@@ -31,6 +31,10 @@ drop table persona_contacto cascade;
 drop table persona_documento cascade;
 drop table persona_domicilio cascade;
 drop table persona_idioma cascade;
+drop table file_structure_shipper cascade;
+drop table file_structure_std cascade;
+drop table original_file cascade;
+drop table shipper_original cascade;
 
 drop sequence fos_group_id_seq;
 drop sequence fos_user_id_seq;
@@ -62,3 +66,10 @@ drop sequence tarifario_id_tarifario_seq;
 drop sequence transporte_id_transporte_seq;
 drop sequence estado_id_estado_seq;
 drop sequence route_id_route_seq;
+drop sequence file_structure_shipper_id_seq;
+drop sequence file_structure_std_id_seq;
+drop sequence original_file_id_seq;
+drop sequence shipper_original_id_seq;
+
+
+
