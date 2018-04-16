@@ -79,12 +79,12 @@ class Persona {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_persona", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="persona_id_persona_seq", allocationSize=1, initialValue=1)
      */
-    private $idPersona;
+    private $id;
 
     /**
      * @ORM\OneToMany(targetEntity="PersonaDocumento",mappedBy="idPersona",cascade={"persist","remove"},orphanRemoval=true)
@@ -120,7 +120,7 @@ class Persona {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id")
      * })
      */
     private $idEstado;
@@ -236,7 +236,7 @@ class Persona {
     }
 
     public function getIdPersona() {
-        return $this->idPersona;
+        return $this->id;
     }
 
     public function setNombre($nombre) {
@@ -270,7 +270,7 @@ class Persona {
     }
 
     public function setIdPersona($idPersona) {
-        $this->idPersona = $idPersona;
+        $this->id = $idPersona;
         return $this;
     }
 

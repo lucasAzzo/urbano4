@@ -40,7 +40,7 @@ class FileStructureStd {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id")
      * })
      */
     private $idEstado;

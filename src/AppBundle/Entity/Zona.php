@@ -24,11 +24,11 @@ class Zona {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_zona", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idZona;
+    private $id;
     
     /**
      * @var string
@@ -38,7 +38,7 @@ class Zona {
     private $zona;
     
     /**
-     * @ORM\OneToMany(targetEntity="Subzona",mappedBy="idZona",cascade={"persist","remove"},orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Subzona",mappedBy="id",cascade={"persist","remove"},orphanRemoval=true)
      */
     private $subzonas;
     
@@ -62,7 +62,7 @@ class Zona {
     
     
     public function getIdZona() {
-        return $this->idZona;
+        return $this->id;
     }
 
     public function getZona() {
@@ -70,7 +70,7 @@ class Zona {
     }
 
     public function setIdZona($idZona) {
-        $this->idZona = $idZona;
+        $this->id = $idZona;
     }
 
     public function setZona($zona) {

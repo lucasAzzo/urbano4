@@ -29,12 +29,12 @@ class Idioma
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_idioma", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      * @ORM\SequenceGenerator(sequenceName="idioma_id_idioma_seq", allocationSize=1, initialValue=1)
      */
-    private $idIdioma;
+    private $id;
     
     public function __toString() {
         return $this->idioma;
@@ -49,7 +49,7 @@ class Idioma
     }
 
     public function getIdIdioma() {
-        return $this->idIdioma;
+        return $this->id;
     }
 
     public function setIdioma($idioma) {

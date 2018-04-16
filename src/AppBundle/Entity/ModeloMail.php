@@ -12,13 +12,13 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * Description of Ciudad
+ * Description of ModeloMail
  *
- * @author Lucas
- * @ORM\Table(name="ciudad")
+ * @author Aledaas
+ * @ORM\Table(name="ModeloMail")
  * @ORM\Entity
  */
-class Ciudad {
+class ModeloMail {
     
     /**
      * @var integer
@@ -32,28 +32,25 @@ class Ciudad {
     /**
      * @var string
      *
-     * @ORM\Column(name="ciudad", type="string", length=255, nullable=false)
+     * @ORM\Column(name="ModeloSms", type="string", length=255, nullable=false)
      */
-    private $ciudad;
-    
-    public function getIdCiudad() {
-        return $this->id;
+    private $ModeloMail;
+
+    /**
+     * @return string
+     */
+    public function getModeloMail()
+    {
+        return $this->ModeloMail;
     }
 
-    public function getCiudad() {
-        return $this->ciudad;
+    /**
+     * @param string $ModeloMail
+     */
+    public function setModeloMail($ModeloMail)
+    {
+        $this->ModeloMail = $ModeloMail;
     }
 
-    public function setIdCiudad($id) {
-        $this->id = $id;
-    }
 
-    public function setCiudad($ciudad) {
-        $this->ciudad = $ciudad;
-    }
-
-    public function __toString() {
-        return $this->ciudad;
-    }
-    
 }

@@ -20,11 +20,11 @@ class Route
     /**
      * @var int
      *
-     * @ORM\Column(name="id_route", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idRoute;
+    private $id;
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class Route
     /**
      * @ORM\ManyToMany(targetEntity="Role", inversedBy="routes")
      * @JoinTable(name="routes_roles",
-     *      joinColumns={@JoinColumn(name="id_route", referencedColumnName="id_route")},
+     *      joinColumns={@JoinColumn(name="id_route", referencedColumnName="id")},
      *      inverseJoinColumns={@JoinColumn(name="id_role", referencedColumnName="id")}
      *      )
      */
@@ -81,7 +81,7 @@ class Route
      */
     public function getIdRoute()
     {
-        return $this->idRoute;
+        return $this->id;
     }
 
     /**
@@ -143,12 +143,5 @@ class Route
     public function __toString() {
         return $this->path;
     }
-
-
-    
-    
-
-
-
 }
 

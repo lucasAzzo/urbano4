@@ -22,18 +22,18 @@ class Legajo {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_legajo", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idLegajo;
+    private $id;
     
     /**
      * @var \AppBundle\Entity\Persona
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Persona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id_persona")
+     *   @ORM\JoinColumn(name="id_persona", referencedColumnName="id")
      * })
      */
     private $idPersona;
@@ -43,7 +43,7 @@ class Legajo {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id")
      * })
      */
     private $idEstado;
@@ -63,7 +63,7 @@ class Legajo {
     private $empresa;
     
     public function getIdLegajo() {
-        return $this->idLegajo;
+        return $this->id;
     }
 
     public function getIdPersona(){

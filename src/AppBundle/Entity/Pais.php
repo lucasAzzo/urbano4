@@ -23,11 +23,11 @@ class Pais {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_pais", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idPais;
+    private $id;
     
     /**
      * @var string
@@ -37,7 +37,7 @@ class Pais {
     private $pais;
     
     public function getIdPais() {
-        return $this->idPais;
+        return $this->id;
     }
 
     public function getPais() {

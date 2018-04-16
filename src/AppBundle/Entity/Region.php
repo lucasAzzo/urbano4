@@ -23,11 +23,11 @@ class Region {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_region", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idRegion;
+    private $id;
     
     /**
      * @var string
@@ -37,7 +37,7 @@ class Region {
     private $region;
     
     public function getIdRegion() {
-        return $this->idRegion;
+        return $this->id;
     }
 
     public function getRegion() {
@@ -45,7 +45,7 @@ class Region {
     }
 
     public function setIdRegion($idRegion) {
-        $this->idRegion = $idRegion;
+        $this->id = $idRegion;
     }
 
     public function setRegion($region) {

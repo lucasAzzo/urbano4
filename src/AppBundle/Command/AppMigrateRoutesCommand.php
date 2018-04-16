@@ -13,21 +13,34 @@ use Symfony\Component\Routing\RouteCollection;
 use AppBundle\Entity\Route;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\Menu;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Style\SymfonyStyle;
 
 class AppMigrateRoutesCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
         $this
-            ->setName('app:migrate:routes')
-            ->setDescription('...')
-            ->addArgument('argument', InputArgument::OPTIONAL, 'Argument description')
-            ->addOption('option', null, InputOption::VALUE_NONE, 'Option description')
+            ->setName('app:migrate')
+            ->setDescription('Executes all migrations, add routes to DB and clear all caches')
+            //->addArgument('argument', InputArgument::OPTIONAL, 'Argument description')
+            ->addOption('--no-cache', null, InputOption::VALUE_NONE, 'do not clear caches')
+            ->addOption('--no-migrations', null, InputOption::VALUE_NONE, 'do not execute migrations')
+            ->addOption('--no-composer', null, InputOption::VALUE_NONE, 'do not execute composer install')
+            ->addOption('--only-routes', null, InputOption::VALUE_NONE, 'do not execute migrations nor clear caches')
         ;
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        if (($input->getOption('only-routes') !== true) && ($input->getOption('no-composer') !== true)) {
+            system('composer install');
+        }
+
+        if (($input->getOption('only-routes') !== true) && ($input->getOption('no-migrations') !== true)) {
+            $this->doctrineMigrate($output);
+        }
+
         /** @var $router \Symfony\Component\Routing\Router */
         $router = $this->getContainer()->get('router');
         $em = $this->getContainer()->get('doctrine')->getManager();
@@ -139,9 +152,9 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
         $qb = $em->createQueryBuilder();
         $qb->select('m');
         $qb->from('AppBundle:Menu', 'm');
-        $qb->leftJoin('AppBundle:Route', 'r', 'WITH','m.idRoute = r.idRoute');
+        $qb->leftJoin('AppBundle:Route', 'r', 'WITH','m.idRoute = r.id');
         $qb->where($qb->expr()->andX(
-            $qb->expr()->isNull('r.idRoute'),
+            $qb->expr()->isNull('r.id'),
             $qb->expr()->isNotNull('m.idRoute')
         ));
         $menus = $qb->getQuery()->getResult();
@@ -157,12 +170,44 @@ class AppMigrateRoutesCommand extends ContainerAwareCommand
         $qb->where($qb->expr()->isNull('m2.idRoute'));
         $menus = $qb->getQuery()->getResult();
 
+
+        if (($input->getOption('only-routes') !== true) && ($input->getOption('no-cache') !== true)) {
+            $this->clearCache($output);
+        }
+
+        
+        $io = new SymfonyStyle($input, $output);
+
         if (sizeof($menus) > 0) {
-            $output->writeln('Done but there are menus left without route asigned, please check.');
+            $io->success('Done but there are some menus without route asigned, please check menu ABM');
         } else {
-            $output->writeln('Done..');
+            $io->success('Done!!!');
         }
         
+    }
+
+    private function clearCache($output)
+    {
+        $command = $this->getApplication()->find('cache:clear');
+        
+        $arguments = array(
+            'command'  => 'cache:clear',
+        );
+
+        $greetInput = new ArrayInput($arguments);
+        return $command->run($greetInput, $output);
+    }
+
+    private function doctrineMigrate($output)
+    {
+        $command = $this->getApplication()->find('doctrine:migrations:migrate');
+        
+        $arguments = array(
+            'command'     => 'doctrine:migrations:migrate',
+        );
+
+        $greetInput = new ArrayInput($arguments);
+        return $command->run($greetInput, $output);
     }
 
 }

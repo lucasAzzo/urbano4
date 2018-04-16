@@ -34,7 +34,7 @@ class OriginalFile {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Shipper")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_shipper", referencedColumnName="id_shipper")
+     *   @ORM\JoinColumn(name="id_shipper", referencedColumnName="id")
      * })
      */
     private $idShipper;

@@ -22,11 +22,11 @@ class Sucursal {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_sucursal", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idSucursal;
+    private $id;
     
     /**
      * @var string
@@ -40,13 +40,13 @@ class Sucursal {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Zona")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id_zona")
+     *   @ORM\JoinColumn(name="id_zona", referencedColumnName="id")
      * })
      */
     private $idZona;
     
     public function getIdSucursal() {
-        return $this->idSucursal;
+        return $this->id;
     }
 
     public function getSucursal() {
@@ -54,7 +54,7 @@ class Sucursal {
     }
 
     public function setIdSucursal($idSucursal) {
-        $this->idSucursal = $idSucursal;
+        $this->id = $idSucursal;
     }
 
     public function setSucursal($sucursal) {

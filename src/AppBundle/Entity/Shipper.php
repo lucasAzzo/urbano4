@@ -24,18 +24,18 @@ class Shipper {
     /**
      * @var integer
      *
-     * @ORM\Column(name="id_shipper", type="integer")
+     * @ORM\Column(name="id", type="integer")
      * @ORM\Id
-     * @ORM\GeneratedValue(strategy="SEQUENCE")
+     * @ORM\GeneratedValue(strategy="IDENTITY")
      */
-    private $idShipper;
+    private $id;
     
     /**
      * @var \AppBundle\Entity\Pais
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pais")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Pais", cascade={"persist"})
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id_pais")
+     *   @ORM\JoinColumn(name="id_pais", referencedColumnName="id")
      * })
      */
     private $idPais;
@@ -45,7 +45,7 @@ class Shipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Provincia")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_provincia", referencedColumnName="id_provincia")
+     *   @ORM\JoinColumn(name="id_provincia", referencedColumnName="id")
      * })
      */
     private $idProvincia;
@@ -55,7 +55,7 @@ class Shipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Region")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_region", referencedColumnName="id_region")
+     *   @ORM\JoinColumn(name="id_region", referencedColumnName="id")
      * })
      */
     private $idRegion;
@@ -65,7 +65,7 @@ class Shipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Ciudad")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_ciudad", referencedColumnName="id_ciudad")
+     *   @ORM\JoinColumn(name="id_ciudad", referencedColumnName="id")
      * })
      */
     private $idCiudad;
@@ -75,7 +75,7 @@ class Shipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Sucursal")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_sucursal_defecto", referencedColumnName="id_sucursal")
+     *   @ORM\JoinColumn(name="id_sucursal_defecto", referencedColumnName="id")
      * })
      */
     private $idSucursalDefecto;
@@ -127,7 +127,7 @@ class Shipper {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id_estado")
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id")
      * })
      */
     private $idEstado;
@@ -164,7 +164,7 @@ class Shipper {
     private $audHoraProc;
     
     public function getIdShipper() {
-        return $this->idShipper;
+        return $this->id;
     }
 
     public function getIdPais(){
@@ -226,10 +226,6 @@ class Shipper {
 
     public function getAudHoraProc() {
         return $this->audHoraProc;
-    }
-
-    public function setIdShipper($idShipper) {
-        $this->idShipper = $idShipper;
     }
 
     public function setIdPais(\AppBundle\Entity\Pais $idPais) {
