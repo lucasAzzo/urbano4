@@ -65,6 +65,10 @@ class CodigoPostal
      */
     private $idEstado;
 
+    public function __construct()
+    {
+        $this->created = new \DateTime();
+    }
 
     /**
      * Get id
@@ -123,20 +127,7 @@ class CodigoPostal
     {
         return $this->idSucursal;
     }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     *
-     * @return CodigoPostal
-     */
-    public function setCreated($created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
+    
 
     /**
      * Get created
