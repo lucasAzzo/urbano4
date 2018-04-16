@@ -19,7 +19,7 @@ class ShipperRepository extends EntityRepository {
     
     public function findByArrayResult() {
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('shipper.shiRepresentante,shipper.idShipper as id');
+        $qb->select('shipper.shiRepresentante,shipper.id as id');
         $qb->from('AppBundle:Shipper', 'shipper');
         return $qb->getQuery()->getArrayResult();
     }
