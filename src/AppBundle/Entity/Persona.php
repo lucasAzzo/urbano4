@@ -120,7 +120,7 @@ class Persona {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Estado")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_estado", referencedColumnName="id")
      * })
      */
     private $idEstado;
