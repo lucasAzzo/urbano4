@@ -128,7 +128,7 @@ class UploadController extends Controller
         ));
         $shipper_original = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
 
-        $linea = $shipper_original->getDescripcion()
+        //$linea = $shipper_original->getDescripcion()
 
         
         
