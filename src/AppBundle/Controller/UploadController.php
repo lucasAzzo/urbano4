@@ -95,6 +95,7 @@ class UploadController extends Controller
             
             $request->getSession()->getFlashBag()->add('success','El archivo: "'. $formulario->get('upload_file')->getData()->getClientOriginalName() . '" se ha guardado satisfactoriamente.');
             return $this->render('upload/structure_confirmation.html.twig', [
+                'labels' => $em->getClassMetadata('AppBundle\Entity\PedidoShipper')->getColumnNames(),
                 'cabezera' => explode(';',current($data)),
                 'id_original_file' => $original_file->getId(),    
             ]);
@@ -106,17 +107,19 @@ class UploadController extends Controller
     }
     
     /**
-     * @Route("/upload/structure/confirmation/{_id_original_file}/{_cabezera}", name="upload_structure_confirmation")
-     * @Method("GET")
+     * @Route("/upload/structure/confirmation/", name="upload_structure_confirmation")
+     * @Method("POST")
      * @Security("is_authenticated()")
      */
-    public function confirmationAction(Request $request, $_id_original_file, $_cabezera) {
+    public function confirmationAction(Request $request) {
         
-//        $em = $this->getDoctrine()->getManager();
-//        
-//        /* @var $origina_file \AppBundle\Entity\OriginalFile */
-//        $original_file = $em->getRepository(OriginalFile::class)->find($_id_original_file);
-//        $data_archive = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
+        dump($request);die;
+        
+        $em = $this->getDoctrine()->getManager();
+        
+        /* @var $origina_file \AppBundle\Entity\OriginalFile */
+        $original_file = $em->getRepository(OriginalFile::class)->find($_id_original_file);
+        $data_archive = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
         
         return $this->render('upload/structure_confirmation.html.twig', [
             
