@@ -112,11 +112,11 @@ class UploadController extends Controller
      */
     public function confirmationAction(Request $request, $_id_original_file, $_cabezera) {
         
-        $em = $this->getDoctrine()->getManager();
-        
-        /* @var $origina_file \AppBundle\Entity\OriginalFile */
-        $original_file = $em->getRepository(OriginalFile::class)->find($_id_original_file);
-        $data_archive = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
+//        $em = $this->getDoctrine()->getManager();
+//        
+//        /* @var $origina_file \AppBundle\Entity\OriginalFile */
+//        $original_file = $em->getRepository(OriginalFile::class)->find($_id_original_file);
+//        $data_archive = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
         
         return $this->render('upload/structure_confirmation.html.twig', [
             
