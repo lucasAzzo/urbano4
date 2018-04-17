@@ -15,13 +15,15 @@
                     <input type="checkbox" id="actualizar_estructura" name="actualizar_estructura[]"/>
                     <label for="actualizar_estructura">Actualizar estructura</label>
                 </p><br>
+                <input type="hidden" name="nombre_archivo" value="{{ shipperData.nombreArchivo }}">
+                <input type="hidden" name="id_shipper" value="{{ shipperData.idShipper }}" >
                 {% for label in labels %}
                     {% if label != 'id' %}
                         <div class="input-field col s12">
                             <select id="{{label}}" name="{{label}}">
                                 <option value="" selected>Seleccione una opción</option>
-                                {% for fila in cabezera %}
-                                    <option value="{{fila}}">{{fila}}</option>
+                                {% for key, fila in cabezera %}
+                                    <option value="{{key}}">{{fila}}</option>
                                 {% endfor %}
                             </select>
                             <label>{{label|upper}}</label>
