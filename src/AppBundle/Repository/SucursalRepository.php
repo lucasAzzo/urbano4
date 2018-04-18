@@ -19,10 +19,9 @@ class SucursalRepository extends EntityRepository {
     
     public function findByArrayResult() {
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('sucursal.sucursal,sucursal.idSucursal as id,zona.zona');
+        $qb->select('sucursal.sucursal,sucursal.id as id,zona.zona');
         $qb->from('AppBundle:Sucursal', 'sucursal');
-        $qb->join('AppBundle:Zona', 'zona', 'WITH','sucursal.idZona = zona.idZona');
+        $qb->join('AppBundle:Zona', 'zona', 'WITH','sucursal.idZona = zona.id');
         return $qb->getQuery()->getArrayResult();
     }
-    
 }
