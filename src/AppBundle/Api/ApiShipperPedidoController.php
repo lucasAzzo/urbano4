@@ -21,7 +21,7 @@ use AppBundle\Entity\Shipper;
  * Description of ApiShipperPedidoController
  *
  * @author jbregant
- *
+ * @Route("/api")
  */
 class ApiShipperPedidoController extends Controller {
 
