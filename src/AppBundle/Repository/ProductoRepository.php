@@ -19,7 +19,7 @@ class ProductoRepository extends EntityRepository {
     
     public function findByArrayResult() {
         $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('producto.producto,producto.idProducto as id');
+        $qb->select('producto.producto,producto.id');
         $qb->from('AppBundle:Producto', 'producto');
         return $qb->getQuery()->getArrayResult();
     }
