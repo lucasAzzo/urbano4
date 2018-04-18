@@ -60,6 +60,7 @@ class FileStructureShipper {
     
     /**
      * @var string
+     * 
      *
      * @ORM\Column(name="nombre_campo_shipper", type="string", length=255)
      */

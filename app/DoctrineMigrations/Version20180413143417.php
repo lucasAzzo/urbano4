@@ -85,10 +85,6 @@ class Version20180413143417 extends AbstractMigration
         $this->addSql("INSERT INTO zona (id, zona) VALUES (2, 'Norte');");
         $this->addSql("INSERT INTO zona (id, zona) VALUES (3, 'Este');");
         $this->addSql("INSERT INTO zona (id, zona) VALUES (4, 'Oeste');");
-        $this->addSql("INSERT INTO sucursal (id, sucursal, id_zona) VALUES (1, 'Sucursal 1', 1);");
-        $this->addSql("INSERT INTO sucursal (id, sucursal, id_zona) VALUES (2, 'Sucursal 2', 2);");
-        $this->addSql("INSERT INTO sucursal (id, sucursal, id_zona) VALUES (3, 'Sucursal 3', 2);");
-        $this->addSql("INSERT INTO sucursal (id, sucursal, id_zona) VALUES (4, 'Sucursal 4', 3);");
         $this->addSql("INSERT INTO fos_user (id, username, username_canonical, email, email_canonical, enabled, salt, password, last_login, confirmation_token, password_requested_at, roles) VALUES (1, 'admin', 'admin', 'admin@urbano.com.ar', 'admin@urbano.com.ar', true, null, '$2y$13\$pcochpoq9tJvADBq7BoDmuYgSuxyE1gkTy3TKds9.5beu3y3WGTJy', '2018-04-13 11:37:52', null, null, 'a:1:{i:0;s:10:\"ROLE_ADMIN\";}');");
 
     }

@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Servicio
  *
  * @ORM\Table(name="servicio")
+ * @ORM\Entity
  */
 class Servicio
 {
