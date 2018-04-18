@@ -139,16 +139,5 @@ class ApiSucursalController extends Controller {
         ]);
     }
 
-    /**
-     * @Route("/shippers/delete/{_id_shipper}", name="sucursal_delete")
-     * @CheckPermission()
-     */
-    public function deleteAction(Request $request, $_id_shipper) {
-        $em = $this->getDoctrine()->getManager();
-        $shipper = $em->getRepository(Shipper::class)->find($_id_shipper);
-        $em->remove($shipper);
-        $em->flush();
-        return $this->redirectToRoute('shipper_index');
-    }
 
 }
