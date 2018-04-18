@@ -10,18 +10,32 @@
 {% block body %}
     <div class="container">
         <div class="card-panel">
-            <form class="col s12">
-                {% for campo in cabezera %}
-                    <div class="input-field col s12">
-                        <select>
-                            <option value="" selected>Seleccione una opción</option>
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                            <option value="3">Option 3</option>
-                        </select>
-                        <label>{{campo|upper}}</label>
-                    </div>
+            <form id="structure-confirmation" name="structure-confirmation" class="col s12" method="POST" action="{{path('upload_structure_confirmation')}}">
+                <p>
+                    <input type="checkbox" id="actualizar_estructura" name="actualizar_estructura[]"/>
+                    <label for="actualizar_estructura">Actualizar estructura</label>
+                </p><br>
+                <input type="hidden" name="nombre_archivo" value="{{ shipperData.nombreArchivo }}">
+                <input type="hidden" name="id_shipper" value="{{ shipperData.idShipper }}" >
+                {% for label in labels %}
+                    {% if label != 'id' %}
+                        <div class="input-field col s12">
+                            <select id="{{label}}" name="{{label}}">
+                                <option value="" selected>Seleccione una opción</option>
+                                {% for key, fila in cabezera %}
+                                    <option value="{{key}}">{{fila}}</option>
+                                {% endfor %}
+                            </select>
+                            <label>{{label|upper}}</label>
+                        </div>
+                    {% endif %}    
                 {% endfor %}
+                <div class="row">
+                    <input type="submit" value="Guardar" class="btn"/>
+                </div>
+                <div class="hidden">
+                    <input type="checkbox" id="id_original_file" name="id_original_file" value="{{id_original_file}}"/>
+                </div>
             </form>    
         </div>
     </div>    

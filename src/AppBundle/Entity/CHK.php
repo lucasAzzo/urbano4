@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * CHK
  *
  * @ORM\Table(name="chk")
+ * @ORM\Entity
  */
 class CHK
 {

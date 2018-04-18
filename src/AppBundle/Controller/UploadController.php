@@ -57,22 +57,25 @@ class UploadController extends Controller
             $data = $_fileUploader->lecturaArchivo($file);
             $usuario = $this->get('security.token_storage')->getToken()->getUser();
             
-            
+            $shipperData = array(
+                'nombreArchivo' => $formulario->get('upload_file')->getData()->getClientOriginalName(),
+                 'idShipper' => $shipper->getIdShipper(),
+             );
             /* me fijo si el archivo existe (en tal caso retorno error), caso contrario, guardo la info del archivo en bd */
-                $archivo = $em->getRepository('AppBundle:OriginalFile')->findOneBy(['nombreArchivo' => $formulario->get('upload_file')->getData()->getClientOriginalName(), 'idShipper' => $shipper]);
-                if (empty($archivo)) {
-                    $original_file = new OriginalFile();
-                    $original_file->setFecha(new \DateTime());
-                    $original_file->setIdShipper($shipper);
-                    $original_file->setIdUsuario($usuario);
-                    $original_file->setNombreArchivo($formulario->get('upload_file')->getData()->getClientOriginalName());
-                    $em->persist($original_file);
-                } else{
-                    $request->getSession()->getFlashBag()->add('error','El archivo: "'. $formulario->get('upload_file')->getData()->getClientOriginalName() . '" ya existe para el shipper:"' . $shipper->getShiRepresentante());
-                    return $this->render('upload/new_upload.html.twig', [
-                        'formulario' => $formulario->createView(),
-                    ]);
-                }
+            $archivo = $em->getRepository('AppBundle:OriginalFile')->findOneBy(['nombreArchivo' => $shipperData['nombreArchivo'], 'idShipper' => $shipper]);
+            if (empty($archivo)) {
+                $original_file = new OriginalFile();
+                $original_file->setFecha(new \DateTime());
+                $original_file->setIdShipper($shipper);
+                $original_file->setIdUsuario($usuario);
+                $original_file->setNombreArchivo($formulario->get('upload_file')->getData()->getClientOriginalName());
+                $em->persist($original_file);
+            } else{
+                $request->getSession()->getFlashBag()->add('error','El archivo: "'. $shipperData['nombreArchivo'] . '" ya existe para el shipper:"' . $shipper->getShiRepresentante());
+                return $this->render('upload/new_upload.html.twig', [
+                    'formulario' => $formulario->createView(),
+                ]);
+            }
             /* -------- */
                 
             /* persisto la data del archivo */
@@ -95,7 +98,9 @@ class UploadController extends Controller
             
             $request->getSession()->getFlashBag()->add('success','El archivo: "'. $formulario->get('upload_file')->getData()->getClientOriginalName() . '" se ha guardado satisfactoriamente.');
             return $this->render('upload/structure_confirmation.html.twig', [
+                'labels' => $em->getClassMetadata('AppBundle\Entity\PedidoShipper')->getColumnNames(),
                 'cabezera' => explode(';',current($data)),
+                'shipperData' => $shipperData,
                 'id_original_file' => $original_file->getId(),    
             ]);
         }
@@ -106,17 +111,28 @@ class UploadController extends Controller
     }
     
     /**
-     * @Route("/upload/structure/confirmation/{_id_original_file}/{_cabezera}", name="upload_structure_confirmation")
-     * @Method("GET")
+     * @Route("/upload/structure/confirmation/", name="upload_structure_confirmation")
+     * @Method("POST")
      * @Security("is_authenticated()")
      */
-    public function confirmationAction(Request $request, $_id_original_file, $_cabezera) {
+    public function confirmationAction(Request $request) {
         
+        $options = $request->request->all();
+        dump($options);
+        die;
+
         $em = $this->getDoctrine()->getManager();
+        $original_file = $em->getRepository(OriginalFile::class)->findOneBy(array(
+            'nombreArchivo' => $options["nombre_archivo"],
+            'idShipper' => $options["id_shipper"],
+        ));
+        $shipper_original = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
+
+        //$linea = $shipper_original->getDescripcion()
+
+        
         
         /* @var $origina_file \AppBundle\Entity\OriginalFile */
-        $original_file = $em->getRepository(OriginalFile::class)->find($_id_original_file);
-        $data_archive = $em->getRepository(ShipperOriginal::class)->findBy(['idOriginalFile' => $original_file]);
         
         return $this->render('upload/structure_confirmation.html.twig', [
             

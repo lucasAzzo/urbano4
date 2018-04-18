@@ -65,3 +65,8 @@ services:
         public: true
         class: AppBundle\Services\JWTManager
         arguments: ["@service_container"]
+
+    app.jwt_manager:
+        public: true
+        class: AppBundle\Process\BaseUpload\Canalization
+        arguments: ["@service_container"]
