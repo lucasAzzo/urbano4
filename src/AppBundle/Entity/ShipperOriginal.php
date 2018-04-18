@@ -43,7 +43,7 @@ class ShipperOriginal {
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User")
      * @ORM\JoinColumns({
-     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id")
+     *   @ORM\JoinColumn(name="id_usuario", referencedColumnName="id", onDelete="CASCADE")
      * })
      */
     private $idUsuario;

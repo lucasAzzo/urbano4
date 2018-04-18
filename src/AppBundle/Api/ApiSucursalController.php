@@ -29,7 +29,7 @@ use AppBundle\Annotation\CheckPermission;
  * Description of ApiSucursalController
  *
  * @author Lucas
- *
+ * @Route("/api")
  */
 class ApiSucursalController extends Controller {
 
@@ -140,7 +140,7 @@ class ApiSucursalController extends Controller {
     }
 
     /**
-     * @Route("/shippers/delete/{_id_shipper}", name="shipper_delete")
+     * @Route("/shippers/delete/{_id_shipper}", name="sucursal_delete")
      * @CheckPermission()
      */
     public function deleteAction(Request $request, $_id_shipper) {
