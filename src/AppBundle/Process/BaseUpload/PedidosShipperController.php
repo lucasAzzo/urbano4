@@ -118,22 +118,22 @@ class PedidosShipperController extends Controller
 //"fecha_hora_pactado"
 //"fecha_actual"
 //"fecha_creacio"
-            $shipment->($data[""]);
-            $shipment->setIdProvincia($provinceId);
-            $shipment->setIdRegion($regionId);
-            $shipment->setIdCiudad($stateId);
-            $shipment->setIdSucursalDefecto($defaultBranchOfficeId);
-            $shipment->setShiRepresentante($data["shiRepresentante"]);
-            $shipment->setShiRazonSocial($data["shiRazonSocial"]);
-            $shipment->setShiDireccion($data["shiDireccion"]);
-            $shipment->setShiTelefono($data["shiTelefono"]);
-            $shipment->setShiCuit($data["shiCuit"]);
-            $shipment->setIdEstado($statusId);
-            $shipment->setAudFechaCreacion($date);
-            $shipment->setAudFechaProc($date);
-            $shipment->setAudHoraProc($date->format('H:i'));
-            $em->persist($shipment);
-            $em->flush();
+//            $shipment->($data[""]);
+//            $shipment->setIdProvincia($provinceId);
+//            $shipment->setIdRegion($regionId);
+//            $shipment->setIdCiudad($stateId);
+//            $shipment->setIdSucursalDefecto($defaultBranchOfficeId);
+//            $shipment->setShiRepresentante($data["shiRepresentante"]);
+//            $shipment->setShiRazonSocial($data["shiRazonSocial"]);
+//            $shipment->setShiDireccion($data["shiDireccion"]);
+//            $shipment->setShiTelefono($data["shiTelefono"]);
+//            $shipment->setShiCuit($data["shiCuit"]);
+//            $shipment->setIdEstado($statusId);
+//            $shipment->setAudFechaCreacion($date);
+//            $shipment->setAudFechaProc($date);
+//            $shipment->setAudHoraProc($date->format('H:i'));
+//            $em->persist($shipment);
+//            $em->flush();
         } catch(\Doctrine\DBAL\DBALException $e){
             throw new Exception($e->getMessage(),$e->getCode());
         } catch(\Doctrine\ORM\ORMException $e){
