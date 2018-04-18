@@ -8,6 +8,7 @@
 
 namespace AppBundle\Api;
 
+use AppBundle\Process\BaseUpload\PedidosShipperController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -15,52 +16,48 @@ use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Shipper;
-use AppBundle\Annotation\CheckPermission;
 
 /**
- * Description of ApiShipperController
+ * Description of ApiShipperPedidoController
  *
- * @author Lucas
+ * @author jbregant
  *
  */
-class ApiShipperController extends Controller {
+class ApiShipperPedidoController extends Controller {
 
-    /*
-     * @var  array
-     */
-    private $requiredErrors = [];
-
-    /**
-     * @Route("/shippers", name="api_shipper_index")
-     * @Method("GET")
-     * @CheckPermission()
-     */
-    public function indexAction(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $shippers = $em->getRepository(Shipper::class)->findByArrayResult();
-        return new JsonResponse($shippers,201);
-    }
+//    /**
+//     * @Route("/shippers", name="api_shipper_index")
+//     * @Method("GET")
+//     * @CheckPermission()
+//     */
+//    public function indexAction(Request $request) {
+//        $em = $this->getDoctrine()->getManager();
+//        $shippers = $em->getRepository(Shipper::class)->findByArrayResult();
+//        return new JsonResponse($shippers,201);
+//    }
 
     /**
-     * @Route("/shippers/create", name="api_shipper_create")
+     * @Route("/shipment/add", name="api_shipper_shipment_add")
      * @Method("POST")
      * Falta agregar la validacion del token
      * Example of use:
      * {"paisId":1,"provinciaId":1,"regionId":1,"ciudadId":2,"sucursalDefectoId":1,"shiRepresentante":"netshoes","shiRazonSocial":"meli","shiDireccion":"arias 2253","shiTelefono":11234567,"shiCuit":20201231230,"estadoId":1,"usuarioId":77}
      */
-    public function createAction(Request $request) {
+    public function addShipmentAction(Request $request) {
         try{
-            $requiredParams = ["paisId", "provinciaId", "regionId", "ciudadId", "sucursalDefectoId", "shiRepresentante", "shiRazonSocial", "shiDireccion", "shiTelefono", "shiCuit", "estadoId"];
+            $shipment = new PedidosShipperController();
             $requestData = json_decode($request->getContent(),true);
-            if(empty($requestData) || !$this->requestParamChecker($requestData, $requiredParams)){
+            if(empty($requestData) || !$shipment->requestParamChecker($requestData)){
                 //logger
                 return new JsonResponse(["status" => "400", "message" => "bad request"],400);
             }
-            $this->requiredParamChecker($requestData);
-            if(!empty($this->requiredErrors))
-                return new JsonResponse(["status" => "400", "message" => "required: ".implode(" ", $this->requiredErrors)],400);
-            $shipper = new Shipper();
-            $this->populateUser($shipper,$requestData);
+            if(!$shipment->validateShipmentRequiredParams($requestData)){
+                //logger
+                return new JsonResponse(["status" => "400", "message" => "required field(s): ".implode(", ", $shipment->requiredParamsErrors)],400);
+            }
+
+//            $shipper = new Shipper();
+//            $this->populateUser($shipper,$requestData);
             //logger
             return new JsonResponse(["status" => "201", "message" => "OK"],201);
         } catch(\Doctrine\DBAL\DBALException $e){
@@ -130,38 +127,6 @@ class ApiShipperController extends Controller {
             return new JsonResponse(["status" => "400", "message" => $e->getMessage()]);
         }
     }
-    public function requestParamChecker($request, $requiredParams){
-        $requestKeys = array_keys($request);
-        foreach ($requiredParams as $item) {
-            if(!in_array($item, $requestKeys))
-                return false;
-        }
-        return true;
-    }
-    public function requiredParamChecker($requestData, $update = false){
-        $requiredParams = [
-            "paisId" => $requestData["paisId"],
-            "provinciaId" => $requestData["provinciaId"],
-            "regionId" => $requestData["regionId"],
-            "ciudadId" => $requestData["ciudadId"],
-            "sucursalDefectoId" => $requestData["sucursalDefectoId"],
-            "shiRepresentante" => $requestData["shiRepresentante"],
-            "shiRazonSocial" => $requestData["shiRazonSocial"],
-            "shiDireccion" => $requestData["shiDireccion"],
-            "shiTelefono" => $requestData["shiTelefono"],
-            "shiCuit" => $requestData["shiCuit"],
-            "estadoId" => $requestData["estadoId"],
-        ];
-        if($update)
-            $requiredParams["shipperId"] = $requestData["shipperId"];
-        foreach ($requiredParams as $key => $value) {
-            if(empty($value)){
-                //logger
-                $this->requiredErrors[] = $key;
-            }
-        }
-    }
-
     public function populateUser(Shipper $shipper, $data,$em = false){
         try{
             if(!$em)
